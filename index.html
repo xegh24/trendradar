@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trendradar 2027</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* Layout: radar-scope instrument on the left (sticky), signal log on the right; detail opens as a side drawer. */
+:root{
+  --bg:#EEF2F0; --surface:#FFFFFF; --ink:#13201C; --muted:#5A6A64; --line:#D3DCD8; --grid:#C3CFCA;
+  --accent:#16705A; --accent-soft:#DCEEE7;
+  --r1:#7A5CC7; --r2:#C27A12; --r3:#16805F; --r4:#2C5C9E;
+  --scope:#F7FAF8;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0C1311; --surface:#121C19; --ink:#E2EBE7; --muted:#8FA29A; --line:#22312C; --grid:#2A3B36;
+  --accent:#4FD1A5; --accent-soft:#16302A;
+  --r1:#A88CF0; --r2:#E6A23C; --r3:#4FD1A5; --r4:#6FA3EE; --scope:#0F1916; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0C1311; --surface:#121C19; --ink:#E2EBE7; --muted:#8FA29A; --line:#22312C; --grid:#2A3B36;
+  --accent:#4FD1A5; --accent-soft:#16302A;
+  --r1:#A88CF0; --r2:#E6A23C; --r3:#4FD1A5; --r4:#6FA3EE; --scope:#0F1916; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+.wrap{max-width:1280px;margin:0 auto;padding-block:28px 64px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+header.top{display:grid;grid-template-columns:1fr auto;gap:12px 32px;align-items:end;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(34px,5vw,58px);font-weight:800;line-height:1}
+h1 span{color:var(--accent)}
+.lede{max-width:62ch;color:var(--muted);margin:10px 0 0}
+.stats{display:flex;gap:22px;flex-wrap:wrap}
+.stat b{display:block;font-family:var(--f-display);font-size:28px;font-weight:700;line-height:1}
+.stat span{font-size:12px;color:var(--muted)}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;padding:16px 0;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.search{flex:1 1 220px;min-width:0;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.search input{border:0;background:transparent;outline:none;width:100%;font:inherit;color:var(--ink)}
+select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.toggle{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;user-select:none}
+.toggle input{accent-color:var(--accent);width:16px;height:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 11px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip .dot{width:8px;height:8px;border-radius:50%}
+.chip small{font-family:var(--f-mono);opacity:.7}
+
+main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;margin-top:22px;align-items:start}
+.scope{position:sticky;top:calc(env(safe-area-inset-top,0px) + 150px);background:var(--scope);border:1px solid var(--line);border-radius:14px;padding:12px}
+.scope svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--muted);padding:6px 6px 2px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:0}
+.legend .sz{display:inline-flex;align-items:center;gap:4px}
+.sector-label{font-family:var(--f-mono);font-size:11.5px;fill:var(--muted);letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+.sector-label.on{fill:var(--accent);font-weight:500}
+.ring-label{font-family:var(--f-mono);font-size:10px;fill:var(--muted)}
+.blip{cursor:pointer;transition:opacity .2s}
+.blip circle{stroke:var(--scope);stroke-width:2}
+.blip.dim{opacity:.13}
+.blip.hot circle{stroke:var(--ink);stroke-width:2.5}
+.blip text{font-family:var(--f-mono);font-size:9px;fill:#fff;pointer-events:none;font-weight:500}
+@media (prefers-reduced-motion:no-preference){
+  .sweep{transform-origin:360px 360px;animation:sweep 9s linear infinite}
+  @keyframes sweep{to{transform:rotate(360deg)}}
+}
+
+.listhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+.listhead h2{font-size:22px}
+.count{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.cards{display:grid;gap:10px}
+.card{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;cursor:pointer;text-align:left;width:100%}
+.card:hover,.card.hot{border-color:var(--accent)}
+.num{font-family:var(--f-mono);font-size:12px;color:var(--muted);padding-top:3px;min-width:2.2em}
+.card h3{font-size:17.5px;font-weight:700;line-height:1.25}
+.meta{grid-column:2;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:12.5px;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-family:var(--f-mono);font-size:11.5px;padding:1px 8px;border-radius:999px;border:1px solid currentColor}
+.imp{letter-spacing:2px;font-family:var(--f-mono)}
+.card p{grid-column:2;margin:4px 0 0;color:var(--ink);font-size:14.5px;min-width:0}
+.keynum{grid-column:2;display:flex;gap:10px;align-items:baseline;margin-top:6px;padding-top:8px;border-top:1px dashed var(--line)}
+.keynum b{font-family:var(--f-display);font-size:20px;color:var(--accent);white-space:nowrap}
+.keynum span{font-size:13px;color:var(--muted)}
+.opp{grid-column:2;margin-top:8px;font-size:13.5px;background:var(--accent-soft);border-radius:6px;padding:8px 10px}
+.opp b{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);display:block}
+.empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}
+
+aside.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--surface);border-left:1px solid var(--line);z-index:20;overflow-y:auto;
+  padding:calc(env(safe-area-inset-top,0px) + 22px) max(22px, env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 40px) 26px;box-shadow:-20px 0 50px rgba(0,0,0,.18)}
+.scrim{position:fixed;inset:0;background:rgba(10,18,15,.35);z-index:15}
+.drawer .close{position:sticky;top:0;float:right;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 12px;cursor:pointer}
+.drawer h2{font-size:clamp(26px,3.5vw,34px);line-height:1.1;margin:10px 0 12px;clear:both}
+.drawer .lead{font-size:16px}
+.drawer h4{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px;font-weight:500}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.fig{border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.fig b{display:block;font-family:var(--f-display);font-size:24px;color:var(--accent);line-height:1.1}
+.fig span{font-size:13px;color:var(--muted)}
+.drawer ul.src{padding-left:18px;margin:0;font-size:14px}
+.drawer ul.src a{color:var(--accent);word-break:break-word}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:26px}
+.nav button{border:1px solid var(--line);background:transparent;border-radius:8px;padding:8px 12px;cursor:pointer;max-width:48%;text-align:left;font-size:13px}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);max-width:80ch}
+
+@media (max-width:900px){
+  main{grid-template-columns:1fr}
+  .scope{position:static}
+  header.top{grid-template-columns:1fr}
+  .controls{position:static}
+}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">Globális trendfelderítés · frissítve 2026. október 27.</div>
+      <h1>Trendradar <span>2027</span></h1>
+      <p class="lede">Kialakuló és gyorsuló trendek 12 területen, friss iparági jelentésekből és adatokból összerakva. A radar közepe a fősodor, a széle a gyenge jel. Kattints egy pontra vagy kártyára a részletekért és forrásokért.</p>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="controls">
+    <label class="search"><span aria-hidden="true">⌕</span><input id="q" type="search" placeholder="Keresés: robot, stablecoin, mikrodráma…" aria-label="Keresés a trendek között"></label>
+    <select id="sort" aria-label="Rendezés">
+      <option value="impact">Hatás szerint</option>
+      <option value="ring">Érettség szerint (fősodortól)</option>
+      <option value="signal">Gyenge jelek elöl</option>
+      <option value="area">Terület szerint</option>
+    </select>
+    <label class="toggle"><input type="checkbox" id="indie"> Csak indie fejlesztőknek / creatoroknak releváns</label>
+    <label class="toggle"><input type="checkbox" id="opp" checked> Lehetőségek mutatása</label>
+    <div class="chips" id="ringChips"></div>
+    <div class="chips" id="areaChips"></div>
+  </div>
+
+  <main>
+    <section class="scope" aria-label="Trendradar">
+      <svg id="radar" viewBox="0 0 720 720" role="img" aria-label="Radar diagram a trendekről területenként és érettség szerint"></svg>
+      <div class="legend" id="legend"></div>
+    </section>
+    <section>
+      <div class="listhead"><h2>Jelnapló</h2><span class="count" id="count"></span></div>
+      <div class="cards" id="cards"></div>
+    </section>
+  </main>
+
+  <footer>
+    Módszer: 2026 október végéig megjelent elemzői és iparági jelentések (Gartner, IMF, Sensor Tower, Counterpoint, BloombergNEF, Mintel, PwC és mások), sajtóanyagok és piaci adatok alapján. Az érettségi besorolás és a hatás-pontszám szerkesztői becslés, nem mért érték. Az előrejelzések a forrásuk véleményét tükrözik; a számokat érdemes a linkelt eredetiben ellenőrizni.
+  </footer>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-modal="true" role="dialog" aria-labelledby="dTitle"></aside>
+
+<script>
+const RINGS={4:{n:"Fősodor",c:"--r4",d:"Már széles körben jelen van, a kérdés a mérték."},3:{n:"Gyorsul",c:"--r3",d:"Mérhető, gyors növekedés, valós bevétel vagy bevezetés."},2:{n:"Felfutó",c:"--r2",d:"Korai, de konkrét befektetések és első bevezetések."},1:{n:"Gyenge jel",c:"--r1",d:"Ígéretes, de még kísérleti vagy szűk körű."}};
+const AREAS=[
+ ["ai","AI & ügynökök","AI"],["tech","Hardver & deep tech","Hardver"],["soc","Közösségi média","Social"],["ent","Appok, játék, szórakozás","Appok"],
+ ["cons","Fogyasztói kultúra","Fogyasztás"],["health","Egészség & wellness","Egészség"],["food","Étel & utazás","Étel·utazás"],["fin","Pénz & fintech","Pénz"],
+ ["energy","Energia & klíma","Energia"],["work","Munka & oktatás","Munka"],["mob","Mobilitás","Mobilitás"],["macro","Gazdaság & geopolitika","Makró"]];
+const AREA=Object.fromEntries(AREAS.map(a=>[a[0],{n:a[1],s:a[2]}]));
+
+/* r: érettség 1–4, i: hatás 1–3, p: indie/creator releváns */
+const T=[
+{id:"ugynokcsapatok",t:"Ügynökcsapatok a munkahelyen",a:"ai",r:3,i:3,p:1,h:"2026–2027",
+ s:"Egyetlen asszisztens helyett specializált AI-ügynökök dolgoznak együtt egy koordináló ügynök alatt, a dolgozó pedig felügyelővé válik.",
+ n:[["40%","vállalati alkalmazás tartalmaz feladat-specifikus ügynököt 2026 végére, szemben az egy évvel korábbi 5% alattival (Gartner)"],["10×","várható növekedés az ügynökhasználatban a G2000 cégeknél 2027-re (IDC, idézi Joget)"]],
+ w:"Nyílt protokollok (MCP, A2A) kötik össze az ügynököket és az adatforrásokat, az elemzők szerint 2026 a többágenses rendszerek áttörési éve. A szűk, vertikális ügynökök jobban teljesítenek az általános asszisztenseknél. A Gartner ugyanakkor magas projektbukási arányra figyelmeztet.",
+ o:"Egy-egy konkrét munkafolyamatra (ügyfélszolgálat, riportolás, lead-kutatás) épített szűk ügynök kis csapatból is versenyképes termék.",
+ src:[["Svitla: Agentic AI market trends","https://svitla.com/blog/agentic-ai-market-trends-2026/"],["Olostep: 7 agentic AI trends","https://www.olostep.com/blog/agentic-ai-trends"],["Joget: AI agent adoption 2026","https://joget.com/ai-agent-adoption-in-2026-what-the-analysts-data-shows/"]]},
+{id:"ugynok-identitas",t:"AI-ügynökök identitása és őrzői",a:"ai",r:2,i:3,h:"2027–2028",
+ s:"Az ügynökök saját, dinamikus, szabályzat-vezérelt jogosultságot kapnak, és megjelennek az ügynököket figyelő \"őr\" ügynökök.",
+ n:[["25%","vállalati biztonsági incidens vezethető vissza ügynökökkel való visszaélésre 2028-ra (Gartner előrejelzés)"]],
+ w:"Az ügynökök több ember nevében, önállóan cselekszenek, a régi statikus jelszavas rendszerek ezt nem tudják kezelni. A Gartner 2027-es top 10 listáján külön trendként szerepel, mellette az automatikus sebezhetőség-javítás (AER).",
+ o:"Ügynök-naplózás, jogosultság- és auditeszközök, kis cégeknek szóló egyszerű \"ügynök-tűzfal\" szolgáltatások.",
+ src:[["Gartner: Top Strategic Technology Trends for 2027","https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"],["TechTarget: Gartner trends","https://www.techtarget.com/it-strategy/feature/Gartner-unveils-top-technology-trends-at-Gartner-IT-Symposium?amp=1"],["Svitla: guardian agents","https://svitla.com/blog/agentic-ai-market-trends-2026/"]]},
+{id:"ai-fejleszto",t:"Az AI mint fejlesztő, ember mint felügyelő",a:"ai",r:3,i:3,p:1,h:"most",
+ s:"A kódolóügynökök a teljes fejlesztési ciklusban dolgoznak; a Gartner szerint zárt vezérlőkeret (\"agent coding harness\") kell köréjük, különben a kézi ellenőrzés elnyeli a nyereséget.",
+ n:[["~15 000","új előfizetéses app indul havonta 2026 elején, 2022 óta hétszeresére nőtt (RevenueCat)"]],
+ w:"A szoftver a szűkösségből a bőségbe vált. Az app-kínálat robban, de a kereslet és a megtartás nem tart lépést, így a terjesztés lett a szűk keresztmetszet.",
+ o:"Egyedül is lehet gyorsan termékeket kiadni, de a megkülönböztetés a niche, a márka és a közösség oldalán dől el, nem a kódon.",
+ src:[["Gartner: 2027 trends","https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"],["ContentGrip: RevenueCat 2026 report","https://www.contentgrip.com/subscription-app-market-2026-growth/"],["Rising Trends: AI agent trends","https://www.risingtrends.co/blog/ai-agents-trends-2026"]]},
+{id:"eldobhato-appok",t:"Eldobható alkalmazások",a:"ai",r:1,i:2,p:1,h:"2027–2030",
+ s:"Egyetlen célra épített szoftverek, amelyeket tudatosan kivezetnek, amint a feladatuk lejárt. A Gartner 2027-es listájának egyik meglepő eleme.",
+ n:[],
+ w:"Ha az AI percek alatt megírja az appot, olcsóbb újat építeni, mint évekig karbantartani. Ez átírja, hogyan vásárolnak, terveznek és költségvetnek szoftvert a cégek.",
+ o:"Esemény-, kampány- vagy szezonális mikro-appok gyors szállítása ügyfeleknek; \"app mint szolgáltatás\" rövid életciklusra árazva.",
+ src:[["Gartner: 2027 trends","https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"],["Gartner webinar (Europe): software abundance","https://www.gartner.com/en/webinar/1028874/2010433-the-gartner-top-strategic-technology-trends-for-2027-europe"]]},
+{id:"hang-ai",t:"Hangon érvelő AI-modellek",a:"ai",r:2,i:2,p:1,h:"2027",
+ s:"Közvetlenül a hangfelvételen gondolkodó modellek, amelyek a beszélgetés során követik a kontextust és a szándékot.",
+ n:[],
+ w:"A Gartner szerint a hang marad a vállalatok legnagyobb volumenű ügyfélcsatornája, és egy évtizednyi automatizálás sem hozta el a kellő pontosságot. Az új modellek az ítélőképességet igénylő beszélgetéseket is automatizálhatóvá tehetik.",
+ o:"Nyelvfüggetlen, hangvezérelt appok és játékok; hangalapú gyakorló- és tanulóeszközök.",
+ src:[["Gartner: 2027 trends","https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"]]},
+{id:"vilagmodellek",t:"Világmodellek és fizikai AI",a:"ai",r:2,i:3,h:"2027–2030",
+ s:"Fizika-első modellek, amelyek értik a teret, az időt és az ok-okozatot, és cselekvés előtt szimulálják a következményeket.",
+ n:[],
+ w:"A robotikába, az önvezetésbe és a térbeli számítástechnikába áramló befektetések hajtják. A Forrester a robotokat, szenzorokat és ellátási láncot valós időben összehangoló \"fizikai AI\"-t emeli ki.",
+ o:"Szimulációs és tréningkörnyezetek, játékmotoros tudás (Unity) iránti kereslet a robotika felé.",
+ src:[["Gartner: 2027 trends","https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"],["Joget: Forrester physical AI","https://joget.com/ai-agent-adoption-in-2026-what-the-analysts-data-shows/"]]},
+{id:"ugynoki-vasarlas",t:"Ügynöki vásárlás",a:"ai",r:2,i:3,p:1,h:"2026–2028",
+ s:"Az AI-ügynök keres, összehasonlít és fizet a felhasználó helyett. A bolt feladata már nem az ember meggyőzése, hanem az ügynök kritériumainak teljesítése.",
+ n:[],
+ w:"A Google Maps \"Ask Maps\" funkciója ügynökké vált: partnereken keresztül ételt rendel, szállást foglal, jegyet keres. A Deloitte szerint az ügynökök a 24/7 stablecoin-síneket részesíthetik előnyben.",
+ o:"Géppel olvasható termékadat, API-k és strukturált katalógus lesz az új SEO; ügynökbarát app- és webshop-felületek.",
+ src:[["Workalizer: agentic revolution late 2026","https://workalizer.com/blog/trends-news-insights/the-agentic-revolution-what-to-expect-from-ai-in-late-2026-and-beyond/"],["Svitla: agentic commerce","https://svitla.com/blog/agentic-ai-market-trends-2026/"],["Deloitte: stablecoins in retail payments","https://www.deloitte.com/us/en/insights/industry/financial-services/financial-services-industry-predictions/2026/stablecoins-retail-payments.html"]]},
+{id:"szuverenitas",t:"Digitális szuverenitás",a:"ai",r:3,i:2,h:"2027–2030",
+ s:"Olyan hardver, szoftver és AI, amelyből technikailag és jogilag is ki lehet lépni, hogy egyetlen szolgáltatótól se függjön a működés.",
+ n:[["75%+","nem amerikai szervezet áll át digitális szuverenitás-stratégiára 2030-ra (Gartner)"]],
+ w:"A geopolitikai kockázat és a beszállítói függés miatt az AI-szuverenitás és a \"technopolitika\" beszerzési szempont lett (Info-Tech).",
+ o:"Európai, adatrezidens alternatívák; önállóan hosztolható eszközök kis- és középvállalatoknak.",
+ src:[["Gartner: 2027 trends","https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"],["ISHIR: 15 emerging tech trends 2027","https://www.ishir.com/blog/345442/15-emerging-technology-trends-for-2027-ishir.htm"]]},
+{id:"kontextus",t:"AI-kontextusplatformok",a:"ai",r:2,i:2,h:"2027",
+ s:"Külön réteg, amely az ügynököknek megadja az üzleti tudást és szemantikát a helyes döntésekhez.",
+ n:[["80%","pontosságjavulás az ügynököknél szemantikus, AI-ra kész adattal, akár 60%-os költségcsökkenés mellett (Gartner)"]],
+ w:"Kontextus nélkül túl sok jogosultságú ügynökök, megfelelőségi hibák és felesleges tokenfogyasztás jelentkezik.",
+ o:"Tudásbázis-építés és adat-előkészítés mint szolgáltatás.",
+ src:[["Gartner: 2027 trends","https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"]]},
+{id:"lqm",t:"Nagy kvantitatív modellek",a:"ai",r:1,i:2,h:"2027–2030",
+ s:"Számokra épített hibrid neurális modellek, mert a nyelvi modellek valószínűségi tippelése numerikus feladatoknál pontossági és megfelelőségi kockázat.",
+ n:[],
+ w:"Szabályozott iparágakban (pénzügy, egészségügy) a szimuláció-alapú, proaktív előrejelzést teszi lehetővé.",
+ o:"Szakmai, számalapú vertikális eszközök: kalkulátorok, előrejelzők.",
+ src:[["Gartner: 2027 trends","https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"]]},
+{id:"wetware",t:"Wetware mint szolgáltatás",a:"ai",r:1,i:1,h:"2030+",
+ s:"Élő vagy szintetikus biológiai rendszerek felhőn keresztül bérelhető számítási kapacitásként.",
+ n:[],
+ w:"A szilícium alapú AI energiaigénye nem skálázható a végtelenségig; a biokémiai hálózatok rendkívül energiahatékonyak lehetnek. Ma még gyenge jel, de a Gartner felvette a 2027-es listára.",
+ o:"Elsősorban figyelendő; tartalmi téma ismeretterjesztő csatornáknak.",
+ src:[["Gartner: 2027 trends","https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"],["Communications Today","https://www.communicationstoday.co.in/gartner-unveils-top-10-strategic-technology-trends-for-2027/"]]},
+
+{id:"okosszemuveg",t:"AI-okosszemüvegek",a:"tech",r:3,i:3,p:1,h:"2026–2028",
+ s:"Kijelző nélküli, kamerás, hangalapú AI-asszisztens szemüvegek törnek előre, miközben a VR-headsetek visszaesnek.",
+ n:[["+776%","AI-okosszemüveg szállítás Q2 2026-ban év/év, a VR-headseteké −79% (SAG)"],["96%","kijelző nélküli modellek aránya az AI-szemüvegeknél, H1 2026 (Counterpoint)"],["20 M","előrejelzett eladás 2026-ra a 2025-ös ~6 millióról (SAG)"]],
+ w:"A Meta uralja a piacot, a Google a Samsunggal már belépett, az Apple 2027 körül várható. Nem a telefont váltják ki, hanem kéz nélküli, mindig elérhető AI-felületként szolgálnak. Gond: engedély nélküli felvételek és zaklatás.",
+ o:"Hang-első mikroélmények: fordítás, navigáció, \"mi ez?\" felismerés, kéz nélküli tanulás.",
+ src:[["Android Headlines: +776% smart glasses","https://www.androidheadlines.com/?p=1301543"],["Counterpoint: AI glasses H1 2026","https://counterpointresearch.com/en/insights/global-ai-glasses-shipments-surge-263-percent-yoy-with-display-less-ai-glasses"],["HyperAI: SAG forecast","https://hyper.ai/en/stories/458be3e24e8a1a2f197c3d6423f425f9"],["DIGITIMES: Google AI glasses","https://www.digitimes.com/news/a20260603PD200.html"]]},
+{id:"humanoidok",t:"Humanoid robotok a gyárakban",a:"tech",r:2,i:3,h:"2026–2030",
+ s:"A humanoid robotok első valódi kereskedelmi bevetései: logisztika, autógyártás, reptéri rakodás. Kínai gyártók vezetnek a volumenben.",
+ n:[["~+300%","humanoid robot szállítás H1 2026 év/év (Counterpoint)"],["7 000+","Unitree-egység H1-ben, 31% piaci részesedés"],["1 000+","robot a Schaeffler globális gyáraiba 2032-ig, az első fázis Németországban indul 2026 decemberében"]],
+ w:"A Toyota bérlési modellben (robot mint szolgáltatás) állít be Digit robotokat, a JAL a Hanedán tesztel. Az elemzők szerint a bejelentett rendelések és a tényleges, mérhető bevetések között még nagy a rés.",
+ o:"Robotikai tréningadat, szimuláció és rendszerintegráció; ismeretterjesztő tartalom erős témája.",
+ src:[["Counterpoint: humanoid shipments H1 2026","https://counterpointresearch.com/en/insights/global-humanoid-robot-shipments-soar-nearly-300-percent-yoy-in-h1-2026"],["AI2Work: Schaeffler, Agility, Boston Dynamics","https://ai2.work/blog/how-boston-dynamics-agility-and-schaeffler-are-moving-humanoids-to-the-factory"],["Robotics 24/7: orders vs deployments","https://www.robotics247.com/article/humanoid-orders-vs-actual-deployments-how-much-commercial-progress-is-really-happening"]]},
+{id:"kvantum",t:"Hibajavított kvantumszámítás",a:"tech",r:2,i:2,h:"2027–2030",
+ s:"A verseny a nyers qubitszámról a megbízható logikai qubitekre és a hibajavításra tolódott.",
+ n:[["94","logikai qubit a Quantinuumnál, 2026 március"],["70","logikai qubit az IBM–Chicagói Egyetem kísérletében, 2026 július"]],
+ w:"A QuEra szimulációi szerint akár két fizikai qubit is elég lehet egy logikaiért. A Forrester szerint a gyakorlati kvantumszámítás és a mai titkosítás feltörhetősége (\"Q-nap\") is valószínű 2030-ig, ezért a kvantumbiztos titkosítás a sürgős teendő.",
+ o:"Kvantumbiztos titkosításra való átállás; oktatási tartalom.",
+ src:[["Analytics Insight: quantum advances","https://www.analyticsinsight.net/quantum-computing-analytics-insight/quantum-computing-advances-key-breakthroughs-shaping-the-future-of-computing"],["Live in the Future: QEC May 2026","https://liveinthefuture.org/stories/quantum-error-correction-five-breakthroughs-may-2026.html"],["Forrester: Q-day","https://www.forrester.com/blogs/practical-quantum-computing-by-2030-is-likely-and-so-is-q-day"]]},
+{id:"eszkozon-ai",t:"Telefonon futó AI",a:"tech",r:3,i:2,p:1,h:"most",
+ s:"Egyre több AI-feldolgozás fut közvetlenül a készüléken: gyorsabb, privátabb, offline is működik.",
+ n:[],
+ w:"Új chipek és kisebb modellek teszik lehetővé. A fogyasztók egyre inkább mérlegelik a valódi hasznot, adatvédelmet és tartósságot a funkciók számánál.",
+ o:"Offline működő, adatot nem küldő AI-funkció mint értékesítési érv mobilappokban.",
+ src:[["Workalizer: edge AI","https://workalizer.com/blog/trends-news-insights/the-agentic-revolution-what-to-expect-from-ai-in-late-2026-and-beyond/"],["Techeconomy: consumer apps 2026","https://techeconomy.ng/what-to-expect-from-consumer-apps-in-2026"],["Analytics Insight: consumer tech 2027","https://www.analyticsinsight.net/ampstories/technology/consumer-technology-trends-in-2027-changes-to-watch"]]},
+
+{id:"kozossegi-kereso",t:"A közösségi média lett a kereső",a:"soc",r:4,i:3,p:1,h:"most",
+ s:"A fiatalok a TikTokon, YouTube-on, Instagramon keresnek. A kulcsszavas felirat és a képernyőszöveg többet ér a hashtageknél, a felfedezés többet a követőszámnál.",
+ n:[["~40%","fiatal felhasználó preferálja a TikTokot vagy Instagramot a Google kereséssel szemben (Narrative)"]],
+ w:"A platformok algoritmusa a videó szövegét is olvassa; a HubSpot szerint a közösségi gráf helyett az érdeklődés-alapú felfedezés dönt az elérésről.",
+ o:"Rövid videóknál a cím és az első képernyőszöveg legyen konkrét kérdés, amire valaki rákeres (pl. \"Miért…?\").",
+ src:[["Narrative: influencer trends 2027","https://narrativegroup.co/blog/influencer-marketing-trends/"],["IQFluence: social media trends","https://iqfluence.io/public/blog/social-trends"],["Plansy: social media in 2027","https://blog.plansy.io/how-social-media-is-changing-in-2027/"]]},
+{id:"social-commerce",t:"Social commerce és élő vásárlás",a:"soc",r:3,i:2,p:1,h:"most",
+ s:"Natív fizetés a TikTok Shopban, Instagramon és YouTube-on; a creatorok QVC-stílusú élő adásokban értékesítenek, jutalékból.",
+ n:[["$81 Mrd","közösségi platformokon keresztüli e-kereskedelem 2024-ben, gyorsuló növekedéssel"]],
+ w:"A platformok megoldották a súrlódást, a vásárlás már nem visz ki az appból. A creator-készítésű hirdetések jobban teljesítenek a stúdiós anyagoknál.",
+ o:"Affiliate-bevétel tartalomcsatornák mellé; digitális termékek közvetlen értékesítése.",
+ src:[["Narrative: social commerce trends","https://narrativegroup.co/blog/social-commerce-trends/"],["IQFluence: social trends","https://iqfluence.io/public/blog/social-trends"]]},
+{id:"reszvetel",t:"A részvétel az új tartalom",a:"soc",r:2,i:2,p:1,h:"2027",
+ s:"A kommentszekció maga a kampány, a creator moderátorrá válik, a közönség társszerzővé. A pop-up kultúra \"drop\" kultúrává alakul.",
+ n:[],
+ w:"Az elköteleződés a részvételből, a hitelességből és a kreativitásból nő, nem a polírozottságból. A TikTok saját jelentése is a közös érdeklődésű csoportokat és a kommentekben zajló részvételt emeli ki.",
+ o:"Nézői kérdésekre épülő sorozatok, \"te döntöd el a következő részt\" formátumok.",
+ src:[["Global Social Media Awards: 7 trends 2027","https://globalsocialmediaawards.com/2026/07/28/7-social-media-trends-shaping-2027/"],["Lead the Mood: social trends 2027","https://leadthemood.com/en/blog/social-media-trends-2027/"]]},
+{id:"karakterek",t:"Rajzolt karakterek saját hanggal",a:"soc",r:2,i:2,p:1,h:"2027",
+ s:"A hasonló fotók tengerében az illusztráció és egy felismerhető személyiségű karakter kiemelkedik, és új fotózás nélkül ad gesztust, érzelmet, kis történeteket.",
+ n:[],
+ w:"A 2026–27-es TikTok-témák fő iránya a hitelesség a túlpolírozottsággal szemben, plusz az érzelmi és közösségi visszatérés. Márkatervezésben is a melegebb, emberibb textúra nyer.",
+ o:"Animált tényvideóknál egy visszatérő saját karakter márkává építhető és több platformon újrahasznosítható.",
+ src:[["Lead the Mood: social trends 2027","https://leadthemood.com/en/blog/social-media-trends-2027/"],["Sozee: TikTok trends calendar","https://www.sozee.ai/resources/tiktok-trends-calendar-guide/"]]},
+{id:"hosszu-forma",t:"Visszatér a hosszabb formátum",a:"soc",r:2,i:1,p:1,h:"2026–2027",
+ s:"Görgetési fáradtság: a közönség mélyebb tartalmak felé fordul, a TikTokon már 10 perces videók is feltölthetők.",
+ n:[],
+ w:"A sikeres creatorok visszatérő, tematikus sorozatokat építenek felismerhető hanggal és stílussal.",
+ o:"Rövid videókból összefűzött hosszabb \"válogatás\" epizódok YouTube-ra.",
+ src:[["IQFluence: social trends","https://iqfluence.io/public/blog/social-trends"],["Hootsuite: TikTok trends","https://blog.hootsuite.com/tiktok-trends/"]]},
+
+{id:"mikrodrama",t:"Vertikális mikrodrámák",a:"ent",r:3,i:3,p:1,h:"most",
+ s:"1–3 perces, függővégű, álló formátumú sorozatepizódok, gyakran webregények alapján. Mobilon már több időt visznek el, mint a nagy streamerek.",
+ n:[["850 M+","letöltés Q1 2026-ban, +140% év/év (Sensor Tower)"],["35,7 perc","napi idő a ReelShortban, szemben a Netflix 24,8 percével (USA, mobil)"],["$14 Mrd","becsült globális bevétel 2026-ban (Omdia)"]],
+ w:"Latin-Amerikában a kategória Q1-ben több mint kilencszeresére nőtt. Kínában az AI-generált szereplők és az AI-képregény-drámák törnek előre. Kockázat: a platformok költségvetésük nagy részét marketingre költik, így nem mindenki éli túl.",
+ o:"AI-animált rövid sorozatok; a horror és thriller a felhasználók szerint alulellátott műfaj.",
+ src:[["Subscription Insider: microdramas","https://www.subscriptioninsider.com/blog/streamers-face-a-new-challenger-for-mobile-attention-microdramas-news"],["eMarketer: microdramas vs Netflix","https://www.emarketer.com/content/microdrama-apps-surpass-netflix--prime-video-us-mobile-engagement"],["Señal News: Latin America +913%","https://senalnews.com/es/data/america-latina-las-apps-de-microdramas-verticales-crecieron-un-913-en-el-q1-2026/amp"],["Señal News: vertical series $150B","https://senalnews.com/en/data/vertical-series-global-market-heads-for-150-billion-in-2026"]]},
+{id:"elofizetes",t:"App-gazdaság: növekedés helyett monetizáció",a:"ent",r:4,i:3,p:1,h:"most",
+ s:"A telepítések lassan nőnek, a bevétel gyorsan. A nem-játék appok, élükön az AI- és előfizetéses termékekkel, húzzák a piacot.",
+ n:[["+105%","előfizetési bevétel Q1 2026-ban év/év az app-gazdaságban"],["1 Mrd","havi aktív felhasználó: a ChatGPT a valaha leggyorsabb app (2026 május)"],["$4 Mrd+","AI-appok in-app bevétele H1 2026-ban, +36%"]],
+ w:"Az AI-figyelem erősen koncentrált: három app viszi a nagyját. Közben az átlagos fogyasztónak már sok előfizetése van, ezért a hibrid modellek (free tier + előfizetés + egyszeri vásárlás) és a weben keresztüli fizetés terjed.",
+ o:"Szűk, valódi problémát megoldó utility appok, ahol egy általános AI-asszisztens nem versenyez; web-to-app fizetés a jutalék csökkentésére.",
+ src:[["AppsOps: Sensor Tower State of AI 2026","https://appsops.store/news/sensor-tower-state-of-ai-2026-mobile-revenue-app-builders"],["eMarketer: growth to extraction","https://www.emarketer.com/content/app-economy-shifts-growth-extraction"],["Sensor Tower press release","https://tools.prnewswire.com/en-us/live/20823/release/20260616EN83943"],["CatDoes: monetization strategies","https://catdoes.com/blog/mobile-app-monetization-strategies"]]},
+{id:"android-2027",t:"Android 2027: új boltszabályok",a:"ent",r:3,i:2,p:1,h:"2026 ősz – 2027",
+ s:"Az USA-ban rivális boltok jelennek meg a Google Playen belül és appon kívül is lehet fizetni; 2027-től minden tanúsított Androidon csak ellenőrzött fejlesztők appjai futnak.",
+ n:[["2026.09.30","a fejlesztő-ellenőrzés indul Brazíliában, Indonéziában, Szingapúrban és Thaiföldön, 2027-ben világszerte"]],
+ w:"Közben terjed a korellenőrzés és a szülői jóváhagyás, és a Google tovább emeli a kötelező Android-célverziót.",
+ o:"Fejlesztői azonosítás időben elintézése; saját webshop bónuszokkal az appon kívüli vásárláshoz.",
+ src:[["Onirealms: mobile gaming trends 2027","https://onirealms.com/guides/mobile-gaming-trends-2027/"]]},
+{id:"idle",t:"Idle-boom és telített boltok",a:"ent",r:3,i:2,p:1,h:"2027",
+ s:"Az idle játékok konjunktúrája folytatódik, és ismert sorozatok is kiadják idle-változatukat. Közben a boltok túltelítettek.",
+ n:[["$103 Mrd","mobiljáték-piac 2027-re (Statista)"],["~10%","a 2025-ben indult 1,4 millió appból csak ennyi kap érdemi figyelmet"]],
+ w:"A mobiljáték-piac stabilizálódott és lassan nő, a feltörekvő piacok (Törökország, Mexikó, India) hajtják a költésnövekedést.",
+ o:"Alacsony fejlesztési költségű, hosszú farokra optimalizált idle/hiperkasual játékok, erős meta-réteggel.",
+ src:[["Onirealms: mobile gaming trends 2027","https://onirealms.com/guides/mobile-gaming-trends-2027/"],["Segwise: mobile gaming statistics","https://segwise.ai/blog/mobile-gaming-statistics"],["Udonis: mobile gaming statistics","https://www.blog.udonis.co/mobile-marketing/mobile-games/mobile-gaming-statistics"]]},
+{id:"platformok-osszemosodnak",t:"Összemosódó platformok, kézikonzolok",a:"ent",r:3,i:2,p:1,h:"2027",
+ s:"Konzol, PC és mobil határa elmosódik; a kézi gépek PC-szintű élményt adnak, a játékokat ökoszisztémára kell tervezni, nem egy platformra.",
+ n:[["$312 Mrd","globális videojáték-bevétel 2027-ben (PwC)"]],
+ w:"Az AI mélyebben beépül a fejlesztési folyamatba, és a gaming creator-gazdaság tovább nő. A MENA-régió gyorsan növekvő piac.",
+ o:"Platformfüggetlen motoros fejlesztés eleve mobil + PC célra; creatorokkal közös kampányok.",
+ src:[["Analytics Insight: gaming trends 2027","https://www.analyticsinsight.net/gaming/7-gaming-trends-to-watch-in-2027-ai-cloud-handhelds-more"],["Udonis: gaming trends 2026","https://www.blog.udonis.co/mobile-marketing/mobile-games/gaming-trends"]]},
+
+{id:"analog",t:"Analóg fordulat",a:"cons",r:3,i:2,p:1,h:"most",
+ s:"A Z generáció tudatosan csökkenti a képernyőidőt: \"nagymama-hobbik\", film fényképezőgépek, buta telefonok, telefonmentes események.",
+ n:[["75%","18–24 éves szeretne idén analógabb lenni, több offline hobbival (YPulse)"],["+157%","instant fényképezőgép eladás, a Walkmané +111% (Afterpay)"],["12×","nőtt egy butatelefon-kereső oldal forgalma 2022 és 2025 között"]],
+ w:"A közösségimédia-fáradtság és a mentális egészség miatt; az Offline Club már 19 városban van jelen. Nem a digitális vége, hanem tudatos határhúzás.",
+ o:"Offline szokásokat támogató appok (képernyőidő, hobbi-tracker), nyomtatható kiegészítők, \"telefon nélküli\" kihívások.",
+ src:[["YPulse: why Gen Z is going analog","https://www.ypulse.com/article/2026/05/05/ypulse-explains-why-gen-z-is-going-analog/"],["Archbridge: analog summer","https://www.archbridgeinstitute.org/gen-z-is-having-an-analog-summer-and-theyre-obsessed-with-this-item/"],["Fortune: Gen Z analog economy","https://fortune.com/2026/04/01/gen-z-analog-economy-5-billion-market-nostalgia"]]},
+{id:"emberi-premium",t:"Emberi prémium és AI-fáradtság",a:"cons",r:2,i:3,p:1,h:"2027",
+ s:"Amikor az intelligencia bőséges, a hitelesség, a látható emberi kéz és az ellenőrizhető forrás lesz az érték. A hagyományos tekintélyforrások szétaprózódnak.",
+ n:[],
+ w:"Előrejelzések szerint 2027-ben a munkahelyen is jobban megbíznak majd a kis hibákat tartalmazó munkában, mint a gyanúsan tökéletesben. A Mintel szerint azok a márkák nyernek, amelyek igazolni tudják a hitelességüket.",
+ o:"Átlátható AI-használat, ellenőrzött források feltüntetése, a készítő személyes jelenléte a tartalomban.",
+ src:[["Lindsay Angelo: consumer trends 2027","https://lindsayangelo.com/thinkingcont//consumer-trends-2027"],["HCAMag: 2027 workforce predictions","https://www.hcamag.com/us/news/general/2027-workforce-predictions-ai-fatigue-and-an-empty-leadership-bench/595038"],["Mintel: 2027 Global Predictions","https://www.mintel.com/insights/consumer-research/global-consumer-trends/"]]},
+{id:"rendszerek",t:"Termékek helyett rendszerek",a:"cons",r:2,i:2,h:"2027–2030",
+ s:"A fogyasztó az elérendő eredményre figyel, nem a termékre; a nyertesek terméket, szakértelmet, technológiát és szolgáltatást kapcsolnak össze.",
+ n:[],
+ w:"A Mintel 2027-es előrejelzésének központi tézise, amely először fogja át az étel, szépségápolás, háztartás és wellness kategóriákat.",
+ o:"Appok, amelyek egy fizikai termékhez vagy szokáshoz adnak követést és tanácsot.",
+ src:[["Mintel: 2027 Global Predictions","https://www.mintel.com/insights/consumer-research/global-consumer-trends/"]]},
+{id:"pozitiv-loket",t:"Pozitív löket és biztonságos menedék",a:"cons",r:3,i:2,p:1,h:"2027",
+ s:"Kis hangulatjavító élmények, kisebb társaságok, gyerekkori kényelmi jelek egy zaklatott világban.",
+ n:[["71%","fáradt a negatív hírektől (Innova)"],["45%","kisebb társas közegben tölti az idejét"]],
+ w:"Az Innova szerint a legerősebb fogyasztói igények (hangulat, nyugalom, energia) éppen azok, amelyekre a legtöbb piacon nem lehet egészségállítást tenni.",
+ o:"Pozitív, csodálkozást keltő ismeretterjesztés; nyugtató, rövid napi rutinok appban.",
+ src:[["Prodeen: Innova 2027 trends","https://prodeen.com/viewpoint/the-2027-consumer-trends-point-to-the-claims-that-are-hardest-to-make?hs_amp=true"],["WGSN: Future Consumer 2027","https://www.wgsn.com/en/blog/future-consumer-2027-why-emotion-money"]]},
+{id:"jatek-jollet",t:"Játék mint jóllét, felnőtt gyűjtők",a:"cons",r:3,i:2,p:1,h:"2027",
+ s:"A játék a jóllét stratégiai elemévé válik; a felnőttek gyerekkori kedvenceket gyűjtenek és \"felnőttségmentes\" élményeket keresnek.",
+ n:[["57%","utazó foglalna valószínűleg \"un-adulting\" utat 2027-ben (Expedia)"]],
+ w:"Nosztalgia és a felelősség alóli szabadulás vágya (WGSN: \"Witherwill\"). A Whatnot játék- és gyűjtői trendeket lát erősödni.",
+ o:"Gamifikáció felnőtteknek; gyűjthető elemek és meta-progresszió appokban.",
+ src:[["NRF: big trends by 2027","https://nrf.com/blog/big-trends-impacting-consumers-by-2027"],["Whatnot: 2027 Consumer Trends","https://blog.teamwhatnot.com/unitedstates/2027globalconsumertrends"],["Expedia Unpack '27","https://www.prnewswire.com/news-releases/unpack-27-expedia-hotelscom-and-vrbo-reveal-the-travel-trends-inspiring-the-world-in-2027-302907800.html"]]},
+{id:"meleg-dizajn",t:"Melegebb, tapinthatóbb dizájn",a:"cons",r:2,i:1,p:1,h:"2027",
+ s:"Melegebb színek, emberi textúra, nyugodtabb elrendezés; a túlpolírozott, hideg vizuális világ ellenreakciója.",
+ n:[],
+ w:"A közösség, az öröm és a kézműves jelleg mint bizalmi jel. A márkarendszerek moduláris felépítésűek, hogy polcon, webshopban és rövid videóban is működjenek.",
+ o:"App-ikonok, képernyők és bélyegképek frissítése melegebb palettára.",
+ src:[["Big Eye: 2027 design trends","https://www.bigeyeagency.com/insights/2027-design-trends-that-will-transform-consumer-brands"]]},
+
+{id:"glp1",t:"GLP-1 a fogyáson túl",a:"health",r:4,i:3,h:"most",
+ s:"A GLP-1 gyógyszerek tabletta és ritkább adagolású formában terjednek, és a kutatás szív-, vese- és függőségkezelésre is kiterjed.",
+ n:[["~1/5","amerikai felnőtt használt már GLP-1 gyógyszert"]],
+ w:"Egyesek az első \"hosszú élet\" gyógyszernek tartják, de egészséges embereknél még nincs elegendő hosszú távú adat. Hullámhatás: kevesebb, de tápanyagdúsabb étel, izommegtartó edzés, ruházati költés.",
+ o:"Táplálkozás- és edzéskövetés gyógyszert szedőknek, orvosi felügyelet mellett.",
+ src:[["US News: health trends 2026","https://health.usnews.com/wellness/articles/top-health-and-nutrition-trends-for-2026"],["US News: GLP-1 and longevity","https://health.usnews.com/wellness/articles/the-glp-1-effect"],["PwC: GLP-1 and business models","https://www.pwc.com/us/en/services/consulting/strategy/glp-1-trends-and-impact-on-business-models.html"]]},
+{id:"hosszu-elet",t:"Mérhető hosszú élet",a:"health",r:3,i:2,p:1,h:"2026–2028",
+ s:"A longevity a virális tippek helyett orvosibb és mérhetőbb lesz: epigenetikai órák, biomarkerek, alváskezelés.",
+ n:[],
+ w:"Több mint 200 orvos válaszai szerint a hangsúly a szuperemberi célokról az egészségben töltött évekre került; az alvás a terápiák központi eleme.",
+ o:"Alvás- és rutin-appok, amelyek egyszerű, mérhető szokásokra építenek.",
+ src:[["Vogue Adria: wellness trends","https://vogueadria.com/wellness-trends/"],["Hone Health: longevity trends","https://honehealth.com/edge/longevity-trends/"]]},
+{id:"etel-borapolas",t:"Étel mint bőrápolás",a:"health",r:2,i:2,h:"2027",
+ s:"Kollagénzselé-rudak, \"bőrfény\" gumicukrok, olívaolaj-shotok: összemosódik a snack, az étrend-kiegészítő és a kozmetikum.",
+ n:[],
+ w:"A Whole Foods 2027-es nyolc élelmiszertrendjének egyike; a K-beauty közben továbbra is meghatározza a bőrápolási rutinokat.",
+ o:"Tartalomtéma: mi igaz és mi marketing a \"belülről szépítő\" termékekben.",
+ src:[["Whole Foods Market: 2027 trends","https://press.aboutamazon.com/2026/10/whole-foods-market-reveals-its-top-food-and-beverage-trend-predictions-for-2027"],["Whatnot: beauty trends 2027","https://blog.teamwhatnot.com/unitedstates/2027globalconsumertrends"]]},
+{id:"upf",t:"Ultrafeldolgozott-mentesség és \"modern betegségek\"",a:"health",r:2,i:2,p:1,h:"2027",
+ s:"Egyre több app és tanúsítás segít elkerülni az ultrafeldolgozott élelmiszereket; új termékek reagálnak a mikroműanyagokra és az alfa-gal szindrómára.",
+ n:[],
+ w:"Az átláthatóság és a pontosan megnevezett előnyök iránti igény; a fogyasztó a hagyományt és a precíz hatást egyszerre keresi.",
+ o:"Címkeolvasó, összetevő-magyarázó appok egyszerű, látványos felülettel, nyelvfüggetlen ikonokkal.",
+ src:[["Whole Foods Market: 2027 trends","https://press.aboutamazon.com/2026/10/whole-foods-market-reveals-its-top-food-and-beverage-trend-predictions-for-2027"],["The Shelby Report: Expo West 2027","https://theshelbyreport.com/2026/10/23/expo-west-forecasts-17-trends-shaping-natural-products-in-2027"]]},
+{id:"funkcionalis-italok",t:"Harmadik hullámos funkcionális italok",a:"health",r:2,i:1,h:"2027",
+ s:"A koffeines sportitalok és az alkoholmentes alternatívák után tisztább összetételű, életszakaszhoz és konkrét igényhez kötött italok jönnek.",
+ n:[],
+ w:"Szénsavas fehérjeitalok, élvezetesebb formátumban adagolt tápanyagok.",
+ o:"Kevés közvetlen lehetőség, inkább fogyasztói háttértrend.",
+ src:[["The Shelby Report: Expo West 2027","https://theshelbyreport.com/2026/10/23/expo-west-forecasts-17-trends-shaping-natural-products-in-2027"],["Vogue Adria: wellness trends","https://vogueadria.com/wellness-trends/"]]},
+
+{id:"terroir",t:"Terroir, örökségízek, magyar túró",a:"food",r:2,i:1,h:"2027",
+ s:"A származás és a \"hely íze\" a boron túl is számít: regionális méz, egybirtokos csokoládé, eredetvédett termékek. Japán komfortételek és keserű ízek is felfutnak.",
+ n:[["+7,3%","várt tejtermék-kategória növekedés 2027-ben az USA-ban (NBJ)"]],
+ w:"Az Expo West \"örökség-tejtermék\" trendjében név szerint szerepel a magyar túró a vietnami joghurt és a labneh mellett. Ősi gabonák (emmer, amaránt) is visszatérnek.",
+ o:"Közép-európai élelmiszerek exportja és tartalmi témája; recept- és eredettörténet videók.",
+ src:[["Whole Foods Market: 2027 trends","https://press.aboutamazon.com/2026/10/whole-foods-market-reveals-its-top-food-and-beverage-trend-predictions-for-2027"],["The Shelby Report: Expo West 2027","https://theshelbyreport.com/2026/10/23/expo-west-forecasts-17-trends-shaping-natural-products-in-2027"],["Datassential 2027","https://www.preparedfoods.com/articles/131963-datassential-identifies-food-and-beverage-trends-to-watch-in-2027"]]},
+{id:"mikro-utazas",t:"Mikro-utazás és egyéjszakás kiruccanások",a:"food",r:3,i:2,h:"2027",
+ s:"Rövidebb, rugalmasabb utak, hobbiközpontú és személyes fejlődést hozó kirándulások; a tökéletes helyett a \"nagyjából jó\".",
+ n:[["14 000+","utazó globális felmérése a Hilton 2027-es jelentésében"],["~1/5","utazó foglalt már utat sorozatban vagy filmben látott helyszínre (Expedia)"]],
+ w:"A Hilton öt trendje: a \"-ish\" térnyerése, a bizalom, fejlődést hozó utak, természetközeli wellness és a mikro-utazás. Az Expedia az egyéjszakás utakat és a hobbialapú utazást emeli ki.",
+ o:"Hobbi- és helyszínalapú mikro-útvonaltervezők, \"forgatási helyszín\" tartalmak.",
+ src:[["Hilton 2027 Trends Report","https://stories.hilton.com/releases/2027-trends-release"],["Expedia Unpack '27","https://www.prnewswire.com/news-releases/unpack-27-expedia-hotelscom-and-vrbo-reveal-the-travel-trends-inspiring-the-world-in-2027-302907800.html"]]},
+
+{id:"stablecoin",t:"Stablecoin-alapú fizetési sínek",a:"fin",r:2,i:3,h:"2027–2030",
+ s:"A stablecoinok a kriptokereskedésből a határon átnyúló B2B-fizetés, a pénzügyi treasury és az elszámolás infrastruktúrájába lépnek, 2027-ben a bankokkal együtt.",
+ n:[["0,02%","a globális fizetések jelenlegi stablecoin-aránya"],["5–10%","határon átnyúló fizetés várható aránya 2030-ra a megkérdezettek szerint"],["$230 Mrd","banki fizetési bevétel kerülhet veszélybe (Capgemini)"]],
+ w:"A határon átnyúló volumen negyedévente nagyjából 15–20%-kal nő. A nagy fizetési szereplők (Stripe, Visa, Mastercard) beszálltak, és a gépi ügynökök természetes fizetőeszköze lehet a 24/7-es, programozható pénz.",
+ o:"Nemzetközi ügyfeleknek számlázóknak olcsóbb kifizetési utak figyelése; mikrotranzakciók appokban.",
+ src:[["Thunes: stablecoin trends 2027","https://www.thunes.com/insights/trends/stablecoin-trends-shaping-global-payments/"],["FinTech Global: Capgemini WPR 2027","https://fintech.global/2026/09/28/banks-face-230bn-payments-hit-as-stablecoins-scale/"],["FINTECH.TV: banks and stablecoins","https://cms.fintech.tv/why-banks-are-embracing-stablecoins-ahead-of-2027/"],["Deloitte: retail stablecoin payments","https://www.deloitte.com/us/en/insights/industry/financial-services/financial-services-industry-predictions/2026/stablecoins-retail-payments.html"]]},
+{id:"szukulo-penztarca",t:"Szűkülő pénztárca, értékalapú vásárlás",a:"fin",r:3,i:2,p:1,h:"2026–2027",
+ s:"Az amerikai fogyasztók többsége kevesebből gazdálkodik az ünnepi szezonban; a vásárlók a tartósságot, javíthatóságot és valós hasznot mérlegelik.",
+ n:[["~60%","amerikai fogyasztónak van kevesebb elkölthető pénze az ünnepekre (Gartner)"]],
+ w:"Az energiasokk és a magasabb infláció szorítja a háztartásokat; az \"elég\" korszaka (kevesebb, de értelmes vásárlás) erősödik.",
+ o:"Ingyenes alapverzió erős értékkel, átlátható árazás, előfizetés-fáradtságra reagáló egyszeri vásárlás.",
+ src:[["Gartner newsroom (2026.10.26.)","https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"],["Analytics Insight: consumer tech 2027","https://www.analyticsinsight.net/ampstories/technology/consumer-technology-trends-in-2027-changes-to-watch"],["Lindsay Angelo: era of enough","https://lindsayangelo.com/thinkingcont//consumer-trends-2027"]]},
+
+{id:"adatkozpont-aram",t:"Az AI áramigénye és az akkumulátorboom",a:"energy",r:4,i:3,h:"most – 2030",
+ s:"Az adatközpontok a hálózati szűk keresztmetszetet akkumulátorokkal, saját erőművel és mikrohálózatokkal kerülik meg. A tárolás az AI-infrastruktúra kötelező elemévé vált.",
+ n:[["2 200+ TWh","lehetséges adatközponti áramigény 2030-ra, nagyjából India mai fogyasztása (S&P, magas forgatókönyv)"],["+131%","USA lítiumion-import AI-szerverrackek tartalékakkujához, 2026 jan–júl"]],
+ w:"Az AI-tréning terhelése ezredmásodpercek alatt ugrik, ezt az akkuk simítják. Az ingatlanpiacon is az áram és a hálózati kapacitás lett a helyválasztás egyik fő szempontja.",
+ o:"Ismeretterjesztő téma; energia- és fogyasztásfigyelő eszközök.",
+ src:[["S&P Global: Horizons 2026","https://www.spglobal.com/energy/en/news-research/special-reports/energy-transition/horizons-top-cleantech-trends-2026"],["pv magazine: storage prices to 2030","https://pv-magazine-usa.com/2026/10/26/u-s-energy-storage-prices-to-drop-through-2030-but-trade-risks-and-supply-gaps-threaten-potential-savings"],["Latitude Media: battery boom","https://www.latitudemedia.com/news/the-battery-boom-behind-the-ai-buildout/"],["CPE: Emerging Trends in Real Estate 2027","https://www.commercialsearch.com/news/emerging-trends-2027-get-ready-to-work-for-it/"]]},
+{id:"nap-tarolas",t:"Napenergia + tárolás, nátriumion",a:"energy",r:4,i:3,h:"2026–2032",
+ s:"A napenergia 2032-re a világ legnagyobb áramforrása lehet; a tárolás meredeken nő, és a lítium mellett nátriumion, flow- és vas-levegő akkuk skálázódnak.",
+ n:[["2032","a napenergia a legnagyobb áramtermelő (BloombergNEF)"],["17×","energiatárolási kapacitás bővülése, 223 GW-ról 3,8 TW-ra (BNEF)"]],
+ w:"Energiabiztonsági okból is: az importált fosszilis energiától való leválás. Kína 2027. január 1-jével megszünteti az akkumulátorok áfa-visszatérítését, ami előrehozott vásárlásokat okozott.",
+ o:"Otthoni energia- és napelem-optimalizáló appok.",
+ src:[["BloombergNEF: New Energy Outlook 2026","https://about.bnef.com/insights/clean-energy/bloombergnefs-new-energy-outlook-2026-transition-to-newer-technologies-expanded-electrification-to-strengthen-nations-energy-security/"],["pv magazine: five storage trends","https://pv-magazine-usa.com/2026/01/26/five-trends-for-energy-storage-as-global-market-passes-100-gw/"],["pv magazine: Intertek CEA Q3 2026","https://pv-magazine-usa.com/2026/10/26/u-s-energy-storage-prices-to-drop-through-2030-but-trade-risks-and-supply-gaps-threaten-potential-savings"]]},
+{id:"hoseg",t:"Alkalmazkodás a hőséghez",a:"energy",r:3,i:2,p:1,h:"most",
+ s:"A rendkívüli hőség szerkezeti kockázat lett: Európában a leghalálosabb időjárási veszély. Városok és országok adaptációs terveket indítanak.",
+ n:[["3,8 Mrd","ember lehet kitéve extrém hőségnek 2050-re (Nature Sustainability)"]],
+ w:"Szingapúr 2026-ot az alkalmazkodás évének nyilvánította; 2026 végére El Niño valószínű, ami 2027-et újabb rendkívül meleg évvé teheti. A fák, parkok és zöldtetők a leghatékonyabb városi hűtési eszközök közé tartoznak.",
+ o:"Hőség-figyelmeztető és hűvös helyeket mutató appok; ismeretterjesztő tartalom.",
+ src:[["Kyoto Club: EU on extreme heat","https://www.kyotoclub.org/en/news-en/news-from-the-world/2026/07/10/caldo-estremo-cinque-cose-da-sapere-e-le-soluzioni-per-affrontarlo/"],["Caixin: Singapore adaptation","https://www.caixinglobal.com/2026-09-03/singapore-to-release-climate-adaptation-plan-as-heat-risks-grow-102481447.html"],["BSS/AFP: 3.8bn people","https://www.bssnews.net/news/354872"]]},
+
+{id:"belepo-szint",t:"Kiürülő belépő szintű munkák",a:"work",r:3,i:3,h:"most – 2028",
+ s:"Az AI elveszi a junior munkák rutinfeladatait, a megmaradó belépő pozíciók pedig korábban senior készségeket (vezetés, stratégia) kérnek.",
+ n:[["7×","valószínűbb, hogy az AI-nak leginkább kitett junior állások senior készségeket kérnek (PwC)"],["+35%","az ilyen \"seniorizált\" belépő pozíciók növekedése 2019 óta"]],
+ w:"A HR-vezetők szerint újra kell építeni a tehetségutánpótlást, mert a rutinmunka volt a tanulás terepe. A kérdés: honnan jön a jövő tapasztalt szakembere.",
+ o:"Szimulációs gyakorló- és mentorplatformok, amelyek pótolják az elveszett \"tanulóév\" tapasztalatait.",
+ src:[["AIHR: HR trends 2027","https://www.aihr.com/blog/hr-trends/"],["PwC: AI Jobs Barometer","https://www.pwc.com/gx/en/1/services/ai/ai-jobs-barometer.html"],["HCAMag: 2027 predictions","https://www.hcamag.com/us/news/general/2027-workforce-predictions-ai-fatigue-and-an-empty-leadership-bench/595038"]]},
+{id:"ellenorzes",t:"Az ellenőrzés mint kulcskészség",a:"work",r:2,i:2,p:1,h:"2027",
+ s:"2027-ben az nyer, aki észreveszi az AI hibáit és jó ítélőképességgel dönt; az AI-használat önmagában már nem előny.",
+ n:[["77% vs 3%","az igazgatótanácsok várnak AI-hatékonyságot, de csak a szervezetek 3%-a teljesíti túl a megtakarítási célt (Gartner HR)"]],
+ w:"A képességek \"elsorvadása\" (AI-atrófia) új kockázat. Közben a villanyszerelők és vízvezeték-szerelők is az AI-boom haszonélvezői az adatközpont-építések miatt.",
+ o:"Kritikus gondolkodást és tényellenőrzést tanító eszközök, kvízek.",
+ src:[["Forbes: 8 workplace skills trends 2027","https://www.forbes.com/sites/bernardmarr/2026/10/26/8-workplace-skills-trends-that-could-make-or-break-your-career-in-2027/"],["Gartner newsroom: HR research","https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"],["Forbes: future of work 2027","https://www.forbes.com/sites/bernardmarr/2026/10/12/10-future-of-work-trends-that-could-change-your-job-in-2027/"]]},
+{id:"ai-tanitas",t:"AI-tanítás: skálázódik, de kevés a bizonyíték",a:"work",r:3,i:2,p:1,h:"most",
+ s:"Az adaptív gyakorlás és az AI-tanári támogatás terjed, miközben a csupasz \"chatbot mint tanár\" ígéret kifullad.",
+ n:[["45%","a legtöbbet használt oktatási eszközök közül ennyinek van publikált hatásvizsgálata"]],
+ w:"A diákok AI-igénye megelőzte az eszközöket és szabályokat. A blokklánc-oklevél és a teljes osztálytermi VR is halványul; a mérhető tanulási eredmény lett a mérce.",
+ o:"Szűk, mérhető tanulási célra (szókincs, fejszámolás) épített, játékos gyakorlóappok.",
+ src:[["TechnBrains: EdTech trends 2026","https://www.technbrains.com/blog/edtech-trends/"],["EdTech Insiders: 2026 predictions","https://edtechinsiders.substack.com/p/trust-integration-and-transformation"]]},
+
+{id:"ev-piac",t:"Kettészakadó villanyautó-piac",a:"mob",r:3,i:2,h:"2026–2027",
+ s:"Kínában a hazai EV-eladás csökken a támogatások szűkülése miatt, Európában erősen nő, és egyre több Európában eladott villanyautó Kínában készül.",
+ n:[["−15%","Kína EV-eladása 2026 májusáig év/év"],["+27%","európai EV-eladás 2026 áprilisában év/év"],["22%","a Kínában gyártott autók aránya az európai EV-eladásokban 2026-ban"]],
+ w:"A kínai gyártók exportra fordulnak és Európában (köztük Magyarországon) építenek gyárakat a vámok elkerülésére.",
+ o:"Töltés- és költségkalkulátorok, összehasonlító tartalmak autóvásárlóknak.",
+ src:[["Benchmark: EV sales May 2026","https://source.benchmarkminerals.com/article/global-ev-sales-reach-1-8-million-units-in-may-2026"],["Benchmark: EV sales April 2026","https://source.benchmarkminerals.com/article/global-ev-sales-reached-1-60-million-units-in-april-2026"],["Independent Research Forum","https://www.independentresearchforum.com/events/1042"]]},
+{id:"robotaxi",t:"Robotaxik Európában",a:"mob",r:2,i:2,h:"2026–2028",
+ s:"Elindultak az első nyilvános európai robotaxi-szolgáltatások, kínai technológiai partnerekkel és Uber-integrációval.",
+ n:[["€1,99","fuvarár Európa első robotaxi-szolgáltatásán, Zágrábban"],["2 000+","robotaxi telepítését tervezi a Pony.ai és az Uber Európában"]],
+ w:"A Baidu Londonban tesztel, a WeRide 2027 első felében Dániában indul. Az iparág a helyi pilotokból a nagy léptékű kereskedelmi üzem felé lép.",
+ o:"Figyelendő; közel van Magyarországhoz, tartalmi téma.",
+ src:[["ChinaEVHome: Pony.ai Zagreb","https://chinaevhome.com/2026/04/09/"],["Daily Kanban: €1.99 robotaxi","https://webmail.dailykanban.com/2026/page/2/"],["ICE: Chinese robotaxis in Europe","https://www.ice.it/it/sites/default/files/inline-files/MACHINERY%20%26%20AUTOMOTIVE_17.pdf"]]},
+
+{id:"energiasokk",t:"Energiasokk és újraosztott növekedés",a:"macro",r:4,i:3,h:"2026–2027",
+ s:"A 2026 februárjában kezdődött nyugat-ázsiai háború ellátási sokkot okozott; a növekedés országonként aszerint oszlik el, ki mennyire kitett a sokknak és az AI-nak.",
+ n:[["3,1%","globális növekedés 2026-ban az IMF októberi előrejelzése szerint"],["3,4%","várt globális növekedés 2027-ben"],["−1,3%","a Közel-Kelet gazdasági teljesítménye 2026-ban (IMF)"]],
+ w:"A Hormuzi-szoros a világ olajellátásának nagyjából ötödét szállítja, ezért az energiaárak és az infláció a fő kockázat. Az AI-beruházások közben felfelé húzzák a növekedést.",
+ o:"Árérzékeny piacokon olcsó, értékalapú termékek; devizakockázatra figyelni nemzetközi bevételnél.",
+ src:[["The Star: IMF October 2026","https://www.thestar.com.my/business/business-news/2026/10/13/global-economy-to-decelerate-to-31-in-2026-in-2026-before-recovering-to-34-in-2027---imf"],["Kurdistan24: IMF regional outlook","https://www.kurdistan24.net/en/story/947832"],["Business Today: IMF April WEO","https://www.businesstoday.in/world/story/imf-cuts-global-growth-forecast-amid-west-asia-conflict-525612-2026-04-14"]]}
+];
+
+/* ---------- state ---------- */
+const st={q:"",areas:new Set(),rings:new Set(),indie:false,opp:true,sort:"impact",hot:null};
+const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+T.forEach((t,i)=>{t.k=i+1;t.hay=norm([t.t,t.s,t.w,t.o,AREA[t.a].n,t.n.map(x=>x.join(" ")).join(" ")].join(" "))});
+
+function match(t){
+  if(st.areas.size&&!st.areas.has(t.a))return false;
+  if(st.rings.size&&!st.rings.has(t.r))return false;
+  if(st.indie&&!t.p)return false;
+  if(st.q){const q=norm(st.q).split(/\s+/).filter(Boolean);if(!q.every(w=>t.hay.includes(w)))return false}
+  return true;
+}
+function sorted(list){
+  const ai=Object.fromEntries(AREAS.map((a,i)=>[a[0],i]));
+  const f={impact:(a,b)=>b.i-a.i||b.r-a.r,ring:(a,b)=>b.r-a.r||b.i-a.i,signal:(a,b)=>a.r-b.r||b.i-a.i,area:(a,b)=>ai[a.a]-ai[b.a]||b.r-a.r}[st.sort];
+  return [...list].sort(f);
+}
+
+/* ---------- header stats & chips ---------- */
+function renderStats(){
+  const srcs=new Set(T.flatMap(t=>t.src.map(s=>s[1].split("/")[2])));
+  $("#stats").innerHTML=[[T.length,"trend"],[AREAS.length,"terület"],[srcs.size,"forrásoldal"],[T.filter(t=>t.p).length,"indie-releváns"]]
+   .map(([b,s])=>`<div class="stat"><b class="mono">${b}</b><span>${s}</span></div>`).join("");
+}
+function renderChips(){
+  $("#ringChips").innerHTML=[4,3,2,1].map(r=>`<button class="chip" data-ring="${r}" aria-pressed="${st.rings.has(r)}" title="${esc(RINGS[r].d)}"><span class="dot" style="background:var(${RINGS[r].c})"></span>${RINGS[r].n} <small>${T.filter(t=>t.r===r).length}</small></button>`).join("");
+  $("#areaChips").innerHTML=AREAS.map(([k,n])=>`<button class="chip" data-area="${k}" aria-pressed="${st.areas.has(k)}">${n} <small>${T.filter(t=>t.a===k).length}</small></button>`).join("");
+}
+
+/* ---------- radar ---------- */
+const C=360, R={4:88,3:160,2:225,1:290}, Rin={4:0,3:88,2:160,1:225};
+function layout(){
+  const n=AREAS.length, step=2*Math.PI/n;
+  AREAS.forEach(([k],ai)=>{
+    const a0=-Math.PI/2+ai*step;
+    for(const r of [1,2,3,4]){
+      const items=T.filter(t=>t.a===k&&t.r===r);
+      items.forEach((t,j)=>{
+        const frac=(j+1)/(items.length+1);
+        const ang=a0+step*(0.12+0.76*frac);
+        const inner=Rin[r]+(r===4?28:14), outer=R[r]-14;
+        const rad=items.length>2?(j%2?inner+(outer-inner)*.72:inner+(outer-inner)*.28):(inner+outer)/2;
+        t.x=C+Math.cos(ang)*rad; t.y=C+Math.sin(ang)*rad;
+      });
+    }
+  });
+}
+function renderRadar(){
+  const n=AREAS.length, step=2*Math.PI/n;
+  let s=`<defs><radialGradient id="sw" cx="0" cy="0" r="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".22"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></radialGradient></defs>`;
+  [1,2,3,4].forEach(r=>s+=`<circle cx="${C}" cy="${C}" r="${R[r]}" fill="none" stroke="var(--grid)" stroke-width="${r===4?1.5:1}"/>`);
+  s+=`<path class="sweep" d="M${C} ${C} L${C} ${C-R[1]} A${R[1]} ${R[1]} 0 0 1 ${C+R[1]*Math.sin(.5)} ${C-R[1]*Math.cos(.5)} Z" fill="url(#sw)" opacity=".7" pointer-events="none"/>`;
+  AREAS.forEach(([k,,short],i)=>{
+    const a=-Math.PI/2+i*step;
+    s+=`<line x1="${C}" y1="${C}" x2="${C+Math.cos(a)*R[1]}" y2="${C+Math.sin(a)*R[1]}" stroke="var(--grid)" stroke-dasharray="2 4"/>`;
+    const m=a+step/2, lx=C+Math.cos(m)*(R[1]+30), ly=C+Math.sin(m)*(R[1]+30);
+    const anchor=Math.abs(Math.cos(m))<.25?"middle":(Math.cos(m)>0?"start":"end");
+    s+=`<text class="sector-label${st.areas.has(k)?" on":""}" data-area="${k}" x="${lx.toFixed(1)}" y="${(ly+4).toFixed(1)}" text-anchor="${anchor}">${short}</text>`;
+  });
+  [4,3,2,1].forEach(r=>s+=`<text class="ring-label" x="${C+4}" y="${C-R[r]+12}">${RINGS[r].n}</text>`);
+  T.forEach(t=>{
+    const on=match(t), rad=5+t.i*2.6;
+    s+=`<g class="blip${on?"":" dim"}${st.hot===t.id?" hot":""}" data-id="${t.id}" tabindex="${on?0:-1}" role="button" aria-label="${esc(t.t)}"><title>${esc(t.t)}</title><circle cx="${t.x.toFixed(1)}" cy="${t.y.toFixed(1)}" r="${rad}" fill="var(${RINGS[t.r].c})"/>${t.i>1?`<text x="${t.x.toFixed(1)}" y="${(t.y+3).toFixed(1)}" text-anchor="middle">${t.k}</text>`:""}</g>`;
+  });
+  $("#radar").innerHTML=s;
+  $("#legend").innerHTML=[4,3,2,1].map(r=>`<span><i style="background:var(${RINGS[r].c})"></i>${RINGS[r].n}</span>`).join("")+`<span class="sz">Pontméret = becsült hatás · szám = sorszám</span>`;
+}
+
+/* ---------- cards ---------- */
+function imp(i){return "●".repeat(i)+"○".repeat(3-i)}
+function renderCards(){
+  const list=sorted(T.filter(match));
+  $("#count").textContent=`${list.length} / ${T.length} trend`;
+  $("#cards").innerHTML=list.length?list.map(t=>`
+    <button class="card${st.hot===t.id?" hot":""}" data-id="${t.id}">
+      <span class="num mono">${String(t.k).padStart(2,"0")}</span>
+      <h3>${esc(t.t)}</h3>
+      <div class="meta"><span class="pill" style="color:var(${RINGS[t.r].c})">${RINGS[t.r].n}</span><span>${AREA[t.a].n}</span><span class="imp" title="Becsült hatás">${imp(t.i)}</span><span class="mono">${esc(t.h)}</span></div>
+      <p>${esc(t.s)}</p>
+      ${t.n[0]?`<div class="keynum"><b>${esc(t.n[0][0])}</b><span>${esc(t.n[0][1])}</span></div>`:""}
+      ${st.opp&&t.o?`<div class="opp"><b>Lehetőség</b>${esc(t.o)}</div>`:""}
+    </button>`).join(""):`<div class="empty">Nincs a szűrőknek megfelelő trend. Próbálj kevesebb szűrőt vagy más kulcsszót.</div>`;
+}
+function renderAll(){renderChips();renderRadar();renderCards()}
+
+/* ---------- drawer ---------- */
+let lastFocus=null;
+function openT(id,push=true){
+  const t=T.find(x=>x.id===id); if(!t)return;
+  const vis=sorted(T.filter(match)); const pool=vis.some(x=>x.id===id)?vis:sorted(T);
+  const ix=pool.findIndex(x=>x.id===id), prev=pool[ix-1], next=pool[ix+1];
+  lastFocus=document.activeElement;
+  const d=$("#drawer");
+  d.innerHTML=`<button class="close" id="close">Bezárás ✕</button>
+    <div class="eyebrow">${String(t.k).padStart(2,"0")} · ${AREA[t.a].n}</div>
+    <h2 id="dTitle">${esc(t.t)}</h2>
+    <div class="meta" style="margin-bottom:14px"><span class="pill" style="color:var(${RINGS[t.r].c})">${RINGS[t.r].n}</span><span class="imp">${imp(t.i)} hatás</span><span class="mono">Időtáv: ${esc(t.h)}</span></div>
+    <p class="lead">${esc(t.s)}</p>
+    ${t.n.length?`<h4>Számok</h4><div class="figs">${t.n.map(x=>`<div class="fig"><b>${esc(x[0])}</b><span>${esc(x[1])}</span></div>`).join("")}</div>`:""}
+    <h4>Miért most</h4><p>${esc(t.w)}</p>
+    ${t.o?`<h4>Lehetőség${t.p?" indie fejlesztőknek, creatoroknak":""}</h4><div class="opp" style="margin:0">${esc(t.o)}</div>`:""}
+    <h4>Érettség</h4><p style="color:var(--muted);margin:0">${RINGS[t.r].n}: ${RINGS[t.r].d}</p>
+    <h4>Források</h4><ul class="src">${t.src.map(s=>`<li><a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join("")}</ul>
+    <div class="nav">${prev?`<button data-go="${prev.id}">← ${esc(prev.t)}</button>`:"<span></span>"}${next?`<button data-go="${next.id}">${esc(next.t)} →</button>`:""}</div>`;
+  d.hidden=false; $("#scrim").hidden=false; d.scrollTop=0;
+  $("#close").focus();
+  st.hot=id; renderRadar(); document.querySelectorAll(".card").forEach(c=>c.classList.toggle("hot",c.dataset.id===id));
+  if(push&&location.hash!=="#"+id){try{history.replaceState(null,"","#"+id)}catch(e){location.hash=id}}
+}
+function closeT(){
+  $("#drawer").hidden=true;$("#scrim").hidden=true;st.hot=null;renderRadar();
+  document.querySelectorAll(".card.hot").forEach(c=>c.classList.remove("hot"));
+  try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}
+  if(lastFocus&&lastFocus.focus)lastFocus.focus();
+}
+
+/* ---------- events ---------- */
+document.addEventListener("click",e=>{
+  const ch=e.target.closest("[data-ring]");
+  if(ch&&ch.classList.contains("chip")){const r=+ch.dataset.ring;st.rings.has(r)?st.rings.delete(r):st.rings.add(r);return renderAll()}
+  const ar=e.target.closest("[data-area]");
+  if(ar){const k=ar.dataset.area;st.areas.has(k)?st.areas.delete(k):st.areas.add(k);return renderAll()}
+  const go=e.target.closest("[data-go]"); if(go)return openT(go.dataset.go);
+  if(e.target.id==="close"||e.target.id==="scrim")return closeT();
+  const it=e.target.closest(".card,.blip"); if(it&&!it.classList.contains("dim"))openT(it.dataset.id);
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&!$("#drawer").hidden)closeT();
+  if((e.key==="Enter"||e.key===" ")&&e.target.classList&&e.target.classList.contains("blip")){e.preventDefault();openT(e.target.dataset.id)}
+});
+document.addEventListener("mouseover",e=>{
+  const c=e.target.closest(".card"); if(!c)return;
+  document.querySelectorAll(".blip").forEach(b=>b.classList.toggle("hot",b.dataset.id===c.dataset.id||b.dataset.id===st.hot));
+});
+$("#q").addEventListener("input",e=>{st.q=e.target.value;renderRadar();renderCards()});
+$("#sort").addEventListener("change",e=>{st.sort=e.target.value;renderCards()});
+$("#indie").addEventListener("change",e=>{st.indie=e.target.checked;renderRadar();renderCards()});
+$("#opp").addEventListener("change",e=>{st.opp=e.target.checked;renderCards()});
+window.addEventListener("hashchange",()=>{const id=location.hash.slice(1);if(T.some(t=>t.id===id))openT(id,false)});
+
+layout();renderStats();renderAll();
+{const id=location.hash.slice(1);if(T.some(t=>t.id===id))openT(id,false)}
+</script>
+
+</body>
+</html>
