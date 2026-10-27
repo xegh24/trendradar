@@ -1,0 +1,2127 @@
+{
+  "edition": "2026-10",
+  "updated": "2026-10-27",
+  "rings": {
+    "1": {
+      "name": "Gyenge jel",
+      "desc": "Ígéretes, de még kísérleti vagy szűk körű."
+    },
+    "2": {
+      "name": "Felfutó",
+      "desc": "Korai, de konkrét befektetések és első bevezetések."
+    },
+    "3": {
+      "name": "Gyorsul",
+      "desc": "Mérhető, gyors növekedés, valós bevétel vagy bevezetés."
+    },
+    "4": {
+      "name": "Fősodor",
+      "desc": "Már széles körben jelen van, a kérdés a mérték."
+    }
+  },
+  "areas": [
+    {
+      "id": "ai",
+      "name": "AI & ügynökök",
+      "short": "AI"
+    },
+    {
+      "id": "tech",
+      "name": "Hardver & deep tech",
+      "short": "Hardver"
+    },
+    {
+      "id": "soc",
+      "name": "Közösségi média",
+      "short": "Social"
+    },
+    {
+      "id": "ent",
+      "name": "Appok, játék, szórakozás",
+      "short": "Appok"
+    },
+    {
+      "id": "cons",
+      "name": "Fogyasztói kultúra",
+      "short": "Fogyasztás"
+    },
+    {
+      "id": "health",
+      "name": "Egészség & wellness",
+      "short": "Egészség"
+    },
+    {
+      "id": "food",
+      "name": "Étel & utazás",
+      "short": "Étel·utazás"
+    },
+    {
+      "id": "fin",
+      "name": "Pénz & fintech",
+      "short": "Pénz"
+    },
+    {
+      "id": "energy",
+      "name": "Energia & klíma",
+      "short": "Energia"
+    },
+    {
+      "id": "work",
+      "name": "Munka & oktatás",
+      "short": "Munka"
+    },
+    {
+      "id": "mob",
+      "name": "Mobilitás",
+      "short": "Mobilitás"
+    },
+    {
+      "id": "macro",
+      "name": "Gazdaság & geopolitika",
+      "short": "Makró"
+    }
+  ],
+  "trends": [
+    {
+      "id": "ugynokcsapatok",
+      "title": "Ügynökcsapatok a munkahelyen",
+      "area": "ai",
+      "ring": 3,
+      "impact": 3,
+      "indie": true,
+      "horizon": "2026–2027",
+      "summary": "Egyetlen asszisztens helyett specializált AI-ügynökök dolgoznak együtt egy koordináló ügynök alatt, a dolgozó pedig felügyelővé válik.",
+      "figures": [
+        {
+          "value": "40%",
+          "label": "vállalati alkalmazás tartalmaz feladat-specifikus ügynököt 2026 végére, szemben az egy évvel korábbi 5% alattival (Gartner)"
+        },
+        {
+          "value": "10×",
+          "label": "várható növekedés az ügynökhasználatban a G2000 cégeknél 2027-re (IDC, idézi Joget)"
+        }
+      ],
+      "why": "Nyílt protokollok (MCP, A2A) kötik össze az ügynököket és az adatforrásokat, az elemzők szerint 2026 a többágenses rendszerek áttörési éve. A szűk, vertikális ügynökök jobban teljesítenek az általános asszisztenseknél. A Gartner ugyanakkor magas projektbukási arányra figyelmeztet.",
+      "opportunity": "Egy-egy konkrét munkafolyamatra (ügyfélszolgálat, riportolás, lead-kutatás) épített szűk ügynök kis csapatból is versenyképes termék.",
+      "sources": [
+        {
+          "title": "Svitla: Agentic AI market trends",
+          "url": "https://svitla.com/blog/agentic-ai-market-trends-2026/"
+        },
+        {
+          "title": "Olostep: 7 agentic AI trends",
+          "url": "https://www.olostep.com/blog/agentic-ai-trends"
+        },
+        {
+          "title": "Joget: AI agent adoption 2026",
+          "url": "https://joget.com/ai-agent-adoption-in-2026-what-the-analysts-data-shows/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "ugynok-identitas",
+      "title": "AI-ügynökök identitása és őrzői",
+      "area": "ai",
+      "ring": 2,
+      "impact": 3,
+      "indie": false,
+      "horizon": "2027–2028",
+      "summary": "Az ügynökök saját, dinamikus, szabályzat-vezérelt jogosultságot kapnak, és megjelennek az ügynököket figyelő \"őr\" ügynökök.",
+      "figures": [
+        {
+          "value": "25%",
+          "label": "vállalati biztonsági incidens vezethető vissza ügynökökkel való visszaélésre 2028-ra (Gartner előrejelzés)"
+        }
+      ],
+      "why": "Az ügynökök több ember nevében, önállóan cselekszenek, a régi statikus jelszavas rendszerek ezt nem tudják kezelni. A Gartner 2027-es top 10 listáján külön trendként szerepel, mellette az automatikus sebezhetőség-javítás (AER).",
+      "opportunity": "Ügynök-naplózás, jogosultság- és auditeszközök, kis cégeknek szóló egyszerű \"ügynök-tűzfal\" szolgáltatások.",
+      "sources": [
+        {
+          "title": "Gartner: Top Strategic Technology Trends for 2027",
+          "url": "https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"
+        },
+        {
+          "title": "TechTarget: Gartner trends",
+          "url": "https://www.techtarget.com/it-strategy/feature/Gartner-unveils-top-technology-trends-at-Gartner-IT-Symposium?amp=1"
+        },
+        {
+          "title": "Svitla: guardian agents",
+          "url": "https://svitla.com/blog/agentic-ai-market-trends-2026/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "ai-fejleszto",
+      "title": "Az AI mint fejlesztő, ember mint felügyelő",
+      "area": "ai",
+      "ring": 3,
+      "impact": 3,
+      "indie": true,
+      "horizon": "most",
+      "summary": "A kódolóügynökök a teljes fejlesztési ciklusban dolgoznak; a Gartner szerint zárt vezérlőkeret (\"agent coding harness\") kell köréjük, különben a kézi ellenőrzés elnyeli a nyereséget.",
+      "figures": [
+        {
+          "value": "~15 000",
+          "label": "új előfizetéses app indul havonta 2026 elején, 2022 óta hétszeresére nőtt (RevenueCat)"
+        }
+      ],
+      "why": "A szoftver a szűkösségből a bőségbe vált. Az app-kínálat robban, de a kereslet és a megtartás nem tart lépést, így a terjesztés lett a szűk keresztmetszet.",
+      "opportunity": "Egyedül is lehet gyorsan termékeket kiadni, de a megkülönböztetés a niche, a márka és a közösség oldalán dől el, nem a kódon.",
+      "sources": [
+        {
+          "title": "Gartner: 2027 trends",
+          "url": "https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"
+        },
+        {
+          "title": "ContentGrip: RevenueCat 2026 report",
+          "url": "https://www.contentgrip.com/subscription-app-market-2026-growth/"
+        },
+        {
+          "title": "Rising Trends: AI agent trends",
+          "url": "https://www.risingtrends.co/blog/ai-agents-trends-2026"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "eldobhato-appok",
+      "title": "Eldobható alkalmazások",
+      "area": "ai",
+      "ring": 1,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2027–2030",
+      "summary": "Egyetlen célra épített szoftverek, amelyeket tudatosan kivezetnek, amint a feladatuk lejárt. A Gartner 2027-es listájának egyik meglepő eleme.",
+      "figures": [],
+      "why": "Ha az AI percek alatt megírja az appot, olcsóbb újat építeni, mint évekig karbantartani. Ez átírja, hogyan vásárolnak, terveznek és költségvetnek szoftvert a cégek.",
+      "opportunity": "Esemény-, kampány- vagy szezonális mikro-appok gyors szállítása ügyfeleknek; \"app mint szolgáltatás\" rövid életciklusra árazva.",
+      "sources": [
+        {
+          "title": "Gartner: 2027 trends",
+          "url": "https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"
+        },
+        {
+          "title": "Gartner webinar (Europe): software abundance",
+          "url": "https://www.gartner.com/en/webinar/1028874/2010433-the-gartner-top-strategic-technology-trends-for-2027-europe"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 1,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "hang-ai",
+      "title": "Hangon érvelő AI-modellek",
+      "area": "ai",
+      "ring": 2,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2027",
+      "summary": "Közvetlenül a hangfelvételen gondolkodó modellek, amelyek a beszélgetés során követik a kontextust és a szándékot.",
+      "figures": [],
+      "why": "A Gartner szerint a hang marad a vállalatok legnagyobb volumenű ügyfélcsatornája, és egy évtizednyi automatizálás sem hozta el a kellő pontosságot. Az új modellek az ítélőképességet igénylő beszélgetéseket is automatizálhatóvá tehetik.",
+      "opportunity": "Nyelvfüggetlen, hangvezérelt appok és játékok; hangalapú gyakorló- és tanulóeszközök.",
+      "sources": [
+        {
+          "title": "Gartner: 2027 trends",
+          "url": "https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "vilagmodellek",
+      "title": "Világmodellek és fizikai AI",
+      "area": "ai",
+      "ring": 2,
+      "impact": 3,
+      "indie": false,
+      "horizon": "2027–2030",
+      "summary": "Fizika-első modellek, amelyek értik a teret, az időt és az ok-okozatot, és cselekvés előtt szimulálják a következményeket.",
+      "figures": [],
+      "why": "A robotikába, az önvezetésbe és a térbeli számítástechnikába áramló befektetések hajtják. A Forrester a robotokat, szenzorokat és ellátási láncot valós időben összehangoló \"fizikai AI\"-t emeli ki.",
+      "opportunity": "Szimulációs és tréningkörnyezetek, játékmotoros tudás (Unity) iránti kereslet a robotika felé.",
+      "sources": [
+        {
+          "title": "Gartner: 2027 trends",
+          "url": "https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"
+        },
+        {
+          "title": "Joget: Forrester physical AI",
+          "url": "https://joget.com/ai-agent-adoption-in-2026-what-the-analysts-data-shows/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "ugynoki-vasarlas",
+      "title": "Ügynöki vásárlás",
+      "area": "ai",
+      "ring": 2,
+      "impact": 3,
+      "indie": true,
+      "horizon": "2026–2028",
+      "summary": "Az AI-ügynök keres, összehasonlít és fizet a felhasználó helyett. A bolt feladata már nem az ember meggyőzése, hanem az ügynök kritériumainak teljesítése.",
+      "figures": [],
+      "why": "A Google Maps \"Ask Maps\" funkciója ügynökké vált: partnereken keresztül ételt rendel, szállást foglal, jegyet keres. A Deloitte szerint az ügynökök a 24/7 stablecoin-síneket részesíthetik előnyben.",
+      "opportunity": "Géppel olvasható termékadat, API-k és strukturált katalógus lesz az új SEO; ügynökbarát app- és webshop-felületek.",
+      "sources": [
+        {
+          "title": "Workalizer: agentic revolution late 2026",
+          "url": "https://workalizer.com/blog/trends-news-insights/the-agentic-revolution-what-to-expect-from-ai-in-late-2026-and-beyond/"
+        },
+        {
+          "title": "Svitla: agentic commerce",
+          "url": "https://svitla.com/blog/agentic-ai-market-trends-2026/"
+        },
+        {
+          "title": "Deloitte: stablecoins in retail payments",
+          "url": "https://www.deloitte.com/us/en/insights/industry/financial-services/financial-services-industry-predictions/2026/stablecoins-retail-payments.html"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "szuverenitas",
+      "title": "Digitális szuverenitás",
+      "area": "ai",
+      "ring": 3,
+      "impact": 2,
+      "indie": false,
+      "horizon": "2027–2030",
+      "summary": "Olyan hardver, szoftver és AI, amelyből technikailag és jogilag is ki lehet lépni, hogy egyetlen szolgáltatótól se függjön a működés.",
+      "figures": [
+        {
+          "value": "75%+",
+          "label": "nem amerikai szervezet áll át digitális szuverenitás-stratégiára 2030-ra (Gartner)"
+        }
+      ],
+      "why": "A geopolitikai kockázat és a beszállítói függés miatt az AI-szuverenitás és a \"technopolitika\" beszerzési szempont lett (Info-Tech).",
+      "opportunity": "Európai, adatrezidens alternatívák; önállóan hosztolható eszközök kis- és középvállalatoknak.",
+      "sources": [
+        {
+          "title": "Gartner: 2027 trends",
+          "url": "https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"
+        },
+        {
+          "title": "ISHIR: 15 emerging tech trends 2027",
+          "url": "https://www.ishir.com/blog/345442/15-emerging-technology-trends-for-2027-ishir.htm"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "kontextus",
+      "title": "AI-kontextusplatformok",
+      "area": "ai",
+      "ring": 2,
+      "impact": 2,
+      "indie": false,
+      "horizon": "2027",
+      "summary": "Külön réteg, amely az ügynököknek megadja az üzleti tudást és szemantikát a helyes döntésekhez.",
+      "figures": [
+        {
+          "value": "80%",
+          "label": "pontosságjavulás az ügynököknél szemantikus, AI-ra kész adattal, akár 60%-os költségcsökkenés mellett (Gartner)"
+        }
+      ],
+      "why": "Kontextus nélkül túl sok jogosultságú ügynökök, megfelelőségi hibák és felesleges tokenfogyasztás jelentkezik.",
+      "opportunity": "Tudásbázis-építés és adat-előkészítés mint szolgáltatás.",
+      "sources": [
+        {
+          "title": "Gartner: 2027 trends",
+          "url": "https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "lqm",
+      "title": "Nagy kvantitatív modellek",
+      "area": "ai",
+      "ring": 1,
+      "impact": 2,
+      "indie": false,
+      "horizon": "2027–2030",
+      "summary": "Számokra épített hibrid neurális modellek, mert a nyelvi modellek valószínűségi tippelése numerikus feladatoknál pontossági és megfelelőségi kockázat.",
+      "figures": [],
+      "why": "Szabályozott iparágakban (pénzügy, egészségügy) a szimuláció-alapú, proaktív előrejelzést teszi lehetővé.",
+      "opportunity": "Szakmai, számalapú vertikális eszközök: kalkulátorok, előrejelzők.",
+      "sources": [
+        {
+          "title": "Gartner: 2027 trends",
+          "url": "https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 1,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "wetware",
+      "title": "Wetware mint szolgáltatás",
+      "area": "ai",
+      "ring": 1,
+      "impact": 1,
+      "indie": false,
+      "horizon": "2030+",
+      "summary": "Élő vagy szintetikus biológiai rendszerek felhőn keresztül bérelhető számítási kapacitásként.",
+      "figures": [],
+      "why": "A szilícium alapú AI energiaigénye nem skálázható a végtelenségig; a biokémiai hálózatok rendkívül energiahatékonyak lehetnek. Ma még gyenge jel, de a Gartner felvette a 2027-es listára.",
+      "opportunity": "Elsősorban figyelendő; tartalmi téma ismeretterjesztő csatornáknak.",
+      "sources": [
+        {
+          "title": "Gartner: 2027 trends",
+          "url": "https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"
+        },
+        {
+          "title": "Communications Today",
+          "url": "https://www.communicationstoday.co.in/gartner-unveils-top-10-strategic-technology-trends-for-2027/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 1,
+          "impact": 1,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "okosszemuveg",
+      "title": "AI-okosszemüvegek",
+      "area": "tech",
+      "ring": 3,
+      "impact": 3,
+      "indie": true,
+      "horizon": "2026–2028",
+      "summary": "Kijelző nélküli, kamerás, hangalapú AI-asszisztens szemüvegek törnek előre, miközben a VR-headsetek visszaesnek.",
+      "figures": [
+        {
+          "value": "+776%",
+          "label": "AI-okosszemüveg szállítás Q2 2026-ban év/év, a VR-headseteké −79% (SAG)"
+        },
+        {
+          "value": "96%",
+          "label": "kijelző nélküli modellek aránya az AI-szemüvegeknél, H1 2026 (Counterpoint)"
+        },
+        {
+          "value": "20 M",
+          "label": "előrejelzett eladás 2026-ra a 2025-ös ~6 millióról (SAG)"
+        }
+      ],
+      "why": "A Meta uralja a piacot, a Google a Samsunggal már belépett, az Apple 2027 körül várható. Nem a telefont váltják ki, hanem kéz nélküli, mindig elérhető AI-felületként szolgálnak. Gond: engedély nélküli felvételek és zaklatás.",
+      "opportunity": "Hang-első mikroélmények: fordítás, navigáció, \"mi ez?\" felismerés, kéz nélküli tanulás.",
+      "sources": [
+        {
+          "title": "Android Headlines: +776% smart glasses",
+          "url": "https://www.androidheadlines.com/?p=1301543"
+        },
+        {
+          "title": "Counterpoint: AI glasses H1 2026",
+          "url": "https://counterpointresearch.com/en/insights/global-ai-glasses-shipments-surge-263-percent-yoy-with-display-less-ai-glasses"
+        },
+        {
+          "title": "HyperAI: SAG forecast",
+          "url": "https://hyper.ai/en/stories/458be3e24e8a1a2f197c3d6423f425f9"
+        },
+        {
+          "title": "DIGITIMES: Google AI glasses",
+          "url": "https://www.digitimes.com/news/a20260603PD200.html"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "humanoidok",
+      "title": "Humanoid robotok a gyárakban",
+      "area": "tech",
+      "ring": 2,
+      "impact": 3,
+      "indie": false,
+      "horizon": "2026–2030",
+      "summary": "A humanoid robotok első valódi kereskedelmi bevetései: logisztika, autógyártás, reptéri rakodás. Kínai gyártók vezetnek a volumenben.",
+      "figures": [
+        {
+          "value": "~+300%",
+          "label": "humanoid robot szállítás H1 2026 év/év (Counterpoint)"
+        },
+        {
+          "value": "7 000+",
+          "label": "Unitree-egység H1-ben, 31% piaci részesedés"
+        },
+        {
+          "value": "1 000+",
+          "label": "robot a Schaeffler globális gyáraiba 2032-ig, az első fázis Németországban indul 2026 decemberében"
+        }
+      ],
+      "why": "A Toyota bérlési modellben (robot mint szolgáltatás) állít be Digit robotokat, a JAL a Hanedán tesztel. Az elemzők szerint a bejelentett rendelések és a tényleges, mérhető bevetések között még nagy a rés.",
+      "opportunity": "Robotikai tréningadat, szimuláció és rendszerintegráció; ismeretterjesztő tartalom erős témája.",
+      "sources": [
+        {
+          "title": "Counterpoint: humanoid shipments H1 2026",
+          "url": "https://counterpointresearch.com/en/insights/global-humanoid-robot-shipments-soar-nearly-300-percent-yoy-in-h1-2026"
+        },
+        {
+          "title": "AI2Work: Schaeffler, Agility, Boston Dynamics",
+          "url": "https://ai2.work/blog/how-boston-dynamics-agility-and-schaeffler-are-moving-humanoids-to-the-factory"
+        },
+        {
+          "title": "Robotics 24/7: orders vs deployments",
+          "url": "https://www.robotics247.com/article/humanoid-orders-vs-actual-deployments-how-much-commercial-progress-is-really-happening"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "kvantum",
+      "title": "Hibajavított kvantumszámítás",
+      "area": "tech",
+      "ring": 2,
+      "impact": 2,
+      "indie": false,
+      "horizon": "2027–2030",
+      "summary": "A verseny a nyers qubitszámról a megbízható logikai qubitekre és a hibajavításra tolódott.",
+      "figures": [
+        {
+          "value": "94",
+          "label": "logikai qubit a Quantinuumnál, 2026 március"
+        },
+        {
+          "value": "70",
+          "label": "logikai qubit az IBM–Chicagói Egyetem kísérletében, 2026 július"
+        }
+      ],
+      "why": "A QuEra szimulációi szerint akár két fizikai qubit is elég lehet egy logikaiért. A Forrester szerint a gyakorlati kvantumszámítás és a mai titkosítás feltörhetősége (\"Q-nap\") is valószínű 2030-ig, ezért a kvantumbiztos titkosítás a sürgős teendő.",
+      "opportunity": "Kvantumbiztos titkosításra való átállás; oktatási tartalom.",
+      "sources": [
+        {
+          "title": "Analytics Insight: quantum advances",
+          "url": "https://www.analyticsinsight.net/quantum-computing-analytics-insight/quantum-computing-advances-key-breakthroughs-shaping-the-future-of-computing"
+        },
+        {
+          "title": "Live in the Future: QEC May 2026",
+          "url": "https://liveinthefuture.org/stories/quantum-error-correction-five-breakthroughs-may-2026.html"
+        },
+        {
+          "title": "Forrester: Q-day",
+          "url": "https://www.forrester.com/blogs/practical-quantum-computing-by-2030-is-likely-and-so-is-q-day"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "eszkozon-ai",
+      "title": "Telefonon futó AI",
+      "area": "tech",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "most",
+      "summary": "Egyre több AI-feldolgozás fut közvetlenül a készüléken: gyorsabb, privátabb, offline is működik.",
+      "figures": [],
+      "why": "Új chipek és kisebb modellek teszik lehetővé. A fogyasztók egyre inkább mérlegelik a valódi hasznot, adatvédelmet és tartósságot a funkciók számánál.",
+      "opportunity": "Offline működő, adatot nem küldő AI-funkció mint értékesítési érv mobilappokban.",
+      "sources": [
+        {
+          "title": "Workalizer: edge AI",
+          "url": "https://workalizer.com/blog/trends-news-insights/the-agentic-revolution-what-to-expect-from-ai-in-late-2026-and-beyond/"
+        },
+        {
+          "title": "Techeconomy: consumer apps 2026",
+          "url": "https://techeconomy.ng/what-to-expect-from-consumer-apps-in-2026"
+        },
+        {
+          "title": "Analytics Insight: consumer tech 2027",
+          "url": "https://www.analyticsinsight.net/ampstories/technology/consumer-technology-trends-in-2027-changes-to-watch"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "kozossegi-kereso",
+      "title": "A közösségi média lett a kereső",
+      "area": "soc",
+      "ring": 4,
+      "impact": 3,
+      "indie": true,
+      "horizon": "most",
+      "summary": "A fiatalok a TikTokon, YouTube-on, Instagramon keresnek. A kulcsszavas felirat és a képernyőszöveg többet ér a hashtageknél, a felfedezés többet a követőszámnál.",
+      "figures": [
+        {
+          "value": "~40%",
+          "label": "fiatal felhasználó preferálja a TikTokot vagy Instagramot a Google kereséssel szemben (Narrative)"
+        }
+      ],
+      "why": "A platformok algoritmusa a videó szövegét is olvassa; a HubSpot szerint a közösségi gráf helyett az érdeklődés-alapú felfedezés dönt az elérésről.",
+      "opportunity": "Rövid videóknál a cím és az első képernyőszöveg legyen konkrét kérdés, amire valaki rákeres (pl. \"Miért…?\").",
+      "sources": [
+        {
+          "title": "Narrative: influencer trends 2027",
+          "url": "https://narrativegroup.co/blog/influencer-marketing-trends/"
+        },
+        {
+          "title": "IQFluence: social media trends",
+          "url": "https://iqfluence.io/public/blog/social-trends"
+        },
+        {
+          "title": "Plansy: social media in 2027",
+          "url": "https://blog.plansy.io/how-social-media-is-changing-in-2027/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 4,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "social-commerce",
+      "title": "Social commerce és élő vásárlás",
+      "area": "soc",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "most",
+      "summary": "Natív fizetés a TikTok Shopban, Instagramon és YouTube-on; a creatorok QVC-stílusú élő adásokban értékesítenek, jutalékból.",
+      "figures": [
+        {
+          "value": "$81 Mrd",
+          "label": "közösségi platformokon keresztüli e-kereskedelem 2024-ben, gyorsuló növekedéssel"
+        }
+      ],
+      "why": "A platformok megoldották a súrlódást, a vásárlás már nem visz ki az appból. A creator-készítésű hirdetések jobban teljesítenek a stúdiós anyagoknál.",
+      "opportunity": "Affiliate-bevétel tartalomcsatornák mellé; digitális termékek közvetlen értékesítése.",
+      "sources": [
+        {
+          "title": "Narrative: social commerce trends",
+          "url": "https://narrativegroup.co/blog/social-commerce-trends/"
+        },
+        {
+          "title": "IQFluence: social trends",
+          "url": "https://iqfluence.io/public/blog/social-trends"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "reszvetel",
+      "title": "A részvétel az új tartalom",
+      "area": "soc",
+      "ring": 2,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2027",
+      "summary": "A kommentszekció maga a kampány, a creator moderátorrá válik, a közönség társszerzővé. A pop-up kultúra \"drop\" kultúrává alakul.",
+      "figures": [],
+      "why": "Az elköteleződés a részvételből, a hitelességből és a kreativitásból nő, nem a polírozottságból. A TikTok saját jelentése is a közös érdeklődésű csoportokat és a kommentekben zajló részvételt emeli ki.",
+      "opportunity": "Nézői kérdésekre épülő sorozatok, \"te döntöd el a következő részt\" formátumok.",
+      "sources": [
+        {
+          "title": "Global Social Media Awards: 7 trends 2027",
+          "url": "https://globalsocialmediaawards.com/2026/07/28/7-social-media-trends-shaping-2027/"
+        },
+        {
+          "title": "Lead the Mood: social trends 2027",
+          "url": "https://leadthemood.com/en/blog/social-media-trends-2027/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "karakterek",
+      "title": "Rajzolt karakterek saját hanggal",
+      "area": "soc",
+      "ring": 2,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2027",
+      "summary": "A hasonló fotók tengerében az illusztráció és egy felismerhető személyiségű karakter kiemelkedik, és új fotózás nélkül ad gesztust, érzelmet, kis történeteket.",
+      "figures": [],
+      "why": "A 2026–27-es TikTok-témák fő iránya a hitelesség a túlpolírozottsággal szemben, plusz az érzelmi és közösségi visszatérés. Márkatervezésben is a melegebb, emberibb textúra nyer.",
+      "opportunity": "Animált tényvideóknál egy visszatérő saját karakter márkává építhető és több platformon újrahasznosítható.",
+      "sources": [
+        {
+          "title": "Lead the Mood: social trends 2027",
+          "url": "https://leadthemood.com/en/blog/social-media-trends-2027/"
+        },
+        {
+          "title": "Sozee: TikTok trends calendar",
+          "url": "https://www.sozee.ai/resources/tiktok-trends-calendar-guide/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "hosszu-forma",
+      "title": "Visszatér a hosszabb formátum",
+      "area": "soc",
+      "ring": 2,
+      "impact": 1,
+      "indie": true,
+      "horizon": "2026–2027",
+      "summary": "Görgetési fáradtság: a közönség mélyebb tartalmak felé fordul, a TikTokon már 10 perces videók is feltölthetők.",
+      "figures": [],
+      "why": "A sikeres creatorok visszatérő, tematikus sorozatokat építenek felismerhető hanggal és stílussal.",
+      "opportunity": "Rövid videókból összefűzött hosszabb \"válogatás\" epizódok YouTube-ra.",
+      "sources": [
+        {
+          "title": "IQFluence: social trends",
+          "url": "https://iqfluence.io/public/blog/social-trends"
+        },
+        {
+          "title": "Hootsuite: TikTok trends",
+          "url": "https://blog.hootsuite.com/tiktok-trends/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 1,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "mikrodrama",
+      "title": "Vertikális mikrodrámák",
+      "area": "ent",
+      "ring": 3,
+      "impact": 3,
+      "indie": true,
+      "horizon": "most",
+      "summary": "1–3 perces, függővégű, álló formátumú sorozatepizódok, gyakran webregények alapján. Mobilon már több időt visznek el, mint a nagy streamerek.",
+      "figures": [
+        {
+          "value": "850 M+",
+          "label": "letöltés Q1 2026-ban, +140% év/év (Sensor Tower)"
+        },
+        {
+          "value": "35,7 perc",
+          "label": "napi idő a ReelShortban, szemben a Netflix 24,8 percével (USA, mobil)"
+        },
+        {
+          "value": "$14 Mrd",
+          "label": "becsült globális bevétel 2026-ban (Omdia)"
+        }
+      ],
+      "why": "Latin-Amerikában a kategória Q1-ben több mint kilencszeresére nőtt. Kínában az AI-generált szereplők és az AI-képregény-drámák törnek előre. Kockázat: a platformok költségvetésük nagy részét marketingre költik, így nem mindenki éli túl.",
+      "opportunity": "AI-animált rövid sorozatok; a horror és thriller a felhasználók szerint alulellátott műfaj.",
+      "sources": [
+        {
+          "title": "Subscription Insider: microdramas",
+          "url": "https://www.subscriptioninsider.com/blog/streamers-face-a-new-challenger-for-mobile-attention-microdramas-news"
+        },
+        {
+          "title": "eMarketer: microdramas vs Netflix",
+          "url": "https://www.emarketer.com/content/microdrama-apps-surpass-netflix--prime-video-us-mobile-engagement"
+        },
+        {
+          "title": "Señal News: Latin America +913%",
+          "url": "https://senalnews.com/es/data/america-latina-las-apps-de-microdramas-verticales-crecieron-un-913-en-el-q1-2026/amp"
+        },
+        {
+          "title": "Señal News: vertical series $150B",
+          "url": "https://senalnews.com/en/data/vertical-series-global-market-heads-for-150-billion-in-2026"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "elofizetes",
+      "title": "App-gazdaság: növekedés helyett monetizáció",
+      "area": "ent",
+      "ring": 4,
+      "impact": 3,
+      "indie": true,
+      "horizon": "most",
+      "summary": "A telepítések lassan nőnek, a bevétel gyorsan. A nem-játék appok, élükön az AI- és előfizetéses termékekkel, húzzák a piacot.",
+      "figures": [
+        {
+          "value": "+105%",
+          "label": "előfizetési bevétel Q1 2026-ban év/év az app-gazdaságban"
+        },
+        {
+          "value": "1 Mrd",
+          "label": "havi aktív felhasználó: a ChatGPT a valaha leggyorsabb app (2026 május)"
+        },
+        {
+          "value": "$4 Mrd+",
+          "label": "AI-appok in-app bevétele H1 2026-ban, +36%"
+        }
+      ],
+      "why": "Az AI-figyelem erősen koncentrált: három app viszi a nagyját. Közben az átlagos fogyasztónak már sok előfizetése van, ezért a hibrid modellek (free tier + előfizetés + egyszeri vásárlás) és a weben keresztüli fizetés terjed.",
+      "opportunity": "Szűk, valódi problémát megoldó utility appok, ahol egy általános AI-asszisztens nem versenyez; web-to-app fizetés a jutalék csökkentésére.",
+      "sources": [
+        {
+          "title": "AppsOps: Sensor Tower State of AI 2026",
+          "url": "https://appsops.store/news/sensor-tower-state-of-ai-2026-mobile-revenue-app-builders"
+        },
+        {
+          "title": "eMarketer: growth to extraction",
+          "url": "https://www.emarketer.com/content/app-economy-shifts-growth-extraction"
+        },
+        {
+          "title": "Sensor Tower press release",
+          "url": "https://tools.prnewswire.com/en-us/live/20823/release/20260616EN83943"
+        },
+        {
+          "title": "CatDoes: monetization strategies",
+          "url": "https://catdoes.com/blog/mobile-app-monetization-strategies"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 4,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "android-2027",
+      "title": "Android 2027: új boltszabályok",
+      "area": "ent",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2026 ősz – 2027",
+      "summary": "Az USA-ban rivális boltok jelennek meg a Google Playen belül és appon kívül is lehet fizetni; 2027-től minden tanúsított Androidon csak ellenőrzött fejlesztők appjai futnak.",
+      "figures": [
+        {
+          "value": "2026.09.30",
+          "label": "a fejlesztő-ellenőrzés indul Brazíliában, Indonéziában, Szingapúrban és Thaiföldön, 2027-ben világszerte"
+        }
+      ],
+      "why": "Közben terjed a korellenőrzés és a szülői jóváhagyás, és a Google tovább emeli a kötelező Android-célverziót.",
+      "opportunity": "Fejlesztői azonosítás időben elintézése; saját webshop bónuszokkal az appon kívüli vásárláshoz.",
+      "sources": [
+        {
+          "title": "Onirealms: mobile gaming trends 2027",
+          "url": "https://onirealms.com/guides/mobile-gaming-trends-2027/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "idle",
+      "title": "Idle-boom és telített boltok",
+      "area": "ent",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2027",
+      "summary": "Az idle játékok konjunktúrája folytatódik, és ismert sorozatok is kiadják idle-változatukat. Közben a boltok túltelítettek.",
+      "figures": [
+        {
+          "value": "$103 Mrd",
+          "label": "mobiljáték-piac 2027-re (Statista)"
+        },
+        {
+          "value": "~10%",
+          "label": "a 2025-ben indult 1,4 millió appból csak ennyi kap érdemi figyelmet"
+        }
+      ],
+      "why": "A mobiljáték-piac stabilizálódott és lassan nő, a feltörekvő piacok (Törökország, Mexikó, India) hajtják a költésnövekedést.",
+      "opportunity": "Alacsony fejlesztési költségű, hosszú farokra optimalizált idle/hiperkasual játékok, erős meta-réteggel.",
+      "sources": [
+        {
+          "title": "Onirealms: mobile gaming trends 2027",
+          "url": "https://onirealms.com/guides/mobile-gaming-trends-2027/"
+        },
+        {
+          "title": "Segwise: mobile gaming statistics",
+          "url": "https://segwise.ai/blog/mobile-gaming-statistics"
+        },
+        {
+          "title": "Udonis: mobile gaming statistics",
+          "url": "https://www.blog.udonis.co/mobile-marketing/mobile-games/mobile-gaming-statistics"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "platformok-osszemosodnak",
+      "title": "Összemosódó platformok, kézikonzolok",
+      "area": "ent",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2027",
+      "summary": "Konzol, PC és mobil határa elmosódik; a kézi gépek PC-szintű élményt adnak, a játékokat ökoszisztémára kell tervezni, nem egy platformra.",
+      "figures": [
+        {
+          "value": "$312 Mrd",
+          "label": "globális videojáték-bevétel 2027-ben (PwC)"
+        }
+      ],
+      "why": "Az AI mélyebben beépül a fejlesztési folyamatba, és a gaming creator-gazdaság tovább nő. A MENA-régió gyorsan növekvő piac.",
+      "opportunity": "Platformfüggetlen motoros fejlesztés eleve mobil + PC célra; creatorokkal közös kampányok.",
+      "sources": [
+        {
+          "title": "Analytics Insight: gaming trends 2027",
+          "url": "https://www.analyticsinsight.net/gaming/7-gaming-trends-to-watch-in-2027-ai-cloud-handhelds-more"
+        },
+        {
+          "title": "Udonis: gaming trends 2026",
+          "url": "https://www.blog.udonis.co/mobile-marketing/mobile-games/gaming-trends"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "analog",
+      "title": "Analóg fordulat",
+      "area": "cons",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "most",
+      "summary": "A Z generáció tudatosan csökkenti a képernyőidőt: \"nagymama-hobbik\", film fényképezőgépek, buta telefonok, telefonmentes események.",
+      "figures": [
+        {
+          "value": "75%",
+          "label": "18–24 éves szeretne idén analógabb lenni, több offline hobbival (YPulse)"
+        },
+        {
+          "value": "+157%",
+          "label": "instant fényképezőgép eladás, a Walkmané +111% (Afterpay)"
+        },
+        {
+          "value": "12×",
+          "label": "nőtt egy butatelefon-kereső oldal forgalma 2022 és 2025 között"
+        }
+      ],
+      "why": "A közösségimédia-fáradtság és a mentális egészség miatt; az Offline Club már 19 városban van jelen. Nem a digitális vége, hanem tudatos határhúzás.",
+      "opportunity": "Offline szokásokat támogató appok (képernyőidő, hobbi-tracker), nyomtatható kiegészítők, \"telefon nélküli\" kihívások.",
+      "sources": [
+        {
+          "title": "YPulse: why Gen Z is going analog",
+          "url": "https://www.ypulse.com/article/2026/05/05/ypulse-explains-why-gen-z-is-going-analog/"
+        },
+        {
+          "title": "Archbridge: analog summer",
+          "url": "https://www.archbridgeinstitute.org/gen-z-is-having-an-analog-summer-and-theyre-obsessed-with-this-item/"
+        },
+        {
+          "title": "Fortune: Gen Z analog economy",
+          "url": "https://fortune.com/2026/04/01/gen-z-analog-economy-5-billion-market-nostalgia"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "emberi-premium",
+      "title": "Emberi prémium és AI-fáradtság",
+      "area": "cons",
+      "ring": 2,
+      "impact": 3,
+      "indie": true,
+      "horizon": "2027",
+      "summary": "Amikor az intelligencia bőséges, a hitelesség, a látható emberi kéz és az ellenőrizhető forrás lesz az érték. A hagyományos tekintélyforrások szétaprózódnak.",
+      "figures": [],
+      "why": "Előrejelzések szerint 2027-ben a munkahelyen is jobban megbíznak majd a kis hibákat tartalmazó munkában, mint a gyanúsan tökéletesben. A Mintel szerint azok a márkák nyernek, amelyek igazolni tudják a hitelességüket.",
+      "opportunity": "Átlátható AI-használat, ellenőrzött források feltüntetése, a készítő személyes jelenléte a tartalomban.",
+      "sources": [
+        {
+          "title": "Lindsay Angelo: consumer trends 2027",
+          "url": "https://lindsayangelo.com/thinkingcont//consumer-trends-2027"
+        },
+        {
+          "title": "HCAMag: 2027 workforce predictions",
+          "url": "https://www.hcamag.com/us/news/general/2027-workforce-predictions-ai-fatigue-and-an-empty-leadership-bench/595038"
+        },
+        {
+          "title": "Mintel: 2027 Global Predictions",
+          "url": "https://www.mintel.com/insights/consumer-research/global-consumer-trends/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "rendszerek",
+      "title": "Termékek helyett rendszerek",
+      "area": "cons",
+      "ring": 2,
+      "impact": 2,
+      "indie": false,
+      "horizon": "2027–2030",
+      "summary": "A fogyasztó az elérendő eredményre figyel, nem a termékre; a nyertesek terméket, szakértelmet, technológiát és szolgáltatást kapcsolnak össze.",
+      "figures": [],
+      "why": "A Mintel 2027-es előrejelzésének központi tézise, amely először fogja át az étel, szépségápolás, háztartás és wellness kategóriákat.",
+      "opportunity": "Appok, amelyek egy fizikai termékhez vagy szokáshoz adnak követést és tanácsot.",
+      "sources": [
+        {
+          "title": "Mintel: 2027 Global Predictions",
+          "url": "https://www.mintel.com/insights/consumer-research/global-consumer-trends/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "pozitiv-loket",
+      "title": "Pozitív löket és biztonságos menedék",
+      "area": "cons",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2027",
+      "summary": "Kis hangulatjavító élmények, kisebb társaságok, gyerekkori kényelmi jelek egy zaklatott világban.",
+      "figures": [
+        {
+          "value": "71%",
+          "label": "fáradt a negatív hírektől (Innova)"
+        },
+        {
+          "value": "45%",
+          "label": "kisebb társas közegben tölti az idejét"
+        }
+      ],
+      "why": "Az Innova szerint a legerősebb fogyasztói igények (hangulat, nyugalom, energia) éppen azok, amelyekre a legtöbb piacon nem lehet egészségállítást tenni.",
+      "opportunity": "Pozitív, csodálkozást keltő ismeretterjesztés; nyugtató, rövid napi rutinok appban.",
+      "sources": [
+        {
+          "title": "Prodeen: Innova 2027 trends",
+          "url": "https://prodeen.com/viewpoint/the-2027-consumer-trends-point-to-the-claims-that-are-hardest-to-make?hs_amp=true"
+        },
+        {
+          "title": "WGSN: Future Consumer 2027",
+          "url": "https://www.wgsn.com/en/blog/future-consumer-2027-why-emotion-money"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "jatek-jollet",
+      "title": "Játék mint jóllét, felnőtt gyűjtők",
+      "area": "cons",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2027",
+      "summary": "A játék a jóllét stratégiai elemévé válik; a felnőttek gyerekkori kedvenceket gyűjtenek és \"felnőttségmentes\" élményeket keresnek.",
+      "figures": [
+        {
+          "value": "57%",
+          "label": "utazó foglalna valószínűleg \"un-adulting\" utat 2027-ben (Expedia)"
+        }
+      ],
+      "why": "Nosztalgia és a felelősség alóli szabadulás vágya (WGSN: \"Witherwill\"). A Whatnot játék- és gyűjtői trendeket lát erősödni.",
+      "opportunity": "Gamifikáció felnőtteknek; gyűjthető elemek és meta-progresszió appokban.",
+      "sources": [
+        {
+          "title": "NRF: big trends by 2027",
+          "url": "https://nrf.com/blog/big-trends-impacting-consumers-by-2027"
+        },
+        {
+          "title": "Whatnot: 2027 Consumer Trends",
+          "url": "https://blog.teamwhatnot.com/unitedstates/2027globalconsumertrends"
+        },
+        {
+          "title": "Expedia Unpack '27",
+          "url": "https://www.prnewswire.com/news-releases/unpack-27-expedia-hotelscom-and-vrbo-reveal-the-travel-trends-inspiring-the-world-in-2027-302907800.html"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "meleg-dizajn",
+      "title": "Melegebb, tapinthatóbb dizájn",
+      "area": "cons",
+      "ring": 2,
+      "impact": 1,
+      "indie": true,
+      "horizon": "2027",
+      "summary": "Melegebb színek, emberi textúra, nyugodtabb elrendezés; a túlpolírozott, hideg vizuális világ ellenreakciója.",
+      "figures": [],
+      "why": "A közösség, az öröm és a kézműves jelleg mint bizalmi jel. A márkarendszerek moduláris felépítésűek, hogy polcon, webshopban és rövid videóban is működjenek.",
+      "opportunity": "App-ikonok, képernyők és bélyegképek frissítése melegebb palettára.",
+      "sources": [
+        {
+          "title": "Big Eye: 2027 design trends",
+          "url": "https://www.bigeyeagency.com/insights/2027-design-trends-that-will-transform-consumer-brands"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 1,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "glp1",
+      "title": "GLP-1 a fogyáson túl",
+      "area": "health",
+      "ring": 4,
+      "impact": 3,
+      "indie": false,
+      "horizon": "most",
+      "summary": "A GLP-1 gyógyszerek tabletta és ritkább adagolású formában terjednek, és a kutatás szív-, vese- és függőségkezelésre is kiterjed.",
+      "figures": [
+        {
+          "value": "~1/5",
+          "label": "amerikai felnőtt használt már GLP-1 gyógyszert"
+        }
+      ],
+      "why": "Egyesek az első \"hosszú élet\" gyógyszernek tartják, de egészséges embereknél még nincs elegendő hosszú távú adat. Hullámhatás: kevesebb, de tápanyagdúsabb étel, izommegtartó edzés, ruházati költés.",
+      "opportunity": "Táplálkozás- és edzéskövetés gyógyszert szedőknek, orvosi felügyelet mellett.",
+      "sources": [
+        {
+          "title": "US News: health trends 2026",
+          "url": "https://health.usnews.com/wellness/articles/top-health-and-nutrition-trends-for-2026"
+        },
+        {
+          "title": "US News: GLP-1 and longevity",
+          "url": "https://health.usnews.com/wellness/articles/the-glp-1-effect"
+        },
+        {
+          "title": "PwC: GLP-1 and business models",
+          "url": "https://www.pwc.com/us/en/services/consulting/strategy/glp-1-trends-and-impact-on-business-models.html"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 4,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "hosszu-elet",
+      "title": "Mérhető hosszú élet",
+      "area": "health",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2026–2028",
+      "summary": "A longevity a virális tippek helyett orvosibb és mérhetőbb lesz: epigenetikai órák, biomarkerek, alváskezelés.",
+      "figures": [],
+      "why": "Több mint 200 orvos válaszai szerint a hangsúly a szuperemberi célokról az egészségben töltött évekre került; az alvás a terápiák központi eleme.",
+      "opportunity": "Alvás- és rutin-appok, amelyek egyszerű, mérhető szokásokra építenek.",
+      "sources": [
+        {
+          "title": "Vogue Adria: wellness trends",
+          "url": "https://vogueadria.com/wellness-trends/"
+        },
+        {
+          "title": "Hone Health: longevity trends",
+          "url": "https://honehealth.com/edge/longevity-trends/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "etel-borapolas",
+      "title": "Étel mint bőrápolás",
+      "area": "health",
+      "ring": 2,
+      "impact": 2,
+      "indie": false,
+      "horizon": "2027",
+      "summary": "Kollagénzselé-rudak, \"bőrfény\" gumicukrok, olívaolaj-shotok: összemosódik a snack, az étrend-kiegészítő és a kozmetikum.",
+      "figures": [],
+      "why": "A Whole Foods 2027-es nyolc élelmiszertrendjének egyike; a K-beauty közben továbbra is meghatározza a bőrápolási rutinokat.",
+      "opportunity": "Tartalomtéma: mi igaz és mi marketing a \"belülről szépítő\" termékekben.",
+      "sources": [
+        {
+          "title": "Whole Foods Market: 2027 trends",
+          "url": "https://press.aboutamazon.com/2026/10/whole-foods-market-reveals-its-top-food-and-beverage-trend-predictions-for-2027"
+        },
+        {
+          "title": "Whatnot: beauty trends 2027",
+          "url": "https://blog.teamwhatnot.com/unitedstates/2027globalconsumertrends"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "upf",
+      "title": "Ultrafeldolgozott-mentesség és \"modern betegségek\"",
+      "area": "health",
+      "ring": 2,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2027",
+      "summary": "Egyre több app és tanúsítás segít elkerülni az ultrafeldolgozott élelmiszereket; új termékek reagálnak a mikroműanyagokra és az alfa-gal szindrómára.",
+      "figures": [],
+      "why": "Az átláthatóság és a pontosan megnevezett előnyök iránti igény; a fogyasztó a hagyományt és a precíz hatást egyszerre keresi.",
+      "opportunity": "Címkeolvasó, összetevő-magyarázó appok egyszerű, látványos felülettel, nyelvfüggetlen ikonokkal.",
+      "sources": [
+        {
+          "title": "Whole Foods Market: 2027 trends",
+          "url": "https://press.aboutamazon.com/2026/10/whole-foods-market-reveals-its-top-food-and-beverage-trend-predictions-for-2027"
+        },
+        {
+          "title": "The Shelby Report: Expo West 2027",
+          "url": "https://theshelbyreport.com/2026/10/23/expo-west-forecasts-17-trends-shaping-natural-products-in-2027"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "funkcionalis-italok",
+      "title": "Harmadik hullámos funkcionális italok",
+      "area": "health",
+      "ring": 2,
+      "impact": 1,
+      "indie": false,
+      "horizon": "2027",
+      "summary": "A koffeines sportitalok és az alkoholmentes alternatívák után tisztább összetételű, életszakaszhoz és konkrét igényhez kötött italok jönnek.",
+      "figures": [],
+      "why": "Szénsavas fehérjeitalok, élvezetesebb formátumban adagolt tápanyagok.",
+      "opportunity": "Kevés közvetlen lehetőség, inkább fogyasztói háttértrend.",
+      "sources": [
+        {
+          "title": "The Shelby Report: Expo West 2027",
+          "url": "https://theshelbyreport.com/2026/10/23/expo-west-forecasts-17-trends-shaping-natural-products-in-2027"
+        },
+        {
+          "title": "Vogue Adria: wellness trends",
+          "url": "https://vogueadria.com/wellness-trends/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 1,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "terroir",
+      "title": "Terroir, örökségízek, magyar túró",
+      "area": "food",
+      "ring": 2,
+      "impact": 1,
+      "indie": false,
+      "horizon": "2027",
+      "summary": "A származás és a \"hely íze\" a boron túl is számít: regionális méz, egybirtokos csokoládé, eredetvédett termékek. Japán komfortételek és keserű ízek is felfutnak.",
+      "figures": [
+        {
+          "value": "+7,3%",
+          "label": "várt tejtermék-kategória növekedés 2027-ben az USA-ban (NBJ)"
+        }
+      ],
+      "why": "Az Expo West \"örökség-tejtermék\" trendjében név szerint szerepel a magyar túró a vietnami joghurt és a labneh mellett. Ősi gabonák (emmer, amaránt) is visszatérnek.",
+      "opportunity": "Közép-európai élelmiszerek exportja és tartalmi témája; recept- és eredettörténet videók.",
+      "sources": [
+        {
+          "title": "Whole Foods Market: 2027 trends",
+          "url": "https://press.aboutamazon.com/2026/10/whole-foods-market-reveals-its-top-food-and-beverage-trend-predictions-for-2027"
+        },
+        {
+          "title": "The Shelby Report: Expo West 2027",
+          "url": "https://theshelbyreport.com/2026/10/23/expo-west-forecasts-17-trends-shaping-natural-products-in-2027"
+        },
+        {
+          "title": "Datassential 2027",
+          "url": "https://www.preparedfoods.com/articles/131963-datassential-identifies-food-and-beverage-trends-to-watch-in-2027"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 1,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "mikro-utazas",
+      "title": "Mikro-utazás és egyéjszakás kiruccanások",
+      "area": "food",
+      "ring": 3,
+      "impact": 2,
+      "indie": false,
+      "horizon": "2027",
+      "summary": "Rövidebb, rugalmasabb utak, hobbiközpontú és személyes fejlődést hozó kirándulások; a tökéletes helyett a \"nagyjából jó\".",
+      "figures": [
+        {
+          "value": "14 000+",
+          "label": "utazó globális felmérése a Hilton 2027-es jelentésében"
+        },
+        {
+          "value": "~1/5",
+          "label": "utazó foglalt már utat sorozatban vagy filmben látott helyszínre (Expedia)"
+        }
+      ],
+      "why": "A Hilton öt trendje: a \"-ish\" térnyerése, a bizalom, fejlődést hozó utak, természetközeli wellness és a mikro-utazás. Az Expedia az egyéjszakás utakat és a hobbialapú utazást emeli ki.",
+      "opportunity": "Hobbi- és helyszínalapú mikro-útvonaltervezők, \"forgatási helyszín\" tartalmak.",
+      "sources": [
+        {
+          "title": "Hilton 2027 Trends Report",
+          "url": "https://stories.hilton.com/releases/2027-trends-release"
+        },
+        {
+          "title": "Expedia Unpack '27",
+          "url": "https://www.prnewswire.com/news-releases/unpack-27-expedia-hotelscom-and-vrbo-reveal-the-travel-trends-inspiring-the-world-in-2027-302907800.html"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "stablecoin",
+      "title": "Stablecoin-alapú fizetési sínek",
+      "area": "fin",
+      "ring": 2,
+      "impact": 3,
+      "indie": false,
+      "horizon": "2027–2030",
+      "summary": "A stablecoinok a kriptokereskedésből a határon átnyúló B2B-fizetés, a pénzügyi treasury és az elszámolás infrastruktúrájába lépnek, 2027-ben a bankokkal együtt.",
+      "figures": [
+        {
+          "value": "0,02%",
+          "label": "a globális fizetések jelenlegi stablecoin-aránya"
+        },
+        {
+          "value": "5–10%",
+          "label": "határon átnyúló fizetés várható aránya 2030-ra a megkérdezettek szerint"
+        },
+        {
+          "value": "$230 Mrd",
+          "label": "banki fizetési bevétel kerülhet veszélybe (Capgemini)"
+        }
+      ],
+      "why": "A határon átnyúló volumen negyedévente nagyjából 15–20%-kal nő. A nagy fizetési szereplők (Stripe, Visa, Mastercard) beszálltak, és a gépi ügynökök természetes fizetőeszköze lehet a 24/7-es, programozható pénz.",
+      "opportunity": "Nemzetközi ügyfeleknek számlázóknak olcsóbb kifizetési utak figyelése; mikrotranzakciók appokban.",
+      "sources": [
+        {
+          "title": "Thunes: stablecoin trends 2027",
+          "url": "https://www.thunes.com/insights/trends/stablecoin-trends-shaping-global-payments/"
+        },
+        {
+          "title": "FinTech Global: Capgemini WPR 2027",
+          "url": "https://fintech.global/2026/09/28/banks-face-230bn-payments-hit-as-stablecoins-scale/"
+        },
+        {
+          "title": "FINTECH.TV: banks and stablecoins",
+          "url": "https://cms.fintech.tv/why-banks-are-embracing-stablecoins-ahead-of-2027/"
+        },
+        {
+          "title": "Deloitte: retail stablecoin payments",
+          "url": "https://www.deloitte.com/us/en/insights/industry/financial-services/financial-services-industry-predictions/2026/stablecoins-retail-payments.html"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "szukulo-penztarca",
+      "title": "Szűkülő pénztárca, értékalapú vásárlás",
+      "area": "fin",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2026–2027",
+      "summary": "Az amerikai fogyasztók többsége kevesebből gazdálkodik az ünnepi szezonban; a vásárlók a tartósságot, javíthatóságot és valós hasznot mérlegelik.",
+      "figures": [
+        {
+          "value": "~60%",
+          "label": "amerikai fogyasztónak van kevesebb elkölthető pénze az ünnepekre (Gartner)"
+        }
+      ],
+      "why": "Az energiasokk és a magasabb infláció szorítja a háztartásokat; az \"elég\" korszaka (kevesebb, de értelmes vásárlás) erősödik.",
+      "opportunity": "Ingyenes alapverzió erős értékkel, átlátható árazás, előfizetés-fáradtságra reagáló egyszeri vásárlás.",
+      "sources": [
+        {
+          "title": "Gartner newsroom (a legfrissebb közlemények listája, 2026.10.26.)",
+          "url": "https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"
+        },
+        {
+          "title": "Analytics Insight: consumer tech 2027",
+          "url": "https://www.analyticsinsight.net/ampstories/technology/consumer-technology-trends-in-2027-changes-to-watch"
+        },
+        {
+          "title": "Lindsay Angelo: era of enough",
+          "url": "https://lindsayangelo.com/thinkingcont//consumer-trends-2027"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "adatkozpont-aram",
+      "title": "Az AI áramigénye és az akkumulátorboom",
+      "area": "energy",
+      "ring": 4,
+      "impact": 3,
+      "indie": false,
+      "horizon": "most – 2030",
+      "summary": "Az adatközpontok a hálózati szűk keresztmetszetet akkumulátorokkal, saját erőművel és mikrohálózatokkal kerülik meg. A tárolás az AI-infrastruktúra kötelező elemévé vált.",
+      "figures": [
+        {
+          "value": "2 200+ TWh",
+          "label": "lehetséges adatközponti áramigény 2030-ra, nagyjából India mai fogyasztása (S&P, magas forgatókönyv)"
+        },
+        {
+          "value": "+131%",
+          "label": "USA lítiumion-import AI-szerverrackek tartalékakkujához, 2026 jan–júl"
+        }
+      ],
+      "why": "Az AI-tréning terhelése ezredmásodpercek alatt ugrik, ezt az akkuk simítják. Az ingatlanpiacon is az áram és a hálózati kapacitás lett a helyválasztás egyik fő szempontja.",
+      "opportunity": "Ismeretterjesztő téma; energia- és fogyasztásfigyelő eszközök.",
+      "sources": [
+        {
+          "title": "S&P Global: Horizons 2026",
+          "url": "https://www.spglobal.com/energy/en/news-research/special-reports/energy-transition/horizons-top-cleantech-trends-2026"
+        },
+        {
+          "title": "pv magazine: storage prices to 2030",
+          "url": "https://pv-magazine-usa.com/2026/10/26/u-s-energy-storage-prices-to-drop-through-2030-but-trade-risks-and-supply-gaps-threaten-potential-savings"
+        },
+        {
+          "title": "Latitude Media: battery boom",
+          "url": "https://www.latitudemedia.com/news/the-battery-boom-behind-the-ai-buildout/"
+        },
+        {
+          "title": "CPE: Emerging Trends in Real Estate 2027",
+          "url": "https://www.commercialsearch.com/news/emerging-trends-2027-get-ready-to-work-for-it/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 4,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "nap-tarolas",
+      "title": "Napenergia + tárolás, nátriumion",
+      "area": "energy",
+      "ring": 4,
+      "impact": 3,
+      "indie": false,
+      "horizon": "2026–2032",
+      "summary": "A napenergia 2032-re a világ legnagyobb áramforrása lehet; a tárolás meredeken nő, és a lítium mellett nátriumion, flow- és vas-levegő akkuk skálázódnak.",
+      "figures": [
+        {
+          "value": "2032",
+          "label": "a napenergia a legnagyobb áramtermelő (BloombergNEF)"
+        },
+        {
+          "value": "17×",
+          "label": "energiatárolási kapacitás bővülése, 223 GW-ról 3,8 TW-ra (BNEF)"
+        }
+      ],
+      "why": "Energiabiztonsági okból is: az importált fosszilis energiától való leválás. Kína 2027. január 1-jével megszünteti az akkumulátorok áfa-visszatérítését, ami előrehozott vásárlásokat okozott.",
+      "opportunity": "Otthoni energia- és napelem-optimalizáló appok.",
+      "sources": [
+        {
+          "title": "BloombergNEF: New Energy Outlook 2026",
+          "url": "https://about.bnef.com/insights/clean-energy/bloombergnefs-new-energy-outlook-2026-transition-to-newer-technologies-expanded-electrification-to-strengthen-nations-energy-security/"
+        },
+        {
+          "title": "pv magazine: five storage trends",
+          "url": "https://pv-magazine-usa.com/2026/01/26/five-trends-for-energy-storage-as-global-market-passes-100-gw/"
+        },
+        {
+          "title": "pv magazine: Intertek CEA Q3 2026",
+          "url": "https://pv-magazine-usa.com/2026/10/26/u-s-energy-storage-prices-to-drop-through-2030-but-trade-risks-and-supply-gaps-threaten-potential-savings"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 4,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "hoseg",
+      "title": "Alkalmazkodás a hőséghez",
+      "area": "energy",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "most",
+      "summary": "A rendkívüli hőség szerkezeti kockázat lett: Európában a leghalálosabb időjárási veszély. Városok és országok adaptációs terveket indítanak.",
+      "figures": [
+        {
+          "value": "3,8 Mrd",
+          "label": "ember lehet kitéve extrém hőségnek 2050-re (Nature Sustainability)"
+        }
+      ],
+      "why": "Szingapúr 2026-ot az alkalmazkodás évének nyilvánította; 2026 végére El Niño valószínű, ami 2027-et újabb rendkívül meleg évvé teheti. A fák, parkok és zöldtetők a leghatékonyabb városi hűtési eszközök közé tartoznak.",
+      "opportunity": "Hőség-figyelmeztető és hűvös helyeket mutató appok; ismeretterjesztő tartalom.",
+      "sources": [
+        {
+          "title": "Kyoto Club: EU on extreme heat",
+          "url": "https://www.kyotoclub.org/en/news-en/news-from-the-world/2026/07/10/caldo-estremo-cinque-cose-da-sapere-e-le-soluzioni-per-affrontarlo/"
+        },
+        {
+          "title": "Caixin: Singapore adaptation",
+          "url": "https://www.caixinglobal.com/2026-09-03/singapore-to-release-climate-adaptation-plan-as-heat-risks-grow-102481447.html"
+        },
+        {
+          "title": "BSS/AFP: 3.8bn people",
+          "url": "https://www.bssnews.net/news/354872"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "belepo-szint",
+      "title": "Kiürülő belépő szintű munkák",
+      "area": "work",
+      "ring": 3,
+      "impact": 3,
+      "indie": false,
+      "horizon": "most – 2028",
+      "summary": "Az AI elveszi a junior munkák rutinfeladatait, a megmaradó belépő pozíciók pedig korábban senior készségeket (vezetés, stratégia) kérnek.",
+      "figures": [
+        {
+          "value": "7×",
+          "label": "valószínűbb, hogy az AI-nak leginkább kitett junior állások senior készségeket kérnek (PwC)"
+        },
+        {
+          "value": "+35%",
+          "label": "az ilyen \"seniorizált\" belépő pozíciók növekedése 2019 óta"
+        }
+      ],
+      "why": "A HR-vezetők szerint újra kell építeni a tehetségutánpótlást, mert a rutinmunka volt a tanulás terepe. A kérdés: honnan jön a jövő tapasztalt szakembere.",
+      "opportunity": "Szimulációs gyakorló- és mentorplatformok, amelyek pótolják az elveszett \"tanulóév\" tapasztalatait.",
+      "sources": [
+        {
+          "title": "AIHR: HR trends 2027",
+          "url": "https://www.aihr.com/blog/hr-trends/"
+        },
+        {
+          "title": "PwC: AI Jobs Barometer",
+          "url": "https://www.pwc.com/gx/en/1/services/ai/ai-jobs-barometer.html"
+        },
+        {
+          "title": "HCAMag: 2027 predictions",
+          "url": "https://www.hcamag.com/us/news/general/2027-workforce-predictions-ai-fatigue-and-an-empty-leadership-bench/595038"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "ellenorzes",
+      "title": "Az ellenőrzés mint kulcskészség",
+      "area": "work",
+      "ring": 2,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2027",
+      "summary": "2027-ben az nyer, aki észreveszi az AI hibáit és jó ítélőképességgel dönt; az AI-használat önmagában már nem előny.",
+      "figures": [
+        {
+          "value": "77% vs 3%",
+          "label": "az igazgatótanácsok várnak AI-hatékonyságot, de csak a szervezetek 3%-a teljesíti túl a megtakarítási célt (Gartner HR)"
+        }
+      ],
+      "why": "A képességek \"elsorvadása\" (AI-atrófia) új kockázat. Közben a villanyszerelők és vízvezeték-szerelők is az AI-boom haszonélvezői az adatközpont-építések miatt.",
+      "opportunity": "Kritikus gondolkodást és tényellenőrzést tanító eszközök, kvízek.",
+      "sources": [
+        {
+          "title": "Forbes: 8 workplace skills trends 2027",
+          "url": "https://www.forbes.com/sites/bernardmarr/2026/10/26/8-workplace-skills-trends-that-could-make-or-break-your-career-in-2027/"
+        },
+        {
+          "title": "Gartner newsroom (a legfrissebb közlemények listája, 2026.10.26.)",
+          "url": "https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027"
+        },
+        {
+          "title": "Forbes: future of work 2027",
+          "url": "https://www.forbes.com/sites/bernardmarr/2026/10/12/10-future-of-work-trends-that-could-change-your-job-in-2027/"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "ai-tanitas",
+      "title": "AI-tanítás: skálázódik, de kevés a bizonyíték",
+      "area": "work",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "most",
+      "summary": "Az adaptív gyakorlás és az AI-tanári támogatás terjed, miközben a csupasz \"chatbot mint tanár\" ígéret kifullad.",
+      "figures": [
+        {
+          "value": "45%",
+          "label": "a legtöbbet használt oktatási eszközök közül ennyinek van publikált hatásvizsgálata"
+        }
+      ],
+      "why": "A diákok AI-igénye megelőzte az eszközöket és szabályokat. A blokklánc-oklevél és a teljes osztálytermi VR is halványul; a mérhető tanulási eredmény lett a mérce.",
+      "opportunity": "Szűk, mérhető tanulási célra (szókincs, fejszámolás) épített, játékos gyakorlóappok.",
+      "sources": [
+        {
+          "title": "TechnBrains: EdTech trends 2026",
+          "url": "https://www.technbrains.com/blog/edtech-trends/"
+        },
+        {
+          "title": "EdTech Insiders: 2026 predictions",
+          "url": "https://edtechinsiders.substack.com/p/trust-integration-and-transformation"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "ev-piac",
+      "title": "Kettészakadó villanyautó-piac",
+      "area": "mob",
+      "ring": 3,
+      "impact": 2,
+      "indie": false,
+      "horizon": "2026–2027",
+      "summary": "Kínában a hazai EV-eladás csökken a támogatások szűkülése miatt, Európában erősen nő, és egyre több Európában eladott villanyautó Kínában készül.",
+      "figures": [
+        {
+          "value": "−15%",
+          "label": "Kína EV-eladása 2026 májusáig év/év"
+        },
+        {
+          "value": "+27%",
+          "label": "európai EV-eladás 2026 áprilisában év/év"
+        },
+        {
+          "value": "22%",
+          "label": "a Kínában gyártott autók aránya az európai EV-eladásokban 2026-ban"
+        }
+      ],
+      "why": "A kínai gyártók exportra fordulnak és Európában (köztük Magyarországon) építenek gyárakat a vámok elkerülésére.",
+      "opportunity": "Töltés- és költségkalkulátorok, összehasonlító tartalmak autóvásárlóknak.",
+      "sources": [
+        {
+          "title": "Benchmark: EV sales May 2026",
+          "url": "https://source.benchmarkminerals.com/article/global-ev-sales-reach-1-8-million-units-in-may-2026"
+        },
+        {
+          "title": "Benchmark: EV sales April 2026",
+          "url": "https://source.benchmarkminerals.com/article/global-ev-sales-reached-1-60-million-units-in-april-2026"
+        },
+        {
+          "title": "Independent Research Forum",
+          "url": "https://www.independentresearchforum.com/events/1042"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 3,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "robotaxi",
+      "title": "Robotaxik Európában",
+      "area": "mob",
+      "ring": 2,
+      "impact": 2,
+      "indie": false,
+      "horizon": "2026–2028",
+      "summary": "Elindultak az első nyilvános európai robotaxi-szolgáltatások, kínai technológiai partnerekkel és Uber-integrációval.",
+      "figures": [
+        {
+          "value": "€1,99",
+          "label": "fuvarár Európa első robotaxi-szolgáltatásán, Zágrábban"
+        },
+        {
+          "value": "2 000+",
+          "label": "robotaxi telepítését tervezi a Pony.ai és az Uber Európában"
+        }
+      ],
+      "why": "A Baidu Londonban tesztel, a WeRide 2027 első felében Dániában indul. Az iparág a helyi pilotokból a nagy léptékű kereskedelmi üzem felé lép.",
+      "opportunity": "Figyelendő; közel van Magyarországhoz, tartalmi téma.",
+      "sources": [
+        {
+          "title": "ChinaEVHome: Pony.ai Zagreb",
+          "url": "https://chinaevhome.com/2026/04/09/"
+        },
+        {
+          "title": "Daily Kanban: €1.99 robotaxi",
+          "url": "https://webmail.dailykanban.com/2026/page/2/"
+        },
+        {
+          "title": "ICE: Chinese robotaxis in Europe",
+          "url": "https://www.ice.it/it/sites/default/files/inline-files/MACHINERY%20%26%20AUTOMOTIVE_17.pdf"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 2,
+          "impact": 2,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    },
+    {
+      "id": "energiasokk",
+      "title": "Energiasokk és újraosztott növekedés",
+      "area": "macro",
+      "ring": 4,
+      "impact": 3,
+      "indie": false,
+      "horizon": "2026–2027",
+      "summary": "A 2026 februárjában kezdődött nyugat-ázsiai háború ellátási sokkot okozott; a növekedés országonként aszerint oszlik el, ki mennyire kitett a sokknak és az AI-nak.",
+      "figures": [
+        {
+          "value": "3,1%",
+          "label": "globális növekedés 2026-ban az IMF októberi előrejelzése szerint"
+        },
+        {
+          "value": "3,4%",
+          "label": "várt globális növekedés 2027-ben"
+        },
+        {
+          "value": "−1,3%",
+          "label": "a Közel-Kelet gazdasági teljesítménye 2026-ban (IMF)"
+        }
+      ],
+      "why": "A Hormuzi-szoros a világ olajellátásának nagyjából ötödét szállítja, ezért az energiaárak és az infláció a fő kockázat. Az AI-beruházások közben felfelé húzzák a növekedést.",
+      "opportunity": "Árérzékeny piacokon olcsó, értékalapú termékek; devizakockázatra figyelni nemzetközi bevételnél.",
+      "sources": [
+        {
+          "title": "The Star: IMF October 2026",
+          "url": "https://www.thestar.com.my/business/business-news/2026/10/13/global-economy-to-decelerate-to-31-in-2026-in-2026-before-recovering-to-34-in-2027---imf"
+        },
+        {
+          "title": "Kurdistan24: IMF regional outlook",
+          "url": "https://www.kurdistan24.net/en/story/947832"
+        },
+        {
+          "title": "Business Today: IMF April WEO",
+          "url": "https://www.businesstoday.in/world/story/imf-cuts-global-growth-forecast-amid-west-asia-conflict-525612-2026-04-14"
+        }
+      ],
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-27",
+          "ring": 4,
+          "impact": 3,
+          "note": "Első felvétel a radarra."
+        }
+      ]
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-27",
+      "edition": "2026-10",
+      "summary": "Első kiadás: 50 trend 12 területen, 2026 október végéig megjelent jelentések alapján.",
+      "added": [
+        "ugynokcsapatok",
+        "ugynok-identitas",
+        "ai-fejleszto",
+        "eldobhato-appok",
+        "hang-ai",
+        "vilagmodellek",
+        "ugynoki-vasarlas",
+        "szuverenitas",
+        "kontextus",
+        "lqm",
+        "wetware",
+        "okosszemuveg",
+        "humanoidok",
+        "kvantum",
+        "eszkozon-ai",
+        "kozossegi-kereso",
+        "social-commerce",
+        "reszvetel",
+        "karakterek",
+        "hosszu-forma",
+        "mikrodrama",
+        "elofizetes",
+        "android-2027",
+        "idle",
+        "platformok-osszemosodnak",
+        "analog",
+        "emberi-premium",
+        "rendszerek",
+        "pozitiv-loket",
+        "jatek-jollet",
+        "meleg-dizajn",
+        "glp1",
+        "hosszu-elet",
+        "etel-borapolas",
+        "upf",
+        "funkcionalis-italok",
+        "terroir",
+        "mikro-utazas",
+        "stablecoin",
+        "szukulo-penztarca",
+        "adatkozpont-aram",
+        "nap-tarolas",
+        "hoseg",
+        "belepo-szint",
+        "ellenorzes",
+        "ai-tanitas",
+        "ev-piac",
+        "robotaxi",
+        "energiasokk"
+      ],
+      "moved": [],
+      "removed": []
+    }
+  ]
+}

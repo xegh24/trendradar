@@ -1,0 +1,17 @@
+name: Forráslinkek ellenőrzése
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"   # hétfőnként 06:17 UTC
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Linkek ellenőrzése
+        run: python3 scripts/check_links.py --strict

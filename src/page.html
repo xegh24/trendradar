@@ -1,0 +1,652 @@
+<title>Trendradar 2027</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: radar-scope instrument + signal log; tabbed views for tracking (watchlist, own signals, changes, report calendar, method); detail opens as a side drawer. */
+:root{
+  --bg:#EEF2F0; --surface:#FFFFFF; --ink:#13201C; --muted:#5A6A64; --line:#D3DCD8; --grid:#C3CFCA;
+  --accent:#16705A; --accent-soft:#DCEEE7; --warn:#B4441F;
+  --r1:#7A5CC7; --r2:#C27A12; --r3:#16805F; --r4:#2C5C9E;
+  --scope:#F7FAF8;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0C1311; --surface:#121C19; --ink:#E2EBE7; --muted:#8FA29A; --line:#22312C; --grid:#2A3B36;
+  --accent:#4FD1A5; --accent-soft:#16302A; --warn:#F08A62;
+  --r1:#A88CF0; --r2:#E6A23C; --r3:#4FD1A5; --r4:#6FA3EE; --scope:#0F1916; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0C1311; --surface:#121C19; --ink:#E2EBE7; --muted:#8FA29A; --line:#22312C; --grid:#2A3B36;
+  --accent:#4FD1A5; --accent-soft:#16302A; --warn:#F08A62;
+  --r1:#A88CF0; --r2:#E6A23C; --r3:#4FD1A5; --r4:#6FA3EE; --scope:#0F1916; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1280px;margin:0 auto;padding-block:28px 64px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+a{color:var(--accent)}
+
+header.top{display:grid;grid-template-columns:1fr auto;gap:12px 32px;align-items:end;padding-bottom:18px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(34px,5vw,58px);font-weight:800;line-height:1}
+h1 span{color:var(--accent)}
+.lede{max-width:64ch;color:var(--muted);margin:10px 0 0}
+.stats{display:flex;gap:22px;flex-wrap:wrap}
+.stat b{display:block;font-family:var(--f-display);font-size:28px;font-weight:700;line-height:1}
+.stat span{font-size:12px;color:var(--muted)}
+
+nav.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+nav.tabs a{padding:10px 14px;text-decoration:none;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;font-weight:500;font-size:14.5px}
+nav.tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+nav.tabs a .badge{font-family:var(--f-mono);font-size:11px;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:0 7px;margin-left:6px}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;padding:14px 0;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.search{flex:1 1 220px;min-width:0;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.search input{border:0;background:transparent;outline:none;width:100%}
+select,input[type=text],input[type=url],textarea{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+textarea{width:100%;resize:vertical;min-height:84px}
+.toggle{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;user-select:none}
+.toggle input{accent-color:var(--accent);width:16px;height:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;width:100%}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 11px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip .dot{width:8px;height:8px;border-radius:50%}
+.chip small{font-family:var(--f-mono);opacity:.7}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:14px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:600}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+.view{padding-top:22px}
+main.radar{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;align-items:start}
+.scope{position:sticky;top:calc(env(safe-area-inset-top,0px) + 150px);background:var(--scope);border:1px solid var(--line);border-radius:14px;padding:12px}
+.scope svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--muted);padding:6px 6px 2px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.sector-label{font-family:var(--f-mono);font-size:11.5px;fill:var(--muted);letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+.sector-label.on{fill:var(--accent);font-weight:500}
+.ring-label{font-family:var(--f-mono);font-size:10px;fill:var(--muted)}
+.blip{cursor:pointer;transition:opacity .2s}
+.blip circle{stroke:var(--scope);stroke-width:2}
+.blip .watch{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-dasharray:2 2}
+.blip.dim{opacity:.13}
+.blip.hot circle:first-of-type{stroke:var(--ink);stroke-width:2.5}
+.blip text{font-family:var(--f-mono);font-size:9px;fill:#fff;pointer-events:none;font-weight:500}
+@media (prefers-reduced-motion:no-preference){
+  .sweep{transform-origin:360px 360px;animation:sweep 9s linear infinite}
+  @keyframes sweep{to{transform:rotate(360deg)}}
+}
+
+.listhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.listhead h2{font-size:22px}
+.count{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.cards{display:grid;gap:10px}
+.card{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;cursor:pointer;text-align:left;width:100%}
+.card:hover,.card.hot{border-color:var(--accent)}
+.num{font-family:var(--f-mono);font-size:12px;color:var(--muted);padding-top:3px;min-width:2.2em}
+.card h3{font-size:17.5px;font-weight:700;line-height:1.25}
+.meta{grid-column:2;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:12.5px;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-family:var(--f-mono);font-size:11.5px;padding:1px 8px;border-radius:999px;border:1px solid currentColor}
+.pill.st{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.mom{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--accent)}
+.imp{letter-spacing:2px;font-family:var(--f-mono)}
+.card p{grid-column:2;margin:4px 0 0;font-size:14.5px;min-width:0}
+.keynum{grid-column:2;display:flex;gap:10px;align-items:baseline;margin-top:6px;padding-top:8px;border-top:1px dashed var(--line)}
+.keynum b{font-family:var(--f-display);font-size:20px;color:var(--accent);white-space:nowrap}
+.keynum span{font-size:13px;color:var(--muted)}
+.opp{grid-column:2;margin-top:8px;font-size:13.5px;background:var(--accent-soft);border-radius:6px;padding:8px 10px}
+.opp b{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);display:block}
+.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}
+.notice{font-size:13px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-bottom:14px}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.twocol{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:24px;align-items:start}
+.form{display:grid;gap:10px}
+.form label{display:grid;gap:4px;font-size:13px;color:var(--muted)}
+.form label input,.form label select,.form label textarea{color:var(--ink);font-size:15px;width:100%}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.item{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:14px 16px;display:grid;gap:6px;min-width:0}
+.item h3{font-size:16.5px}
+.item .note{white-space:pre-wrap;font-size:14px;min-width:0;overflow-wrap:anywhere}
+.ai-out{font-size:14px;border-left:3px solid var(--accent);padding:4px 0 4px 12px;min-width:0;overflow-wrap:anywhere}
+.ai-out ul{margin:4px 0;padding-left:18px}
+.ai-out p{margin:4px 0}
+.group h3.gh{font-size:14px;font-family:var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px;font-weight:500}
+
+.months{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.month{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:12px 14px;min-width:0}
+.month.now{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.month h3{font-size:17px;display:flex;justify-content:space-between;align-items:baseline}
+.month h3 small{font-family:var(--f-mono);font-size:11px;color:var(--accent);font-weight:500}
+.month ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
+.month li{font-size:13.5px}
+.month li b{font-weight:600}
+.month li span{display:block;color:var(--muted);font-size:12.5px}
+
+.prose{max-width:72ch}
+.prose h2{font-size:24px;margin:26px 0 8px}
+.prose h3{font-size:18px;margin:18px 0 6px}
+.prose table{border-collapse:collapse;font-size:14px;width:100%}
+.prose td,.prose th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.tablewrap{overflow-x:auto}
+.timeline{display:grid;gap:12px}
+.timeline .entry{border-left:2px solid var(--accent);padding:2px 0 2px 14px}
+
+aside.drawer{position:fixed;top:0;right:0;bottom:0;width:min(580px,100%);background:var(--surface);border-left:1px solid var(--line);z-index:20;overflow-y:auto;
+  padding:calc(env(safe-area-inset-top,0px) + 22px) max(22px, env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 40px) 26px;box-shadow:-20px 0 50px rgba(0,0,0,.18)}
+.scrim{position:fixed;inset:0;background:rgba(10,18,15,.35);z-index:15}
+.drawer .close{position:sticky;top:0;float:right;z-index:1}
+.drawer h2{font-size:clamp(26px,3.5vw,34px);line-height:1.1;margin:10px 0 12px;clear:both}
+.drawer .lead{font-size:16px}
+.drawer h4{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px;font-weight:500}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.fig{border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.fig b{display:block;font-family:var(--f-display);font-size:24px;color:var(--accent);line-height:1.1}
+.fig span{font-size:13px;color:var(--muted)}
+.drawer ul.src{padding-left:18px;margin:0;font-size:14px}
+.drawer ul.src a{word-break:break-word}
+.trackbox{border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:8px;background:var(--bg)}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:26px}
+.nav button{max-width:48%;text-align:left;font-size:13px}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);max-width:80ch}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 20px);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:999px;font-size:14px;z-index:30}
+
+@media (max-width:900px){
+  main.radar,.twocol{grid-template-columns:1fr}
+  .scope{position:static}
+  header.top{grid-template-columns:1fr}
+  .controls{position:static}
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow" id="edition">Globális trendfelderítés</div>
+      <h1>Trendradar <span>2027</span></h1>
+      <p class="lede">Kialakuló és gyorsuló trendek 12 területen, friss jelentésekből és adatokból. A radar közepe a fősodor, a széle a gyenge jel. Jelöld meg, amit követni akarsz, gyűjtsd a saját jeleidet, és a havi frissítés ezekre is figyel.</p>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <nav class="tabs" aria-label="Nézetek">
+    <a href="#radar" data-view="radar">Radar</a>
+    <a href="#kovetett" data-view="kovetett">Követett <span class="badge" id="bWatch">0</span></a>
+    <a href="#jelek" data-view="jelek">Saját jelek <span class="badge" id="bSig">0</span></a>
+    <a href="#valtozasok" data-view="valtozasok">Változások</a>
+    <a href="#naptar" data-view="naptar">Jelentésnaptár</a>
+    <a href="#modszertan" data-view="modszertan">Módszertan</a>
+  </nav>
+
+  <section id="v-radar" class="vwrap">
+    <div class="controls">
+      <label class="search"><span aria-hidden="true">⌕</span><input id="q" type="search" placeholder="Keresés: robot, stablecoin, mikrodráma…" aria-label="Keresés a trendek között"></label>
+      <select id="sort" aria-label="Rendezés">
+        <option value="impact">Hatás szerint</option>
+        <option value="ring">Érettség szerint (fősodortól)</option>
+        <option value="signal">Gyenge jelek elöl</option>
+        <option value="area">Terület szerint</option>
+      </select>
+      <label class="toggle"><input type="checkbox" id="indie"> Indie fejlesztőknek, creatoroknak</label>
+      <label class="toggle"><input type="checkbox" id="onlyWatch"> Csak követettek</label>
+      <label class="toggle"><input type="checkbox" id="opp" checked> Lehetőségek</label>
+      <div class="chips" id="ringChips"></div>
+      <div class="chips" id="areaChips"></div>
+    </div>
+    <main class="radar view">
+      <section class="scope" aria-label="Trendradar">
+        <svg id="radarSvg" viewBox="0 0 720 720" role="img" aria-label="Radar diagram a trendekről területenként és érettség szerint"></svg>
+        <div class="legend" id="legend"></div>
+      </section>
+      <section>
+        <div class="listhead"><h2>Jelnapló</h2><span class="count" id="count"></span></div>
+        <div class="cards" id="cards"><div class="empty">Trendek betöltése…</div></div>
+      </section>
+    </main>
+  </section>
+
+  <section id="v-kovetett" class="vwrap view" hidden>
+    <div class="listhead"><h2>Követett trendek</h2><div class="row"><button class="btn" id="copyWatch">Lista másolása</button></div></div>
+    <div id="storeNote1"></div>
+    <div id="watchList"></div>
+  </section>
+
+  <section id="v-jelek" class="vwrap view" hidden>
+    <div id="storeNote2"></div>
+    <div class="twocol">
+      <form class="panel form" id="sigForm" autocomplete="off">
+        <h2 style="font-size:20px">Új jel rögzítése</h2>
+        <p class="muted" style="margin:0;font-size:13.5px">Cikk, videó, app, termék vagy saját megfigyelés, amiből trend lehet. A havi frissítés ezeket is feldolgozza.</p>
+        <label>Mi a jel? <input type="text" id="sTitle" required maxlength="160" placeholder="pl. Egyre több AI-generált gyerekmese-app a toplistán"></label>
+        <label>Link (nem kötelező) <input type="url" id="sUrl" maxlength="500" placeholder="https://…"></label>
+        <label>Terület <select id="sArea"></select></label>
+        <label>Megjegyzés <textarea id="sNote" maxlength="2000" placeholder="Mit láttál, miért érdekes, kapcsolódik-e valamelyik trendhez?"></textarea></label>
+        <div class="row"><button class="btn primary" type="submit" id="sSave">Jel mentése</button><span class="muted" id="sMsg" style="font-size:13px"></span></div>
+      </form>
+      <div>
+        <div class="listhead"><h2>Beküldött jelek</h2><select id="sFilter" aria-label="Jelek szűrése"><option value="all">Mind</option><option value="uj">Új</option><option value="feldolgozva">Feldolgozva</option><option value="elvetve">Elvetve</option></select></div>
+        <div class="cards" id="sigList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="v-valtozasok" class="vwrap view" hidden></section>
+  <section id="v-naptar" class="vwrap view" hidden></section>
+
+  <section id="v-modszertan" class="vwrap view prose" hidden>
+    <h2>Hogyan kerül valami a radarra</h2>
+    <p>Egy megfigyelés akkor lesz trend, ha legalább <b>három független forrás</b> támasztja alá, és ezek közül legalább kettő <b>különböző típusú</b>: például egy piaci adat (letöltés, eladás, bevétel), egy pénzmozgás (befektetés, felvásárlás, nagy szerződés) és egy kulturális vagy szabályozási jel. Egyetlen cikk vagy egyetlen cég bejelentése csak <i>jel</i>, amit a Saját jelek fülön érdemes rögzíteni.</p>
+    <h2>Érettségi gyűrűk</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Gyűrű</th><th>Mikor kerül ide</th><th>Tipikus bizonyíték</th></tr>
+      <tr><td>Gyenge jel</td><td>Kutatás, prototípus, egy-két úttörő</td><td>Elemzői lista, kutatási cikk, első demó</td></tr>
+      <tr><td>Felfutó</td><td>Konkrét befektetések és első valós bevezetések</td><td>Finanszírozási kör, pilot, első fizető ügyfelek</td></tr>
+      <tr><td>Gyorsul</td><td>Mérhető, gyors növekedés, valós bevétel</td><td>Kétszámjegyű negyedéves növekedés, toplistás termékek</td></tr>
+      <tr><td>Fősodor</td><td>Széles körben jelen van, a kérdés a mérték</td><td>Tömeges használat, szabályozás, nagy szereplők mind benne vannak</td></tr>
+    </table></div>
+    <h2>Hatás (1–3)</h2>
+    <p><b>●○○</b> egy iparágat vagy szűk réteget érint. <b>●●○</b> több iparágat vagy egy nagy fogyasztói csoportot alakít át. <b>●●●</b> a gazdaság, a munka vagy a mindennapi élet egészére hat a következő 3–5 évben.</p>
+    <h2>Lendület</h2>
+    <p>Minden havi frissítés összeveti a trendet az előző kiadással. <b>ÚJ</b>: most került fel. <b>↑</b>: belsőbb gyűrűbe lépett vagy nőtt a hatása. <b>↓</b>: kifelé mozdult, vagy a friss adatok gyengülést mutatnak. <b>→</b>: nincs érdemi változás. A trend lapján az előzmények is látszanak.</p>
+    <h2>Havi rutin</h2>
+    <h3>Automatikusan (ütemezett feladat, minden hónap elején)</h3>
+    <ol>
+      <li>A Jelentésnaptár aktuális havi jelentéseinek és a figyelt források átnézése.</li>
+      <li>A Saját jelek fülön beküldött új jelek értékelése: beépítés meglévő trendbe, új trend nyitása vagy elvetés indoklással.</li>
+      <li>A követett trendekhez friss számok és események keresése elsőként.</li>
+      <li>Gyűrű, hatás, lendület és előzmények frissítése, új bejegyzés a Változások fülön.</li>
+      <li>Rövid összefoglaló üzenet arról, mi változott és mi érinti a követett trendeket.</li>
+    </ol>
+    <h3>Kézzel (havonta 15 perc)</h3>
+    <ol>
+      <li>Olvasd át a Változások fület, és állítsd át a követési állapotokat.</li>
+      <li>Rögzíts minden érdekes jelet, amivel a hónapban találkoztál, akkor is, ha bizonytalan.</li>
+      <li>Ha egy trendre építeni kezdesz, jelöld „Építek rá” állapotra: a frissítés ezekhez külön figyel versenytársakra és számokra.</li>
+    </ol>
+    <h2>Korlátok</h2>
+    <p>Az érettség és a hatás szerkesztői becslés. Az előrejelzések a forrásuk véleményét tükrözik, a számokat érdemes a linkelt eredetiben ellenőrizni. A „Kérdezd Claude-ot” gombok a trend adatai és a modell saját tudása alapján válaszolnak, webes keresés nélkül.</p>
+  </section>
+
+  <footer id="foot">
+    Források: 2026 október végéig megjelent elemzői és iparági jelentések, sajtóanyagok és piaci adatok, trendenként linkelve. A gyűrű- és hatásbesorolás szerkesztői becslés.
+  </footer>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-modal="true" role="dialog" aria-labelledby="dTitle"></aside>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ================= data ================= */
+let D=null, CAL=null, T=[], RINGS={}, AREAS=[], AREA={};
+const STATUS=[["figyelem","Figyelem"],["vizsgalom","Vizsgálom"],["epitek","Építek rá"],["elengedtem","Elengedtem"]];
+const STATUSN=Object.fromEntries(STATUS);
+const RC={1:"--r1",2:"--r2",3:"--r3",4:"--r4"};
+const MOM={new:"ÚJ",up:"↑",down:"↓",stable:"→"};
+const MOMN={new:"új",up:"erősödik",down:"gyengül",stable:"változatlan"};
+const MONTHS=["január","február","március","április","május","június","július","augusztus","szeptember","október","november","december"];
+
+const st={q:"",areas:new Set(),rings:new Set(),indie:false,onlyWatch:false,opp:true,sort:"impact",hot:null,view:"radar",sigFilter:"all"};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm=s=>String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const imp=i=>"●".repeat(i)+"○".repeat(3-i);
+function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2400)}
+
+/* ================= storage: db when served by claude.ai, else browser ================= */
+const S={kind:"pending",watch:{},signals:[],canWrite:true,db:null,sample:null};
+const LS={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function useLocal(){S.kind="local";S.watch=LS.get("tr.watch",{});S.signals=LS.get("tr.signals",[]);refreshTracking()}
+async function initStore(){
+  const c=window.claude;
+  if(!c||typeof c.use!=="function"){useLocal();return}
+  let db=null,user=null,sample=null;
+  try{[db,user,sample]=await Promise.all([c.use("db"),c.use("user"),c.use("sample")])}catch(e){}
+  S.sample=sample||null;
+  if(!db){useLocal();renderAll();return}
+  S.db=db;S.kind="db";
+  try{const w=user?await user.can("data.write"):null;S.canWrite=w!==false}catch(e){}
+  db.collection("watch").onSnapshot(snap=>{const m={};snap.docs.forEach(d=>{m[d.id]=d.data()});S.watch=m;refreshTracking()},()=>{});
+  db.collection("signals").orderBy("created","desc").onSnapshot(snap=>{S.signals=snap.docs.map(d=>({id:d.id,...d.data()}));refreshTracking()},()=>{});
+  renderAll();
+}
+async function saveWatch(id,patch){
+  const cur={...(S.watch[id]||{}),...patch,updated:new Date().toISOString()};
+  const empty=!cur.status&&!(cur.note||"").trim();
+  if(S.kind==="db"){
+    try{const ref=S.db.doc("watch/"+id); if(empty)await ref.delete(); else await ref.set(cur)}
+    catch(e){toast(e&&e.code==="invalid_argument"?"Ehhez nincs írási jogod.":"Nem sikerült menteni, próbáld újra.");return false}
+  }else{ if(empty)delete S.watch[id]; else S.watch[id]=cur; LS.set("tr.watch",S.watch); refreshTracking() }
+  return true;
+}
+async function addSignal(sig){
+  const body={...sig,status:"uj",created:new Date().toISOString()};
+  if(S.kind==="db"){try{await S.db.collection("signals").add(body);return true}catch(e){toast(e&&e.code==="quota_exceeded"?"Megtelt a tárhely: törölj régi jeleket.":"Nem sikerült menteni.");return false}}
+  body.id="s"+Date.now().toString(36);S.signals=[body,...S.signals];LS.set("tr.signals",S.signals);refreshTracking();return true;
+}
+async function updSignal(id,patch){
+  if(S.kind==="db"){try{await S.db.doc("signals/"+id).update(patch)}catch(e){toast("Nem sikerült menteni.")}return}
+  S.signals=S.signals.map(s=>s.id===id?{...s,...patch}:s);LS.set("tr.signals",S.signals);refreshTracking();
+}
+async function delSignal(id){
+  if(S.kind==="db"){try{await S.db.doc("signals/"+id).delete()}catch(e){toast("Nem sikerült törölni.")}return}
+  S.signals=S.signals.filter(s=>s.id!==id);LS.set("tr.signals",S.signals);refreshTracking();
+}
+function storeNote(){
+  if(S.kind==="pending")return `<div class="notice">Mentett adatok betöltése…</div>`;
+  if(S.kind==="local")return `<div class="notice">Ebben a nézetben a követés és a jelek csak ebben a böngészőben mentődnek. A claude.ai-on megnyitott változat menti őket tartósan, és a havi frissítés is azokat olvassa.</div>`;
+  if(!S.canWrite)return `<div class="notice">Ezt a radart csak olvasni tudod; a követést és a jeleket a tulajdonos szerkeszti.</div>`;
+  return "";
+}
+
+/* ================= ask Claude (sample) ================= */
+function mdLite(txt){
+  const lines=esc(txt).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").split(/\n/);
+  let h="",inList=false;
+  for(const l of lines){
+    const m=l.match(/^\s*(?:[-*•]|\d+[.)])\s+(.*)/);
+    if(m){if(!inList){h+="<ul>";inList=true}h+=`<li>${m[1]}</li>`;continue}
+    if(inList){h+="</ul>";inList=false}
+    const hd=l.match(/^#{1,4}\s+(.*)/);
+    if(hd)h+=`<p><strong>${hd[1]}</strong></p>`; else if(l.trim())h+=`<p>${l}</p>`;
+  }
+  return h+(inList?"</ul>":"");
+}
+const ASKS={
+  otletek:{label:"Ötletek appra, tartalomra",task:"Adj 4 konkrét termék- vagy tartalomötletet egy egyedül dolgozó indie mobilfejlesztőnek és rövid ismeretterjesztő videókat készítő creatornak, aki erre a trendre építene. Mindegyikhez: egy mondat, mit csinál; miért most; a legnagyobb kockázat."},
+  kockazat:{label:"Ellenérvek, kockázatok",task:"Mi szól a trend ellen? Sorold fel a legerősebb ellenérveket és kockázatokat, és írd le, milyen jel bizonyítaná, hogy túlértékelt."},
+  figyeld:{label:"Mit figyeljek?",task:"Milyen 3–5 mérhető jelet figyeljek a következő 6 hónapban, ami megmutatja, hogy a trend gyorsul vagy lassul? Mindegyikhez írd meg, hol és hogyan lehet követni."}
+};
+async function askClaude(prompt,out,btns){
+  if(!S.sample)return;
+  btns.forEach(b=>b.disabled=true);out.hidden=false;out.innerHTML=`<p class="muted">Gondolkodik…</p>`;
+  try{
+    const r=await S.sample(prompt,{modelTier:"default",onText:({text})=>{out.innerHTML=mdLite(text)}});
+    out.innerHTML=mdLite(r.text)+`<p class="muted" style="font-size:12px">Claude válasza a radar adatai és saját tudása alapján, webes keresés nélkül.</p>`;
+    return r.text;
+  }catch(e){
+    out.innerHTML=`<p class="muted">${e&&e.code==="rate_limited"?"Túl sok kérés egymás után. Várj egy percet, és próbáld újra.":e&&e.code==="not_granted"?"Ebben a nézetben Claude nem érhető el.":"Nem sikerült választ kapni. Próbáld újra később."}</p>`;
+  }finally{btns.forEach(b=>b.disabled=false)}
+}
+function trendPrompt(t,key){
+  const data={cim:t.title,terulet:AREA[t.area].name,erettseg:RINGS[t.ring].name,hatas:t.impact,idotav:t.horizon,osszefoglalo:t.summary,szamok:t.figures,miert:t.why,lehetoseg:t.opportunity,elso_felvetel:t.firstSeen,radar_kiadas:D.updated};
+  return `Trendelemző asszisztens vagy. Magyarul válaszolj, legfeljebb kb. 220 szóban, rövid listákkal, bevezető és zárszó nélkül. Ne találj ki számokat; ha bizonytalan vagy, mondd ki.\n\nA trend adatai (JSON):\n${JSON.stringify(data)}\n\nFeladat: ${ASKS[key].task}`;
+}
+function signalPrompt(s){
+  const list=T.map(t=>`${t.id}: ${t.title} [${AREA[t.area].short}, ${RINGS[t.ring].name}]`).join("\n");
+  return `Trendelemző asszisztens vagy egy trendradarhoz. Magyarul válaszolj, legfeljebb kb. 180 szóban, rövid listával.\n\nA radar módszertana: egy megfigyelés akkor trend, ha legalább 3 független, legalább 2 különböző típusú forrás támasztja alá (piaci adat, pénzmozgás, kulturális vagy szabályozási jel). Gyűrűk: 1 Gyenge jel, 2 Felfutó, 3 Gyorsul, 4 Fősodor. Hatás 1–3.\n\nA radar jelenlegi trendjei:\n${list}\n\nAz értékelendő jel:\nCím: ${s.title}\nLink: ${s.url||"nincs"}\nTerület: ${AREA[s.area]?.name||"nem megadott"}\nMegjegyzés: ${s.note||"nincs"}\n\nÉrtékeld: 1) melyik meglévő trendhez kapcsolódik (id), vagy új trend lehet-e; 2) javasolt gyűrű és hatás indoklással; 3) milyen további bizonyíték kellene a megerősítéshez.`;
+}
+
+/* ================= filtering ================= */
+function match(t){
+  if(st.areas.size&&!st.areas.has(t.area))return false;
+  if(st.rings.size&&!st.rings.has(t.ring))return false;
+  if(st.indie&&!t.indie)return false;
+  if(st.onlyWatch&&!S.watch[t.id]?.status)return false;
+  if(st.q){const q=norm(st.q).split(/\s+/).filter(Boolean);if(!q.every(w=>t.hay.includes(w)))return false}
+  return true;
+}
+function sorted(list){
+  const ai=Object.fromEntries(AREAS.map((a,i)=>[a.id,i]));
+  const f={impact:(a,b)=>b.impact-a.impact||b.ring-a.ring,ring:(a,b)=>b.ring-a.ring||b.impact-a.impact,signal:(a,b)=>a.ring-b.ring||b.impact-a.impact,area:(a,b)=>ai[a.area]-ai[b.area]||b.ring-a.ring}[st.sort];
+  return [...list].sort(f);
+}
+
+/* ================= header, chips ================= */
+function renderStats(){
+  const srcs=new Set(T.flatMap(t=>t.sources.map(s=>{try{return new URL(s.url).host}catch(e){return s.url}})));
+  const watched=Object.values(S.watch).filter(w=>w.status&&w.status!=="elengedtem").length;
+  $("#stats").innerHTML=[[T.length,"trend"],[AREAS.length,"terület"],[srcs.size,"forrásoldal"],[watched,"követett"]]
+   .map(([b,s])=>`<div class="stat"><b class="mono">${b}</b><span>${s}</span></div>`).join("");
+  const d=new Date(D.updated);
+  $("#edition").textContent=`Globális trendfelderítés · ${D.edition} kiadás · frissítve ${d.getFullYear()}. ${MONTHS[d.getMonth()]} ${d.getDate()}.`;
+}
+function renderChips(){
+  $("#ringChips").innerHTML=[4,3,2,1].map(r=>`<button class="chip" data-ring="${r}" aria-pressed="${st.rings.has(r)}" title="${esc(RINGS[r].desc)}"><span class="dot" style="background:var(${RC[r]})"></span>${esc(RINGS[r].name)} <small>${T.filter(t=>t.ring===r).length}</small></button>`).join("");
+  $("#areaChips").innerHTML=AREAS.map(a=>`<button class="chip" data-area="${a.id}" aria-pressed="${st.areas.has(a.id)}">${esc(a.name)} <small>${T.filter(t=>t.area===a.id).length}</small></button>`).join("");
+}
+
+/* ================= radar ================= */
+const C=360,R={4:88,3:160,2:225,1:290},Rin={4:0,3:88,2:160,1:225};
+function layout(){
+  const step=2*Math.PI/AREAS.length;
+  AREAS.forEach((a,ai)=>{
+    const a0=-Math.PI/2+ai*step;
+    for(const r of [1,2,3,4]){
+      const items=T.filter(t=>t.area===a.id&&t.ring===r);
+      items.forEach((t,j)=>{
+        const ang=a0+step*(0.12+0.76*((j+1)/(items.length+1)));
+        const inner=Rin[r]+(r===4?28:14),outer=R[r]-14;
+        const rad=items.length>2?(j%2?inner+(outer-inner)*.72:inner+(outer-inner)*.28):(inner+outer)/2;
+        t.x=C+Math.cos(ang)*rad;t.y=C+Math.sin(ang)*rad;
+      });
+    }
+  });
+}
+function renderRadar(){
+  const step=2*Math.PI/AREAS.length;
+  let s=`<defs><radialGradient id="sw" cx="0" cy="0" r="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".22"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></radialGradient></defs>`;
+  [1,2,3,4].forEach(r=>s+=`<circle cx="${C}" cy="${C}" r="${R[r]}" fill="none" stroke="var(--grid)" stroke-width="${r===4?1.5:1}"/>`);
+  s+=`<path class="sweep" d="M${C} ${C} L${C} ${C-R[1]} A${R[1]} ${R[1]} 0 0 1 ${(C+R[1]*Math.sin(.5)).toFixed(1)} ${(C-R[1]*Math.cos(.5)).toFixed(1)} Z" fill="url(#sw)" opacity=".7" pointer-events="none"/>`;
+  AREAS.forEach((a,i)=>{
+    const ang=-Math.PI/2+i*step;
+    s+=`<line x1="${C}" y1="${C}" x2="${(C+Math.cos(ang)*R[1]).toFixed(1)}" y2="${(C+Math.sin(ang)*R[1]).toFixed(1)}" stroke="var(--grid)" stroke-dasharray="2 4"/>`;
+    const m=ang+step/2,lx=C+Math.cos(m)*(R[1]+30),ly=C+Math.sin(m)*(R[1]+30);
+    const anchor=Math.abs(Math.cos(m))<.25?"middle":(Math.cos(m)>0?"start":"end");
+    s+=`<text class="sector-label${st.areas.has(a.id)?" on":""}" data-area="${a.id}" x="${lx.toFixed(1)}" y="${(ly+4).toFixed(1)}" text-anchor="${anchor}">${esc(a.short)}</text>`;
+  });
+  [4,3,2,1].forEach(r=>s+=`<text class="ring-label" x="${C+4}" y="${C-R[r]+12}">${esc(RINGS[r].name)}</text>`);
+  T.forEach(t=>{
+    const on=match(t),rad=5+t.impact*2.6,w=S.watch[t.id]?.status&&S.watch[t.id].status!=="elengedtem";
+    s+=`<g class="blip${on?"":" dim"}${st.hot===t.id?" hot":""}" data-id="${t.id}" tabindex="${on?0:-1}" role="button" aria-label="${esc(t.title)}"><title>${esc(t.title)}</title><circle cx="${t.x.toFixed(1)}" cy="${t.y.toFixed(1)}" r="${rad}" fill="var(${RC[t.ring]})"/>${w?`<circle class="watch" cx="${t.x.toFixed(1)}" cy="${t.y.toFixed(1)}" r="${rad+4}"/>`:""}${t.impact>1?`<text x="${t.x.toFixed(1)}" y="${(t.y+3).toFixed(1)}" text-anchor="middle">${t.k}</text>`:""}</g>`;
+  });
+  $("#radarSvg").innerHTML=s;
+  $("#legend").innerHTML=[4,3,2,1].map(r=>`<span><i style="background:var(${RC[r]})"></i>${esc(RINGS[r].name)}</span>`).join("")+`<span>Pontméret = becsült hatás · szaggatott gyűrű = követett · szám = sorszám</span>`;
+}
+
+/* ================= cards ================= */
+function cardHTML(t){
+  const w=S.watch[t.id];
+  return `<button class="card${st.hot===t.id?" hot":""}" data-id="${t.id}">
+    <span class="num mono">${String(t.k).padStart(2,"0")}</span>
+    <h3>${esc(t.title)}</h3>
+    <div class="meta"><span class="pill" style="color:var(${RC[t.ring]})">${esc(RINGS[t.ring].name)}</span><span>${esc(AREA[t.area].name)}</span><span class="imp" title="Becsült hatás">${imp(t.impact)}</span><span class="mom" title="Lendület: ${MOMN[t.momentum]||""}">${MOM[t.momentum]||""}</span>${w?.status?`<span class="pill st">${esc(STATUSN[w.status])}</span>`:""}</div>
+    <p>${esc(t.summary)}</p>
+    ${t.figures[0]?`<div class="keynum"><b>${esc(t.figures[0].value)}</b><span>${esc(t.figures[0].label)}</span></div>`:""}
+    ${st.opp&&t.opportunity?`<div class="opp"><b>Lehetőség</b>${esc(t.opportunity)}</div>`:""}
+  </button>`;
+}
+function renderCards(){
+  const list=sorted(T.filter(match));
+  $("#count").textContent=`${list.length} / ${T.length} trend`;
+  $("#cards").innerHTML=list.length?list.map(cardHTML).join(""):`<div class="empty">${st.onlyWatch&&!Object.keys(S.watch).length?"Még nem követsz egy trendet sem. Nyiss meg egyet, és állíts be követési állapotot.":"Nincs a szűrőknek megfelelő trend. Próbálj kevesebb szűrőt vagy más kulcsszót."}</div>`;
+}
+
+/* ================= watch view ================= */
+function renderWatch(){
+  $("#storeNote1").innerHTML=storeNote();
+  const ids=Object.keys(S.watch).filter(id=>T.some(t=>t.id===id));
+  $("#bWatch").textContent=ids.filter(id=>S.watch[id].status&&S.watch[id].status!=="elengedtem").length;
+  if(!ids.length){$("#watchList").innerHTML=`<div class="empty">Még nem követsz egy trendet sem.<br>Nyiss meg egy trendet a Radar fülön, és válassz állapotot: Figyelem, Vizsgálom, Építek rá. A havi frissítés ezekhez keres először friss adatot.</div>`;return}
+  const groups=[...STATUS.map(s=>s[0]),""];
+  $("#watchList").innerHTML=groups.map(g=>{
+    const its=ids.filter(id=>(S.watch[id].status||"")===g).map(id=>T.find(t=>t.id===id));
+    if(!its.length)return "";
+    return `<div class="group"><h3 class="gh">${g?esc(STATUSN[g]):"Csak jegyzet"} · ${its.length}</h3><div class="cards">${its.map(t=>`
+      <div class="item"><div class="row" style="justify-content:space-between"><h3><a href="#t-${t.id}">${esc(t.title)}</a></h3><span class="mom" title="Lendület: ${esc(MOMN[t.momentum]||"")}">${MOM[t.momentum]||""}</span></div>
+      <div class="meta" style="grid-column:auto"><span class="pill" style="color:var(${RC[t.ring]})">${esc(RINGS[t.ring].name)}</span><span>${esc(AREA[t.area].name)}</span><span class="imp">${imp(t.impact)}</span></div>
+      ${S.watch[t.id].note?`<div class="note">${esc(S.watch[t.id].note)}</div>`:""}</div>`).join("")}</div></div>`;
+  }).join("");
+}
+function watchMarkdown(){
+  const ids=Object.keys(S.watch).filter(id=>T.some(t=>t.id===id));
+  return `# Követett trendek (${D.edition})\n\n`+ids.map(id=>{const t=T.find(x=>x.id===id),w=S.watch[id];return `- **${t.title}** — ${STATUSN[w.status]||"jegyzet"}; ${RINGS[t.ring].name}, hatás ${t.impact}/3${w.note?`\n  - ${w.note.replace(/\n/g," ")}`:""}`}).join("\n");
+}
+
+/* ================= signals view ================= */
+function renderSignals(){
+  $("#storeNote2").innerHTML=storeNote();
+  $("#bSig").textContent=S.signals.filter(s=>s.status==="uj").length;
+  const ro=S.kind==="db"&&!S.canWrite;
+  $("#sSave").disabled=ro||S.kind==="pending";
+  const list=S.signals.filter(s=>st.sigFilter==="all"||s.status===st.sigFilter);
+  const SN={uj:"Új",feldolgozva:"Feldolgozva",elvetve:"Elvetve"};
+  $("#sigList").innerHTML=list.length?list.map(s=>{
+    const d=s.created?new Date(s.created):null;
+    return `<div class="item" data-sig="${esc(s.id)}">
+      <div class="row" style="justify-content:space-between"><h3>${esc(s.title)}</h3><span class="pill st">${esc(SN[s.status]||s.status)}</span></div>
+      <div class="meta" style="grid-column:auto">${AREA[s.area]?`<span>${esc(AREA[s.area].name)}</span>`:""}${d?`<span class="mono">${d.toLocaleDateString("hu-HU")}</span>`:""}${s.url&&/^https?:\/\//.test(s.url)?`<a href="${esc(s.url)}" target="_blank" rel="noopener">link</a>`:""}${s.trendId&&AREA&&T.some(t=>t.id===s.trendId)?`<a href="#t-${esc(s.trendId)}">→ ${esc(T.find(t=>t.id===s.trendId).title)}</a>`:""}</div>
+      ${s.note?`<div class="note">${esc(s.note)}</div>`:""}
+      ${s.resolution?`<div class="note muted">Feldolgozás: ${esc(s.resolution)}</div>`:""}
+      ${s.eval?`<div class="ai-out">${mdLite(s.eval)}</div>`:`<div class="ai-out" hidden></div>`}
+      ${ro?"":`<div class="row">${S.sample&&!s.eval?`<button class="btn" data-eval="${esc(s.id)}">Értékelje Claude</button>`:""}${s.status!=="elvetve"?`<button class="btn" data-sstat="elvetve" data-id="${esc(s.id)}">Elvetem</button>`:`<button class="btn" data-sstat="uj" data-id="${esc(s.id)}">Visszaállítom</button>`}<button class="btn" data-sdel="${esc(s.id)}">Törlés</button></div>`}
+    </div>`}).join(""):`<div class="empty">${S.signals.length?"Ebben az állapotban nincs jel.":"Még nincs beküldött jel. Ha olvasol vagy látsz valamit, ami trend lehet, rögzítsd a bal oldali űrlapon."}</div>`;
+}
+
+/* ================= changes view ================= */
+function renderChanges(){
+  const by=k=>T.filter(t=>t.momentum===k);
+  const block=(k,title)=>{const l=by(k);return l.length?`<div class="panel" style="min-width:0"><h3 style="font-size:17px;margin-bottom:8px">${MOM[k]} ${title} <span class="count">${l.length}</span></h3><div class="row" style="gap:6px">${l.map(t=>`<a class="chip" href="#t-${t.id}">${esc(t.title)}</a>`).join("")}</div></div>`:""};
+  const watchedMoves=T.filter(t=>S.watch[t.id]?.status&&t.momentum!=="stable");
+  $("#v-valtozasok").innerHTML=`
+    <div class="listhead"><h2>Változások</h2><span class="count">Kiadás: ${esc(D.edition)}</span></div>
+    ${watchedMoves.length&&D.changelog.length>1?`<div class="notice">A követett trendjeid közül ${watchedMoves.length} mozdult a legutóbbi kiadásban.</div>`:""}
+    <div style="display:grid;gap:12px;margin-bottom:26px">${block("up","Erősödő")}${block("down","Gyengülő")}${block("new","Új a radaron")}</div>
+    <h2 style="font-size:20px;margin-bottom:12px">Kiadások</h2>
+    <div class="timeline">${[...D.changelog].reverse().map(c=>`<div class="entry"><div class="eyebrow">${esc(c.date)} · ${esc(c.edition)}</div><p style="margin:4px 0">${esc(c.summary)}</p><p class="muted" style="margin:0;font-size:13px">${c.added.length} új · ${c.moved.length} mozdult · ${c.removed.length} lekerült</p>${c.moved.length?`<ul style="margin:6px 0 0;font-size:14px">${c.moved.map(m=>`<li>${esc((T.find(t=>t.id===m.id)||{}).title||m.id)}: ${esc(m.note||"")}</li>`).join("")}</ul>`:""}</div>`).join("")}</div>`;
+}
+
+/* ================= calendar view ================= */
+function renderCalendar(){
+  const now=new Date().getMonth()+1,next=now%12+1;
+  const order=[...Array(12)].map((_,i)=>((now-1+i)%12)+1);
+  $("#v-naptar").innerHTML=`
+    <div class="listhead"><h2>Jelentésnaptár</h2><span class="count">${esc(CAL.note)}</span></div>
+    <p class="muted" style="max-width:70ch;margin-top:0">A nagy éves jelentések és események tipikus hónapja, a mostanitól kezdve. A havi frissítés ezeket nézi át elsőként.</p>
+    <div class="months">${order.map(m=>{const rs=CAL.reports.filter(r=>r.month===m);return `<div class="month${m===now?" now":""}"><h3>${MONTHS[m-1][0].toUpperCase()+MONTHS[m-1].slice(1)}${m===now?"<small>EZ A HÓNAP</small>":m===next?"<small>KÖVETKEZŐ</small>":""}</h3>${rs.length?`<ul>${rs.map(r=>`<li><b><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a></b> · ${esc(r.publisher)}<span>${esc(r.why)}</span></li>`).join("")}</ul>`:`<p class="muted" style="font-size:13px;margin:8px 0 0">Nincs kiemelt éves jelentés: jó hónap a folyamatos források átnézésére.</p>`}</div>`}).join("")}</div>
+    <h2 style="font-size:20px;margin:28px 0 10px">Folyamatosan figyelt források</h2>
+    <div class="months">${CAL.monitors.map(m=>`<div class="month"><h3 style="font-size:16px"><a href="${esc(m.url)}" target="_blank" rel="noopener">${esc(m.name)}</a></h3><p style="margin:6px 0 0;font-size:13.5px" class="muted">${esc(m.use)}</p></div>`).join("")}</div>`;
+}
+
+/* ================= drawer ================= */
+let lastFocus=null,curT=null;
+function openT(id){
+  const t=T.find(x=>x.id===id);if(!t)return;
+  curT=id;
+  const vis=sorted(T.filter(match)),pool=vis.some(x=>x.id===id)?vis:sorted(T);
+  const ix=pool.findIndex(x=>x.id===id),prev=pool[ix-1],next=pool[ix+1];
+  if($("#drawer").hidden)lastFocus=document.activeElement;
+  const w=S.watch[id]||{},ro=S.kind==="db"&&!S.canWrite;
+  const d=$("#drawer");
+  d.innerHTML=`<button class="btn close" id="close">Bezárás ✕</button>
+    <div class="eyebrow">${String(t.k).padStart(2,"0")} · ${esc(AREA[t.area].name)}</div>
+    <h2 id="dTitle">${esc(t.title)}</h2>
+    <div class="meta" style="margin-bottom:14px"><span class="pill" style="color:var(${RC[t.ring]})">${esc(RINGS[t.ring].name)}</span><span class="imp">${imp(t.impact)} hatás</span><span class="mom">${MOM[t.momentum]||""} ${esc(MOMN[t.momentum]||"")}</span><span class="mono">Időtáv: ${esc(t.horizon)}</span></div>
+    <p class="lead">${esc(t.summary)}</p>
+    <div class="trackbox">
+      <div class="row" style="justify-content:space-between"><b style="font-size:14px">Követés</b><span class="muted" style="font-size:12px">${S.kind==="local"?"ebben a böngészőben":S.kind==="db"?"mentve a radarhoz":""}</span></div>
+      <div class="row">${STATUS.map(([k,n])=>`<button class="chip" data-wst="${k}" aria-pressed="${w.status===k}" ${ro?"disabled":""}>${n}</button>`).join("")}</div>
+      <label class="muted" style="font-size:13px;display:grid;gap:4px">Saját jegyzet<textarea id="wNote" maxlength="3000" placeholder="Ötletek, kérdések, mit akarsz megnézni…" ${ro?"disabled":""}>${esc(w.note||"")}</textarea></label>
+    </div>
+    ${t.figures.length?`<h4>Számok</h4><div class="figs">${t.figures.map(x=>`<div class="fig"><b>${esc(x.value)}</b><span>${esc(x.label)}</span></div>`).join("")}</div>`:""}
+    <h4>Miért most</h4><p>${esc(t.why)}</p>
+    ${t.opportunity?`<h4>Lehetőség${t.indie?" indie fejlesztőknek, creatoroknak":""}</h4><div class="opp" style="margin:0">${esc(t.opportunity)}</div>`:""}
+    ${S.sample?`<h4>Kérdezd Claude-ot</h4><div class="row" id="askRow">${Object.entries(ASKS).map(([k,a])=>`<button class="btn" data-ask="${k}">${a.label}</button>`).join("")}</div><div class="ai-out" id="askOut" hidden style="margin-top:10px"></div>`:""}
+    <h4>Előzmények</h4><div class="timeline">${[...t.history].reverse().map(h=>`<div class="entry"><span class="mono" style="font-size:12px">${esc(h.date)}</span> · ${esc(RINGS[h.ring].name)}, hatás ${h.impact}/3<br><span class="muted" style="font-size:13.5px">${esc(h.note)}</span></div>`).join("")}</div>
+    <h4>Források</h4><ul class="src">${t.sources.map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join("")}</ul>
+    <div class="nav">${prev?`<button class="btn" data-go="${prev.id}">← ${esc(prev.title)}</button>`:"<span></span>"}${next?`<button class="btn" data-go="${next.id}">${esc(next.title)} →</button>`:""}</div>`;
+  d.hidden=false;$("#scrim").hidden=false;d.scrollTop=0;$("#close").focus();
+  st.hot=id;renderRadar();document.querySelectorAll(".card").forEach(c=>c.classList.toggle("hot",c.dataset.id===id));
+  const nt=$("#wNote");let tm;
+  nt&&nt.addEventListener("input",()=>{clearTimeout(tm);tm=setTimeout(()=>saveWatch(id,{note:nt.value}),900)});
+  nt&&nt.addEventListener("blur",()=>{clearTimeout(tm);if((S.watch[id]?.note||"")!==nt.value)saveWatch(id,{note:nt.value})});
+}
+function closeT(){
+  const nt=$("#wNote");if(nt&&curT&&(S.watch[curT]?.note||"")!==nt.value)saveWatch(curT,{note:nt.value});
+  $("#drawer").hidden=true;$("#scrim").hidden=true;st.hot=null;curT=null;renderRadar();
+  document.querySelectorAll(".card.hot").forEach(c=>c.classList.remove("hot"));
+  if(location.hash.startsWith("#t-"))location.hash=st.view;
+  if(lastFocus&&lastFocus.focus)lastFocus.focus();
+}
+
+/* ================= routing ================= */
+const VIEWS=["radar","kovetett","jelek","valtozasok","naptar","modszertan"];
+function route(){
+  const h=location.hash.slice(1);
+  if(h.startsWith("t-")){if(T.length)openT(h.slice(2));return}
+  if(!$("#drawer").hidden){$("#drawer").hidden=true;$("#scrim").hidden=true;st.hot=null;curT=null}
+  st.view=VIEWS.includes(h)?h:"radar";
+  VIEWS.forEach(v=>{$("#v-"+v).hidden=v!==st.view});
+  document.querySelectorAll("nav.tabs a").forEach(a=>{if(a.dataset.view===st.view)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+}
+
+/* ================= render orchestration ================= */
+function refreshTracking(){if(!D)return;renderStats();renderRadar();renderCards();renderWatch();renderSignals();if(st.view==="valtozasok")renderChanges();
+  if(curT&&!$("#drawer").hidden){const w=S.watch[curT]||{};document.querySelectorAll("[data-wst]").forEach(b=>b.setAttribute("aria-pressed",String(w.status===b.dataset.wst)))}}
+function renderAll(){if(!D)return;renderStats();renderChips();renderRadar();renderCards();renderWatch();renderSignals();renderChanges();renderCalendar()}
+
+/* ================= events ================= */
+document.addEventListener("click",async e=>{
+  const ch=e.target.closest("button[data-ring]");
+  if(ch){const r=+ch.dataset.ring;st.rings.has(r)?st.rings.delete(r):st.rings.add(r);renderChips();renderRadar();renderCards();return}
+  const ar=e.target.closest("[data-area]");
+  if(ar&&!ar.closest("form")){const k=ar.dataset.area;st.areas.has(k)?st.areas.delete(k):st.areas.add(k);renderChips();renderRadar();renderCards();return}
+  const go=e.target.closest("[data-go]");if(go){location.hash="t-"+go.dataset.go;return}
+  if(e.target.id==="close"||e.target.id==="scrim"){closeT();return}
+  const ws=e.target.closest("[data-wst]");
+  if(ws&&curT){const cur=S.watch[curT]?.status;const ok=await saveWatch(curT,{status:cur===ws.dataset.wst?"":ws.dataset.wst,note:$("#wNote")?.value??S.watch[curT]?.note??""});if(ok)toast(cur===ws.dataset.wst?"Követés kikapcsolva":"Mentve: "+STATUSN[ws.dataset.wst]);return}
+  const ask=e.target.closest("[data-ask]");
+  if(ask&&curT){const t=T.find(x=>x.id===curT);askClaude(trendPrompt(t,ask.dataset.ask),$("#askOut"),[...document.querySelectorAll("[data-ask]")]);return}
+  const ev=e.target.closest("[data-eval]");
+  if(ev){const s=S.signals.find(x=>x.id===ev.dataset.eval);const box=ev.closest(".item").querySelector(".ai-out");const txt=await askClaude(signalPrompt(s),box,[ev]);if(txt)updSignal(s.id,{eval:txt});return}
+  const ss=e.target.closest("[data-sstat]");if(ss){updSignal(ss.dataset.id,{status:ss.dataset.sstat});return}
+  const sd=e.target.closest("[data-sdel]");
+  if(sd){if(sd.dataset.confirm){delSignal(sd.dataset.sdel)}else{sd.dataset.confirm="1";sd.textContent="Biztosan törlöd?";setTimeout(()=>{if(sd.isConnected){delete sd.dataset.confirm;sd.textContent="Törlés"}},3500)}return}
+  if(e.target.id==="copyWatch"){const md=watchMarkdown();try{await navigator.clipboard.writeText(md);toast("Lista a vágólapon")}catch(err){const ta=document.createElement("textarea");ta.value=md;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");toast("Lista a vágólapon")}catch(e2){toast("A másolás nem sikerült")}ta.remove()}return}
+  const it=e.target.closest(".card,.blip");if(it&&it.dataset.id&&!it.classList.contains("dim"))location.hash="t-"+it.dataset.id;
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&!$("#drawer").hidden)closeT();
+  if((e.key==="Enter"||e.key===" ")&&e.target.classList&&e.target.classList.contains("blip")){e.preventDefault();location.hash="t-"+e.target.dataset.id}
+});
+document.addEventListener("mouseover",e=>{const c=e.target.closest(".card");if(!c)return;document.querySelectorAll(".blip").forEach(b=>b.classList.toggle("hot",b.dataset.id===c.dataset.id||b.dataset.id===st.hot))});
+$("#q").addEventListener("input",e=>{st.q=e.target.value;renderRadar();renderCards()});
+$("#sort").addEventListener("change",e=>{st.sort=e.target.value;renderCards()});
+$("#indie").addEventListener("change",e=>{st.indie=e.target.checked;renderRadar();renderCards()});
+$("#onlyWatch").addEventListener("change",e=>{st.onlyWatch=e.target.checked;renderRadar();renderCards()});
+$("#opp").addEventListener("change",e=>{st.opp=e.target.checked;renderCards()});
+$("#sFilter").addEventListener("change",e=>{st.sigFilter=e.target.value;renderSignals()});
+$("#sigForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const title=$("#sTitle").value.trim();if(!title){$("#sMsg").textContent="Adj meg egy rövid címet.";return}
+  const url=$("#sUrl").value.trim();if(url&&!/^https?:\/\//.test(url)){$("#sMsg").textContent="A link http:// vagy https:// kezdetű legyen.";return}
+  $("#sSave").disabled=true;
+  const ok=await addSignal({title,url,area:$("#sArea").value,note:$("#sNote").value.trim()});
+  $("#sSave").disabled=false;
+  if(ok){$("#sigForm").reset();$("#sMsg").textContent="";toast("Jel elmentve")}
+});
+window.addEventListener("hashchange",route);
+
+/* ================= boot ================= */
+(async()=>{
+  try{
+    const [d,c]=await Promise.all([fetch("data/trends.json").then(r=>{if(!r.ok)throw 0;return r.json()}),fetch("data/calendar.json").then(r=>r.ok?r.json():{note:"",reports:[],monitors:[]})]);
+    D=d;CAL=c;
+  }catch(e){
+    $("#cards").innerHTML=`<div class="empty">A trendadatok nem töltődtek be. Ha a fájlt közvetlenül nyitottad meg a gépeden, indíts egy helyi szervert a mappában (például: <span class="mono">python3 -m http.server</span>), vagy használd a GitHub Pages-en közzétett változatot.</div>`;return;
+  }
+  RINGS=D.rings;AREAS=D.areas;AREA=Object.fromEntries(AREAS.map(a=>[a.id,a]));T=D.trends;
+  T.forEach((t,i)=>{t.k=i+1;t.hay=norm([t.title,t.summary,t.why,t.opportunity,AREA[t.area].name,t.figures.map(x=>x.value+" "+x.label).join(" ")].join(" "))});
+  $("#sArea").innerHTML=AREAS.map(a=>`<option value="${a.id}">${esc(a.name)}</option>`).join("");
+  layout();renderAll();route();
+  initStore();
+})();
+</script>
