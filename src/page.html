@@ -143,7 +143,7 @@ main.radar{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap
 aside.drawer{position:fixed;top:0;right:0;bottom:0;width:min(580px,100%);background:var(--surface);border-left:1px solid var(--line);z-index:20;overflow-y:auto;
   padding:calc(env(safe-area-inset-top,0px) + 22px) max(22px, env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 40px) 26px;box-shadow:-20px 0 50px rgba(0,0,0,.18)}
 .scrim{position:fixed;inset:0;background:rgba(10,18,15,.35);z-index:15}
-.drawer .close{position:sticky;top:0;float:right;z-index:1}
+.drawer .close{position:sticky;top:0;float:right;z-index:1;box-shadow:0 0 0 8px var(--surface)}
 .drawer h2{font-size:clamp(26px,3.5vw,34px);line-height:1.1;margin:10px 0 12px;clear:both}
 .drawer .lead{font-size:16px}
 .drawer h4{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px;font-weight:500}
@@ -153,6 +153,22 @@ aside.drawer{position:fixed;top:0;right:0;bottom:0;width:min(580px,100%);backgro
 .fig span{font-size:13px;color:var(--muted)}
 .drawer ul.src{padding-left:18px;margin:0;font-size:14px}
 .drawer ul.src a{word-break:break-word}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px}
+.dbox{border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-width:0}
+.dbox h5{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.dbox ul,.opp ul.acts{margin:0;padding-left:18px;font-size:14px;display:grid;gap:4px}
+.opp ul.acts{font-size:13.5px}
+.socstats{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.socstats .fig a{font-size:11.5px;color:var(--muted)}
+.plat{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.plat .item{align-content:start}
+.plat .item h3{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tr-up{color:var(--accent)}.tr-down{color:var(--warn)}.tr-stable{color:var(--muted)}.tr-new{color:var(--r1)}
+.tl{display:grid;gap:8px}
+.tl .entry{display:grid;grid-template-columns:7.5em 1fr;gap:10px;align-items:baseline;border-left:2px solid var(--line);padding-left:12px}
+.tl .entry.future{border-left-color:var(--accent)}
+.play{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.sec-h{font-size:20px;margin:28px 0 12px}
 .trackbox{border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:8px;background:var(--bg)}
 .nav{display:flex;justify-content:space-between;gap:10px;margin-top:26px}
 .nav button{max-width:48%;text-align:left;font-size:13px}
@@ -179,6 +195,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
 
   <nav class="tabs" aria-label="Nézetek">
     <a href="#radar" data-view="radar">Radar</a>
+    <a href="#social" data-view="social">Social média</a>
     <a href="#kovetett" data-view="kovetett">Követett <span class="badge" id="bWatch">0</span></a>
     <a href="#jelek" data-view="jelek">Saját jelek <span class="badge" id="bSig">0</span></a>
     <a href="#valtozasok" data-view="valtozasok">Változások</a>
@@ -238,6 +255,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
     </div>
   </section>
 
+  <section id="v-social" class="vwrap view" hidden></section>
   <section id="v-valtozasok" class="vwrap view" hidden></section>
   <section id="v-naptar" class="vwrap view" hidden></section>
 
@@ -286,7 +304,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-si
 
 <script>
 /* ================= data ================= */
-let D=null, CAL=null, T=[], RINGS={}, AREAS=[], AREA={};
+let D=null, CAL=null, SOC=null, T=[], RINGS={}, AREAS=[], AREA={};
 const STATUS=[["figyelem","Figyelem"],["vizsgalom","Vizsgálom"],["epitek","Építek rá"],["elengedtem","Elengedtem"]];
 const STATUSN=Object.fromEntries(STATUS);
 const RC={1:"--r1",2:"--r2",3:"--r3",4:"--r4"};
@@ -377,7 +395,7 @@ async function askClaude(prompt,out,btns){
   }finally{btns.forEach(b=>b.disabled=false)}
 }
 function trendPrompt(t,key){
-  const data={cim:t.title,terulet:AREA[t.area].name,erettseg:RINGS[t.ring].name,hatas:t.impact,idotav:t.horizon,osszefoglalo:t.summary,szamok:t.figures,miert:t.why,lehetoseg:t.opportunity,elso_felvetel:t.firstSeen,radar_kiadas:D.updated};
+  const data={cim:t.title,terulet:AREA[t.area].name,erettseg:RINGS[t.ring].name,hatas:t.impact,idotav:t.horizon,osszefoglalo:t.summary,szamok:t.figures,miert:t.why,lehetoseg:t.opportunity,hatter:t.deep?.context,hajtoerok:t.deep?.drivers,szereplok:t.deep?.players,figyelendo:t.deep?.signals,kockazatok:t.deep?.risks,elso_felvetel:t.firstSeen,radar_kiadas:D.updated};
   return `Trendelemző asszisztens vagy. Magyarul válaszolj, legfeljebb kb. 220 szóban, rövid listákkal, bevezető és zárszó nélkül. Ne találj ki számokat; ha bizonytalan vagy, mondd ki.\n\nA trend adatai (JSON):\n${JSON.stringify(data)}\n\nFeladat: ${ASKS[key].task}`;
 }
 function signalPrompt(s){
@@ -536,6 +554,26 @@ function renderCalendar(){
     <div class="months">${CAL.monitors.map(m=>`<div class="month"><h3 style="font-size:16px"><a href="${esc(m.url)}" target="_blank" rel="noopener">${esc(m.name)}</a></h3><p style="margin:6px 0 0;font-size:13.5px" class="muted">${esc(m.use)}</p></div>`).join("")}</div>`;
 }
 
+/* ================= social view ================= */
+function renderSocial(){
+  const el=$("#v-social");
+  const soc=sorted(T.filter(t=>t.area==="soc")).sort((a,b)=>b.impact-a.impact||b.ring-a.ring);
+  const TR={up:"↑ nő",down:"↓ csökken",stable:"→ stabil",new:"ÚJ"};
+  const today=new Date().toISOString().slice(0,10);
+  el.innerHTML=`
+    <div class="listhead"><h2>Social média</h2><span class="count">${soc.length} trend · frissítve ${esc(SOC?.updated||D.updated)}</span></div>
+    ${SOC?`<p class="muted" style="max-width:70ch;margin-top:0">${esc(SOC.intro)}</p>
+    <div class="socstats">${SOC.stats.map(s=>`<div class="fig"><b>${esc(s.value)}</b><span>${esc(s.label)}</span><br><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.source)}</a></div>`).join("")}</div>
+    <h2 class="sec-h">Platformok iránya</h2>
+    <div class="plat">${SOC.platforms.map(p=>`<div class="item"><h3>${esc(p.name)} <span class="mono tr-${p.trend}" style="font-size:12px">${TR[p.trend]||""}</span></h3><div class="note">${esc(p.note)}</div><div class="row" style="gap:6px">${p.trends.filter(id=>T.some(t=>t.id===id)).map(id=>`<a class="chip" href="#t-${id}">${esc(T.find(t=>t.id===id).title)}</a>`).join("")}</div></div>`).join("")}</div>
+    <h2 class="sec-h">Szabályváltozások idővonala</h2>
+    <div class="tl">${SOC.timeline.map(e=>`<div class="entry${e.date>=today?" future":""}"><span class="mono" style="font-size:13px">${esc(e.date)}</span><span>${esc(e.what)} · <a href="${esc(e.url)}" target="_blank" rel="noopener">forrás</a></span></div>`).join("")}</div>
+    <h2 class="sec-h">Gyakorlati irányelvek creatoroknak</h2>
+    <div class="play">${SOC.playbook.map(p=>`<div class="panel" style="padding:14px"><h3 style="font-size:16px;margin-bottom:6px">${esc(p.title)}</h3><p style="margin:0;font-size:14px">${esc(p.text)}</p></div>`).join("")}</div>`:""}
+    <h2 class="sec-h">Social media trendek</h2>
+    <div class="cards">${soc.map(cardHTML).join("")}</div>`;
+}
+
 /* ================= drawer ================= */
 let lastFocus=null,curT=null;
 function openT(id){
@@ -557,8 +595,10 @@ function openT(id){
       <label class="muted" style="font-size:13px;display:grid;gap:4px">Saját jegyzet<textarea id="wNote" maxlength="3000" placeholder="Ötletek, kérdések, mit akarsz megnézni…" ${ro?"disabled":""}>${esc(w.note||"")}</textarea></label>
     </div>
     ${t.figures.length?`<h4>Számok</h4><div class="figs">${t.figures.map(x=>`<div class="fig"><b>${esc(x.value)}</b><span>${esc(x.label)}</span></div>`).join("")}</div>`:""}
+    ${t.deep?`<h4>Háttér</h4>${t.deep.context.map(p=>`<p>${esc(p)}</p>`).join("")}`:""}
     <h4>Miért most</h4><p>${esc(t.why)}</p>
-    ${t.opportunity?`<h4>Lehetőség${t.indie?" indie fejlesztőknek, creatoroknak":""}</h4><div class="opp" style="margin:0">${esc(t.opportunity)}</div>`:""}
+    ${t.deep?`<div class="dgrid">${[["drivers","Hajtóerők"],["players","Kulcsszereplők, példák"],["signals","Figyelendő jelek"],["risks","Kockázatok, ellenérvek"]].filter(([k])=>t.deep[k]&&t.deep[k].length).map(([k,n])=>`<div class="dbox"><h5>${n}</h5><ul>${t.deep[k].map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>`:""}
+    ${t.opportunity||t.deep?.actions?.length?`<h4>Lehetőség, teendők${t.indie?" indie fejlesztőknek, creatoroknak":""}</h4><div class="opp" style="margin:0">${t.opportunity?`<p style="margin:0 0 6px">${esc(t.opportunity)}</p>`:""}${t.deep?.actions?.length?`<ul class="acts">${t.deep.actions.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`:""}</div>`:""}
     ${S.sample?`<h4>Kérdezd Claude-ot</h4><div class="row" id="askRow">${Object.entries(ASKS).map(([k,a])=>`<button class="btn" data-ask="${k}">${a.label}</button>`).join("")}</div><div class="ai-out" id="askOut" hidden style="margin-top:10px"></div>`:""}
     <h4>Előzmények</h4><div class="timeline">${[...t.history].reverse().map(h=>`<div class="entry"><span class="mono" style="font-size:12px">${esc(h.date)}</span> · ${esc(RINGS[h.ring].name)}, hatás ${h.impact}/3<br><span class="muted" style="font-size:13.5px">${esc(h.note)}</span></div>`).join("")}</div>
     <h4>Források</h4><ul class="src">${t.sources.map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></li>`).join("")}</ul>
@@ -578,7 +618,7 @@ function closeT(){
 }
 
 /* ================= routing ================= */
-const VIEWS=["radar","kovetett","jelek","valtozasok","naptar","modszertan"];
+const VIEWS=["radar","social","kovetett","jelek","valtozasok","naptar","modszertan"];
 function route(){
   const h=location.hash.slice(1);
   if(h.startsWith("t-")){if(T.length)openT(h.slice(2));return}
@@ -589,9 +629,9 @@ function route(){
 }
 
 /* ================= render orchestration ================= */
-function refreshTracking(){if(!D)return;renderStats();renderRadar();renderCards();renderWatch();renderSignals();if(st.view==="valtozasok")renderChanges();
+function refreshTracking(){if(!D)return;renderStats();renderRadar();renderCards();renderWatch();renderSignals();if(st.view==="valtozasok")renderChanges();if(st.view==="social")renderSocial();
   if(curT&&!$("#drawer").hidden){const w=S.watch[curT]||{};document.querySelectorAll("[data-wst]").forEach(b=>b.setAttribute("aria-pressed",String(w.status===b.dataset.wst)))}}
-function renderAll(){if(!D)return;renderStats();renderChips();renderRadar();renderCards();renderWatch();renderSignals();renderChanges();renderCalendar()}
+function renderAll(){if(!D)return;renderStats();renderChips();renderRadar();renderCards();renderWatch();renderSignals();renderChanges();renderCalendar();renderSocial()}
 
 /* ================= events ================= */
 document.addEventListener("click",async e=>{
@@ -638,13 +678,13 @@ window.addEventListener("hashchange",route);
 /* ================= boot ================= */
 (async()=>{
   try{
-    const [d,c]=await Promise.all([fetch("data/trends.json").then(r=>{if(!r.ok)throw 0;return r.json()}),fetch("data/calendar.json").then(r=>r.ok?r.json():{note:"",reports:[],monitors:[]})]);
-    D=d;CAL=c;
+    const [d,c,so]=await Promise.all([fetch("data/trends.json").then(r=>{if(!r.ok)throw 0;return r.json()}),fetch("data/calendar.json").then(r=>r.ok?r.json():{note:"",reports:[],monitors:[]}),fetch("data/social.json").then(r=>r.ok?r.json():null).catch(()=>null)]);
+    D=d;CAL=c;SOC=so;
   }catch(e){
     $("#cards").innerHTML=`<div class="empty">A trendadatok nem töltődtek be. Ha a fájlt közvetlenül nyitottad meg a gépeden, indíts egy helyi szervert a mappában (például: <span class="mono">python3 -m http.server</span>), vagy használd a GitHub Pages-en közzétett változatot.</div>`;return;
   }
   RINGS=D.rings;AREAS=D.areas;AREA=Object.fromEntries(AREAS.map(a=>[a.id,a]));T=D.trends;
-  T.forEach((t,i)=>{t.k=i+1;t.hay=norm([t.title,t.summary,t.why,t.opportunity,AREA[t.area].name,t.figures.map(x=>x.value+" "+x.label).join(" ")].join(" "))});
+  T.forEach((t,i)=>{t.k=i+1;t.hay=norm([t.title,t.summary,t.why,t.opportunity,AREA[t.area].name,t.figures.map(x=>x.value+" "+x.label).join(" "),t.deep?[...t.deep.context,...t.deep.drivers,...t.deep.players,...t.deep.signals,...t.deep.risks,...t.deep.actions].join(" "):""].join(" "))});
   $("#sArea").innerHTML=AREAS.map(a=>`<option value="${a.id}">${esc(a.name)}</option>`).join("");
   layout();renderAll();route();
   initStore();

@@ -21,6 +21,8 @@ python3 scripts/new_edition.py snapshot
 - **Gyűrű-változás nélküli lendület**: ha a friss adatok egyértelmű gyorsulást vagy lassulást mutatnak, de a gyűrű marad, add meg: `"_momentum": "up"` vagy `"down"`, és `"_note"`.
 - **Új trend**: csak ha legalább három független, legalább két különböző típusú forrás támasztja alá (piaci adat, pénzmozgás, kulturális vagy szabályozási jel). Az id kisbetűs, kötőjeles. A `history` lehet üres lista, a szkript kitölti.
 - **Lekerülő trend**: töröld a listából, ha elvesztette a relevanciáját vagy beolvadt egy másikba; a változásnapló rögzíti.
+- **Részletes elemzés**: minden trend `deep` mezője (`context` bekezdések, `drivers`, `players`, `signals`, `risks`, `actions`). Új trendnél kötelező, meglévőnél frissítsd, ha a háttér érdemben változott.
+- **Social média nézet** (`data/social.json`): frissítsd a kulcsszámokat (forrással), a platformok irányát és az idővonal közelgő dátumait; a lejárt idővonal-elemek maradhatnak.
 - **Feldolgozott jelek**: minden jelnél állítsd a `status` mezőt `feldolgozva` vagy `elvetve` értékre, írj rövid `resolution` szöveget, és ha trendhez kötötted, add meg a `trendId`-t.
 
 ## 4. Lezárás

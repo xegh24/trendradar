@@ -29,6 +29,11 @@ def urls() -> dict[str, list[str]]:
     c = json.loads((ROOT / "data/calendar.json").read_text(encoding="utf-8"))
     for r in c.get("reports", []) + c.get("monitors", []):
         found.setdefault(r["url"], []).append("naptár")
+    sp = ROOT / "data/social.json"
+    if sp.exists():
+        so = json.loads(sp.read_text(encoding="utf-8"))
+        for r in so.get("stats", []) + so.get("timeline", []):
+            found.setdefault(r["url"], []).append("social")
     return found
 
 

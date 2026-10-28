@@ -2,13 +2,14 @@
 
 Interaktív radar a kialakuló globális trendekről 12 területen: AI, hardver és deep tech, közösségi média, appok és játék, fogyasztói kultúra, egészség, étel és utazás, pénz, energia és klíma, munka és oktatás, mobilitás, makrogazdaság.
 
-Minden trendnél: érettség (gyenge jel → fősodor), becsült hatás, lendület (új / erősödik / gyengül), kulcsszámok, „miért most”, lehetőségek indie fejlesztőknek és creatoroknak, előzmények és források.
+Minden trendnél: részletes elemzés (háttér, hajtóerők, kulcsszereplők, figyelendő jelek, kockázatok, teendők), érettség (gyenge jel → fősodor), becsült hatás, lendület (új / erősödik / gyengül), kulcsszámok, „miért most”, lehetőségek indie fejlesztőknek és creatoroknak, előzmények és források.
 
 ## Mit tud a felület
 
 | Nézet | Mire jó |
 |---|---|
 | **Radar** | Radar-diagram és kártyák; szűrés terület, érettség, kulcsszó, indie-relevancia és követés szerint |
+| **Social média** | Kulcsszámok, platformok iránya, szabályváltozások idővonala, gyakorlati irányelvek creatoroknak és a social trendek |
 | **Követett** | A megjelölt trendek állapot szerint (Figyelem, Vizsgálom, Építek rá, Elengedtem) saját jegyzetekkel; másolható lista |
 | **Saját jelek** | Gyors rögzítés: amit olvasol vagy látsz és trend lehet; Claude értékelheti, a havi frissítés feldolgozza |
 | **Változások** | Erősödő, gyengülő és új trendek; kiadásonkénti változásnapló |
@@ -24,6 +25,7 @@ index.html              a kész oldal (src/page.html-ből építve)
 src/page.html           az oldal forrása (ezt kell szerkeszteni)
 data/trends.json        a trendek, előzmények és változásnapló
 data/calendar.json      jelentésnaptár és figyelt források
+data/social.json        a Social média nézet adatai (számok, platformok, idővonal)
 data/snapshots/         korábbi kiadások pillanatképei
 scripts/validate.py     adatellenőrzés (CI is futtatja)
 scripts/new_edition.py  havi kiadás: pillanatkép, lendület, változásnapló

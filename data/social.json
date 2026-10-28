@@ -1,0 +1,219 @@
+{
+  "updated": "2026-10-28",
+  "intro": "A közösségi média 2026 végén: hol van a figyelem, merre mozdulnak a platformok, és milyen szabályváltozások jönnek. A számok forrása minden sornál linkelve.",
+  "stats": [
+    {
+      "value": "5,81 Mrd",
+      "label": "közösségimédia-felhasználói identitás világszerte, a népesség 69,9%-a (+2,7% egy év alatt)",
+      "source": "Meltwater & We Are Social, Digital 2027",
+      "url": "https://www.meltwater.com/en/press-releases/digital-2027-report"
+    },
+    {
+      "value": "19 ó 18 p",
+      "label": "hetente ennyit tölt egy átlagos internetező közösségi médiával és online videóval (+3,8%)",
+      "source": "Digital 2027",
+      "url": "https://www.meltwater.com/en/press-releases/digital-2027-report"
+    },
+    {
+      "value": "1 ó 55 p",
+      "label": "napi átlagos idő aktív felhasználónként a TikTokon, a legtöbb az összes platform közül",
+      "source": "Digital 2027",
+      "url": "https://www.meltwater.com/en/press-releases/digital-2027-report"
+    },
+    {
+      "value": "−11,2%",
+      "label": "csökkent a weben töltött idő 24 hónap alatt; a figyelem a feedekbe, appokba és AI-felületekre költözik",
+      "source": "Digital 2027",
+      "url": "https://www.meltwater.com/en/press-releases/digital-2027-report"
+    },
+    {
+      "value": "3,24 Mrd",
+      "label": "aktív generatív AI-felhasználó (a népesség 38,9%-a, +57% egy év alatt)",
+      "source": "Digital 2027",
+      "url": "https://www.meltwater.com/en/press-releases/digital-2027-report"
+    },
+    {
+      "value": "13,4%",
+      "label": "a YouTube részesedése az amerikai tévénézésből (2026 április), első helyen",
+      "source": "Nielsen The Gauge, AdWave",
+      "url": "https://adwave.com/resources/youtube-tv-viewing-share-q2-2026"
+    },
+    {
+      "value": "200 Mrd",
+      "label": "napi YouTube Shorts-megtekintés",
+      "source": "YouTube, Forbes",
+      "url": "https://www.forbes.com/sites/gabrielalinzainescu/2026/08/11/youtube-doubles-the-monetization-bar-for-new-creators/"
+    },
+    {
+      "value": "$50,3 Mrd",
+      "label": "TikTok Shop globális forgalom 2026 első félévében (+92%)",
+      "source": "Momentum Works, Tubefilter",
+      "url": "https://www.tubefilter.com/2026/08/06/tiktok-shop-gross-merchandise-value-gmv-50-billion/"
+    }
+  ],
+  "platforms": [
+    {
+      "name": "YouTube",
+      "trend": "up",
+      "note": "A tévéképernyő és a hosszú formátum erősödik; 2027. február 1-jétől szigorúbb partnerprogram-küszöb az új csatornáknak.",
+      "trends": [
+        "youtube-tevekepernyo",
+        "youtube-monetizacio-2027",
+        "video-podcast"
+      ]
+    },
+    {
+      "name": "TikTok",
+      "trend": "up",
+      "note": "A legtöbb napi idő felhasználónként; erős kereső- és vásárlási funkció; az USA-ban új közös vállalat, újratanított algoritmus.",
+      "trends": [
+        "kozossegi-kereso",
+        "social-commerce",
+        "platform-fragmentacio"
+      ]
+    },
+    {
+      "name": "Instagram",
+      "trend": "stable",
+      "note": "A privát továbbküldés a legerősebb rangsorolási jel; 2026 áprilistól eredetiségi büntetés a fotókra és körhintákra is; „Your Algorithm” vezérlők.",
+      "trends": [
+        "privat-megosztas",
+        "ai-tartalomaradat"
+      ]
+    },
+    {
+      "name": "Threads",
+      "trend": "up",
+      "note": "Havi aktív felhasználók +21,3% egy év alatt (2026 jún.); csoportchatek.",
+      "trends": [
+        "platform-fragmentacio"
+      ]
+    },
+    {
+      "name": "X",
+      "trend": "down",
+      "note": "Havi aktív −3%, napi aktív −7% egy év alatt (2026 közepe).",
+      "trends": [
+        "platform-fragmentacio"
+      ]
+    },
+    {
+      "name": "Bluesky",
+      "trend": "down",
+      "note": "10,4 millió havi aktív mobilfelhasználó, a 2024-es csúcs fele; a protokoll (AT) viszont terjed.",
+      "trends": [
+        "platform-fragmentacio"
+      ]
+    },
+    {
+      "name": "Reddit",
+      "trend": "up",
+      "note": "130,3 millió napi aktív, +61% bevétel (2026 Q2); a keresők és AI-asszisztensek fő emberi forrása.",
+      "trends": [
+        "reddit-emberi-valasz"
+      ]
+    },
+    {
+      "name": "Roblox",
+      "trend": "down",
+      "note": "A kötelező életkor-ellenőrzés után 152 millióról 123 millióra esett a napi aktív felhasználó (2025 Q3 → 2026 Q2).",
+      "trends": [
+        "korhatar"
+      ]
+    },
+    {
+      "name": "LinkedIn",
+      "trend": "up",
+      "note": "Videós és creator-alapú B2B platformmá alakul (BrandLink, Top Voices 360, tévés hirdetés).",
+      "trends": [
+        "linkedin-video"
+      ]
+    },
+    {
+      "name": "AI-videó appok (Sora, Vibes)",
+      "trend": "new",
+      "note": "Csak AI-generált videókból álló feedek; a használat nő, a monetizáció és a közönség elfogadása még nyitott.",
+      "trends": [
+        "ai-videofolyam"
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2025-12-10",
+      "what": "Ausztrália: életbe lép a 16 év alattiak közösségimédia-tilalma",
+      "url": "https://www.al-monitor.com/originals/2026/06/factbox-australia-europe-countries-move-curb-childrens-social-media-access"
+    },
+    {
+      "date": "2026-01-07",
+      "what": "Roblox: világszerte arcalapú életkor-ellenőrzés a chathez",
+      "url": "https://www.nasdaq.com/press-release/roblox-requires-users-worldwide-age-check-access-chat-2026-01-07"
+    },
+    {
+      "date": "2026-01-22",
+      "what": "TikTok: bejelentik az amerikai közös vállalatot (USDS Joint Venture)",
+      "url": "https://www.aljazeera.com/news/2026/1/23/who-controls-tiktoks-us-platform-under-new-deal"
+    },
+    {
+      "date": "2026-04",
+      "what": "Instagram: az eredetiségi büntetés kiterjed a fotókra és körhinta-posztokra",
+      "url": "https://www.socialpilot.co/?p=563048"
+    },
+    {
+      "date": "2026-04-24",
+      "what": "Törökország: a parlament elfogadja a 15 év alattiak tiltását",
+      "url": "https://www.al-monitor.com/originals/2026/06/factbox-australia-europe-countries-move-curb-childrens-social-media-access"
+    },
+    {
+      "date": "2026-06-01",
+      "what": "Malajzia: 16 év alatt nem regisztrálhatók közösségimédia-fiókok",
+      "url": "https://www.al-monitor.com/originals/2026/06/factbox-australia-europe-countries-move-curb-childrens-social-media-access"
+    },
+    {
+      "date": "2026-08-02",
+      "what": "EU AI Act: életbe lépnek az átláthatósági (AI-tartalom jelölési) kötelezettségek",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+    },
+    {
+      "date": "2027-01-31",
+      "what": "YouTube: a meglévő partnereknek eddig kell elfogadniuk az új feltételeket",
+      "url": "https://www.forbes.com/sites/gabrielalinzainescu/2026/08/11/youtube-doubles-the-monetization-bar-for-new-creators/"
+    },
+    {
+      "date": "2027-02-01",
+      "what": "YouTube: duplázott partnerprogram-küszöb az új jelentkezőknek (8 000 óra / 20 M Shorts)",
+      "url": "https://www.forbes.com/sites/gabrielalinzainescu/2026/08/11/youtube-doubles-the-monetization-bar-for-new-creators/"
+    },
+    {
+      "date": "2027",
+      "what": "Android: csak ellenőrzött fejlesztők appjai telepíthetők tanúsított telefonokon (világszerte)",
+      "url": "https://onirealms.com/guides/mobile-gaming-trends-2027/"
+    }
+  ],
+  "playbook": [
+    {
+      "title": "Továbbküldhetőség",
+      "text": "Minden videóban legyen egy „ezt el kell küldenem valakinek” pillanat: a privát megosztás ma a legerősebb terjesztési jel."
+    },
+    {
+      "title": "Kereshető cím",
+      "text": "A cím, az első mondat és a képernyőszöveg fogalmazzon meg egy konkrét kérdést, amire az emberek rákeresnek."
+    },
+    {
+      "title": "Felismerhető saját elem",
+      "text": "Visszatérő karakter, hang és vizuális stílus: ez különböztet meg az AI-tömegtartalomtól, és a platformok eredetiségi szabályai is ezt jutalmazzák."
+    },
+    {
+      "title": "Rövidből hosszú",
+      "text": "Fűzd össze a rövid videókat 8–12 perces válogatássá: a nézési idő a hosszú formátumon gyűlik, és a tévén is nézik."
+    },
+    {
+      "title": "Bevétel a hirdetésen túl",
+      "text": "Affiliate, digitális termék, rajongói támogatás és a saját appok keresztpromóciója, különösen 2027 februárja után."
+    },
+    {
+      "title": "Gyerekközönség",
+      "text": "Szigorodó korhatár-szabályok: pontos „gyerekeknek szóló” jelölés, adatgyűjtés nélkül, szülőbarát tartalom."
+    }
+  ]
+}

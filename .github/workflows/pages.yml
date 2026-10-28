@@ -26,7 +26,7 @@ jobs:
         run: |
           mkdir -p _site/data
           cp index.html _site/
-          cp data/trends.json data/calendar.json _site/data/
+          cp data/trends.json data/calendar.json data/social.json _site/data/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

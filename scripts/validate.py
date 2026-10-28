@@ -78,6 +78,15 @@ def check_trends(d: dict) -> None:
                 err(f"{where}: érvénytelen vagy nem https forrás: {s.get('url')}")
             if not s.get("title"):
                 err(f"{where}: forrás cím nélkül")
+        deep = t.get("deep")
+        if deep is None:
+            warnings.append(f"{where}: nincs részletes elemzés (deep)")
+        else:
+            if not isinstance(deep.get("context"), list) or not deep["context"]:
+                err(f"{where}: deep.context legyen nem üres bekezdéslista")
+            for key in ("drivers", "players", "signals", "risks", "actions"):
+                if not isinstance(deep.get(key), list):
+                    err(f"{where}: deep.{key} legyen lista")
         for f in t.get("figures", []):
             if not f.get("value") or not f.get("label"):
                 err(f"{where}: szám érték vagy címke nélkül")
@@ -114,6 +123,21 @@ def check_calendar(c: dict, area_ids: set) -> None:
             err(f"calendar.monitors[{i}]: érvénytelen url")
 
 
+def check_social(s: dict, trend_ids: set) -> None:
+    for i, st in enumerate(s.get("stats", [])):
+        if not st.get("value") or not URL.match(st.get("url", "")):
+            err(f"social.stats[{i}]: érték vagy url hiányzik")
+    for p in s.get("platforms", []):
+        if p.get("trend") not in ("up", "down", "stable", "new"):
+            err(f"social.platforms {p.get('name')}: trend értéke up/down/stable/new legyen")
+        for ref in p.get("trends", []):
+            if ref not in trend_ids:
+                err(f"social.platforms {p.get('name')}: ismeretlen trend '{ref}'")
+    for e in s.get("timeline", []):
+        if not URL.match(e.get("url", "")):
+            err(f"social.timeline {e.get('date')}: érvénytelen url")
+
+
 def main() -> int:
     try:
         trends = json.loads((ROOT / "data/trends.json").read_text(encoding="utf-8"))
@@ -123,6 +147,10 @@ def main() -> int:
         return 1
     check_trends(trends)
     check_calendar(calendar, {a["id"] for a in trends.get("areas", [])})
+    social_path = ROOT / "data/social.json"
+    if social_path.exists():
+        check_social(json.loads(social_path.read_text(encoding="utf-8")),
+                     {t["id"] for t in trends.get("trends", [])})
     for w in warnings:
         print(f"figyelmeztetés: {w}")
     for e in errors:

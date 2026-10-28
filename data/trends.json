@@ -1,6 +1,6 @@
 {
   "edition": "2026-10",
-  "updated": "2026-10-27",
+  "updated": "2026-10-28",
   "rings": {
     "1": {
       "name": "Gyenge jel",
@@ -126,7 +126,41 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "2024-ben az AI még főleg csevegőablak volt: kérdezel, válaszol. 2026-ra a hangsúly a feladatot önállóan végrehajtó ügynökökre került, amelyek eszközöket hívnak, fájlokat olvasnak, rendszerekbe írnak. A következő lépés, hogy nem egy, hanem több, szűk feladatra szakosodott ügynök dolgozik együtt egy koordináló ügynök alatt, ahogy egy kis csapat.",
+          "Ehhez szabványok kellettek: az MCP (Model Context Protocol) az ügynököket köti az adatforrásokhoz és eszközökhöz, az A2A az ügynököket egymáshoz. A cégeknél az ember szerepe a felügyelet lesz: célt ad, jóváhagyja a kockázatos lépéseket, ellenőriz. A Gartner ugyanakkor figyelmeztet, hogy sok ügynökprojekt elbukik, ha nincs mögötte tiszta folyamat és jó adat."
+        ],
+        "drivers": [
+          "Erősebb, eszközhasználatra tanított modellek",
+          "Nyílt protokollok (MCP, A2A)",
+          "A cégek nyomása a mérhető AI-megtérülésre",
+          "Csökkenő tokenárak"
+        ],
+        "players": [
+          "Anthropic (Claude, MCP)",
+          "OpenAI",
+          "Google (Gemini, A2A)",
+          "Microsoft Copilot",
+          "Salesforce Agentforce"
+        ],
+        "signals": [
+          "Mennyi ügynökprojekt jut el éles üzembe a pilotból",
+          "Megjelennek-e szabványos ügynök-piacterek",
+          "Az ügynökök hibáiból eredő incidensek és perek"
+        ],
+        "risks": [
+          "Hibák láncolata több ügynök között nehezen követhető",
+          "Túlzott jogosultságok és biztonsági rések",
+          "A várt megtakarítás elmaradhat (Gartner: csak kevés szervezet teljesíti túl a célját)"
+        ],
+        "actions": [
+          "A saját munkádban (számlázás, ügyféljelentés, tartalomgyártás) azonosíts 2–3 ismétlődő folyamatot, és építs rájuk ügynököt",
+          "Ügyfeleknek kínálhatsz szűk, egy folyamatra szabott ügynököt mint szolgáltatást",
+          "Tanuld meg az MCP-szerverek írását: ez lesz az integrációs munka új formája"
+        ]
+      }
     },
     {
       "id": "ugynok-identitas",
@@ -168,7 +202,36 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Ha egy ügynök önállóan küld e-mailt, fizet, vagy módosít egy adatbázist, kérdés, hogy kinek a nevében teszi, és milyen jogosultsággal. A régi rendszerek emberi felhasználókra és statikus jelszavakra épülnek, amelyeket az ügynökök gyakran megosztva, túl széles jogkörrel kapnak meg.",
+          "A Gartner 2027-es listáján ezért külön trend az ügynök-identitás: minden ügynök saját, ideiglenes, szabályzathoz kötött jogosultságot kap, és minden lépése visszakövethető. Mellette nő az „őr-ügynökök” piaca, amelyek más ügynököket figyelnek, és a hibák automatikus javítása (AER)."
+        ],
+        "drivers": [
+          "Az ügynökök gyors terjedése",
+          "Szabályozói elvárás az elszámoltathatóságra",
+          "Biztonsági incidensek"
+        ],
+        "players": [
+          "Okta, Microsoft Entra (identitás)",
+          "CrowdStrike, Palo Alto (biztonság)",
+          "Anthropic, OpenAI (ügynök-keretrendszerek)"
+        ],
+        "signals": [
+          "Szabványos ügynökazonosítási protokollok",
+          "Az első nagy, ügynökhöz köthető adatszivárgások",
+          "Biztosítók megjelenése AI-ügynök kockázatokra"
+        ],
+        "risks": [
+          "A biztonsági réteg lelassíthatja a bevezetést",
+          "Új, még nem ismert támadási felületek"
+        ],
+        "actions": [
+          "Saját fejlesztésben az ügynököknek adj külön, szűk jogosultságú API-kulcsot, ne a sajátodat",
+          "Naplózz minden ügynöki műveletet"
+        ]
+      }
     },
     {
       "id": "ai-fejleszto",
@@ -210,7 +273,40 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A kódolóügynökök 2026-ra képesek teljes funkciókat megírni, tesztelni és javítani, a fejlesztő pedig egyre inkább specifikál és ellenőriz. A Gartner szerint a szoftver a szűkösségből a bőség korába lép: a kódolás nem drága többé, a bizalom, a minőség és a terjesztés viszont igen.",
+          "Ennek mellékhatása, hogy elárasztják az appboltokat: a RevenueCat szerint az új előfizetéses appok száma 2022 óta hétszeresére nőtt, miközben a felhasználói kereslet és a megtartás nem tart lépést. A Gartner ezért „vezérlőkeretet” (harness) javasol: automatizált teszteket, ellenőrző lépéseket, amelyek nélkül a kézi ellenőrzés elnyeli a nyereséget."
+        ],
+        "drivers": [
+          "Kódolásra tanított modellek és ügynökök",
+          "Fejlesztői eszközök integrációja (IDE, terminál, CI)",
+          "A cégek költségcsökkentési nyomása"
+        ],
+        "players": [
+          "Claude Code",
+          "GitHub Copilot",
+          "Cursor",
+          "OpenAI Codex",
+          "Google Jules"
+        ],
+        "signals": [
+          "Mennyit változik a junior fejlesztői munkaerőpiac",
+          "Az AI-írta kód biztonsági hibáiról szóló kutatások",
+          "Appboltok minőségi szűrése az AI-appok áradata ellen"
+        ],
+        "risks": [
+          "Minőségi és biztonsági adósság a gyorsan generált kódban",
+          "Az appboltokban egyre nehezebb kitűnni",
+          "A tapasztalat megszerzése nehezebb, ha az AI írja a kódot"
+        ],
+        "actions": [
+          "Építs automatizált teszteket és ellenőrzést minden projekt köré, hogy az AI-kódot gyorsan validálhasd",
+          "A megkülönböztetést a niche-ben, a dizájnban és a terjesztésben keresd, ne a funkciók számában",
+          "Kis, gyors kísérletekkel (1–2 hetes MVP) teszteld az ötleteket a piacon"
+        ]
+      }
     },
     {
       "id": "eldobhato-appok",
@@ -243,7 +339,35 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Ha egy alkalmazás megírása napokba, nem hónapokba kerül, akkor nem érdemes évekig karbantartani. A Gartner ezért nevezte meg az „eldobható alkalmazásokat”: egy konkrét célra, rövid időre készülnek, és utána tudatosan kivezetik őket.",
+          "Ez átírja a szoftverbeszerzést és -költségvetést: a cégek nem nagy rendszereket vásárolnak, hanem célalkalmazások gyors sorát rendelik, például egy kampányhoz, eseményhez, egyszeri adatmigrációhoz."
+        ],
+        "drivers": [
+          "AI-alapú gyors fejlesztés",
+          "Low-code és no-code eszközök",
+          "A régi rendszerek karbantartási költségei"
+        ],
+        "players": [
+          "Gartner (fogalom)",
+          "Replit, Lovable, Bolt (gyors appépítők)",
+          "Microsoft Power Apps"
+        ],
+        "signals": [
+          "Megjelennek-e „app mint projekt” árazású szolgáltatások",
+          "A cégek IT-költségvetésének szerkezetváltása"
+        ],
+        "risks": [
+          "Biztonsági és adatkezelési rések a gyorsan épített appokban",
+          "Elszaporodó, nyilvántartatlan „árnyék” alkalmazások"
+        ],
+        "actions": [
+          "Ügyfeleknek kínálj fix áras, rövid életű célalkalmazást (esemény, kampány, belső eszköz)",
+          "Készíts magadnak újrahasznosítható sablonokat a gyors szállításhoz"
+        ]
+      }
     },
     {
       "id": "hang-ai",
@@ -272,7 +396,36 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A korábbi hangasszisztensek a beszédet szöveggé alakították, majd szövegként dolgozták fel, ezért elvesztették a hangsúlyt, érzelmet, a közbevágás lehetőségét. A közvetlenül hangon érvelő modellek a hanghullámmal dolgoznak, követik a beszélgetés menetét és szándékát, és valós időben reagálnak.",
+          "A Gartner szerint ez az ügyfélszolgálatban hozhat fordulatot, ahol a hang még mindig a legnagyobb volumenű csatorna. Fogyasztói oldalon a hangalapú tanulás, nyelvgyakorlás és a kéz nélküli eszközök (okosszemüveg) profitálnak."
+        ],
+        "drivers": [
+          "Natív hang-modellek",
+          "Okosszemüvegek és fülhallgatók",
+          "Ügyfélszolgálati költségnyomás"
+        ],
+        "players": [
+          "OpenAI (Realtime)",
+          "Google Gemini Live",
+          "ElevenLabs",
+          "Meta AI (szemüvegeken)"
+        ],
+        "signals": [
+          "Nyelvtanuló appok hangalapú gyakorlása",
+          "A hangalapú csalások (hangklónozás) elleni szabályozás"
+        ],
+        "risks": [
+          "Hangklónozásos csalások",
+          "Adatvédelem: folyamatos hallgatás"
+        ],
+        "actions": [
+          "Szótanító appban a kiejtés-gyakorlás és rövid hangos párbeszéd lehet megkülönböztető funkció",
+          "Nyelvfüggetlen játékokban a hangvezérlés akadálymentességi előny"
+        ]
+      }
     },
     {
       "id": "vilagmodellek",
@@ -305,7 +458,36 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A nyelvi modellek a szövegből tanulnak, a világmodellek a térből, időből és fizikából: megjósolják, mi történik egy jelenetben, ha egy tárgyat elmozdítanak. Ez kell ahhoz, hogy robotok, önvezető autók és ügynökök cselekvés előtt szimulálni tudják a következményeket.",
+          "A Gartner 2027-es listáján a „nem szöveges AI-határvidék” egyik fő eleme. A befektetések a robotikából, az önvezetésből és a térbeli számítástechnikából érkeznek, a szimulációs környezetek pedig játékmotorokra épülnek."
+        ],
+        "drivers": [
+          "Robotikai és önvezető befektetések",
+          "Szimulációs adatok és játékmotorok",
+          "Videógeneráló modellek mint világszimulátorok"
+        ],
+        "players": [
+          "NVIDIA (Cosmos, Omniverse)",
+          "Google DeepMind (Genie)",
+          "Meta (V-JEPA)",
+          "World Labs"
+        ],
+        "signals": [
+          "Humanoid robotok tanítása szimulációban",
+          "Játékmotoros cégek AI-partnerségei"
+        ],
+        "risks": [
+          "A szimuláció és a valóság közötti eltérés",
+          "Hosszú megtérülési idő"
+        ],
+        "actions": [
+          "Unity-tudással a robotikai szimuláció és tréningkörnyezet-építés új piac lehet",
+          "Ismeretterjesztő témaként jól magyarázható: hogyan tanulják a gépek a fizikát"
+        ]
+      }
     },
     {
       "id": "ugynoki-vasarlas",
@@ -342,7 +524,37 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Az ügynöki vásárlásban a felhasználó célt ad („foglalj egy hétvégi szállást Bécsben 100 euró alatt”), az ügynök pedig keres, összehasonlít, és fizet. A Google Maps ügynöke már ételt rendel és szállást foglal partnereken keresztül, a nagy AI-cégek pedig fizetési szolgáltatókkal építik a fizetési sínt.",
+          "A boltok számára ez azt jelenti, hogy nem embert, hanem algoritmust kell meggyőzni: a strukturált termékadat, a pontos ár és készlet, az API-elérés lesz az új keresőoptimalizálás. A stablecoinok a 24/7-es, programozható fizetés miatt kerülhetnek elő."
+        ],
+        "drivers": [
+          "Ügynökök eszközhasználata és böngészése",
+          "Fizetési szolgáltatók ügynöki fizetési protokolljai",
+          "Kényelmi igény"
+        ],
+        "players": [
+          "Google (Ask Maps, Gemini)",
+          "OpenAI (vásárlás a ChatGPT-ben)",
+          "Stripe, Visa, Mastercard",
+          "Shopify"
+        ],
+        "signals": [
+          "Ügynöki fizetési szabványok elfogadása",
+          "A webshopforgalomban megjelenő ügynöki látogatók aránya",
+          "Csalás- és visszatérítési szabályok ügynöki vásárlásra"
+        ],
+        "risks": [
+          "Hibás vagy nem kívánt vásárlások felelőssége",
+          "A kis boltok kiszorulhatnak, ha az ügynökök a nagy platformokat preferálják"
+        ],
+        "actions": [
+          "Az appjaid weboldalán legyen strukturált, géppel olvasható leírás (árazás, funkciók, GYIK)",
+          "Figyeld, hogyan ajánlják az AI-asszisztensek az appokat: ez az új appbolt-keresés"
+        ]
+      }
     },
     {
       "id": "szuverenitas",
@@ -380,7 +592,35 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A geopolitikai feszültségek, a vámok és az amerikai szabályozás kiszámíthatatlansága miatt az európai és ázsiai cégek egyre inkább olyan technológiát keresnek, amelyből bármikor ki tudnak lépni, és amelynek az adatai helyben maradnak.",
+          "A Gartner szerint 2030-ra a nem amerikai szervezetek háromnegyede szuverenitási stratégiát követ. Ez nyílt forráskódú modelleknek, európai felhőknek és helyben futtatható megoldásoknak kedvez."
+        ],
+        "drivers": [
+          "Geopolitika és vámháború",
+          "Uniós adatvédelmi és AI-szabályozás",
+          "Egyszolgáltatós függés kockázata"
+        ],
+        "players": [
+          "Mistral AI",
+          "OVHcloud, Hetzner, Scaleway",
+          "Az EU AI-gigagyárai",
+          "Nyílt modellek (Llama, Qwen, Mistral)"
+        ],
+        "signals": [
+          "Uniós közbeszerzési előírások szuverén megoldásokra",
+          "Európai AI-modellek piaci részesedése"
+        ],
+        "risks": [
+          "Az európai alternatívák drágábbak vagy kevésbé fejlettek lehetnek"
+        ],
+        "actions": [
+          "Ügyfeleidnek ajánld fel az EU-ban tárolt adatot és a szolgáltatóváltás lehetőségét: értékesítési érv",
+          "Saját appoknál az EU-s adatkezelés (GDPR) legyen alapértelmezett"
+        ]
+      }
     },
     {
       "id": "kontextus",
@@ -414,7 +654,34 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Egy ügynök annyit ér, amennyi üzleti kontextust ismer: ki az ügyfél, mi a szabály, melyik adat számít. A kontextusplatform egy külön réteg, amely ezt a tudást rendezett, szemantikus formában adja az ügynököknek, jogosultsággal együtt.",
+          "A Gartner szerint a szemantikailag rendezett adat akár 80%-kal javíthatja az ügynökök pontosságát és 60%-kal csökkentheti a költséget. Enélkül az ügynökök túl sok jogot kapnak, hibáznak, és fölöslegesen sok tokent fogyasztanak."
+        ],
+        "drivers": [
+          "Ügynökök pontossági problémái",
+          "Növekvő tokenköltségek",
+          "Megfelelőségi elvárások"
+        ],
+        "players": [
+          "Anthropic (MCP)",
+          "Snowflake, Databricks",
+          "Glean",
+          "Tudásgráf-szolgáltatók"
+        ],
+        "signals": [
+          "Szabványos kontextusprotokollok elterjedése",
+          "Tudásbázis-építő szolgáltatások piaca"
+        ],
+        "risks": [
+          "Rossz minőségű belső adat rossz döntésekhez vezet"
+        ],
+        "actions": [
+          "Ügyfeleknek ajánlható szolgáltatás: dokumentumok és folyamatok rendezése AI-ra kész tudásbázissá"
+        ]
+      }
     },
     {
       "id": "lqm",
@@ -443,7 +710,30 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A nyelvi modellek valószínűségi alapon „tippelnek”, ami számoknál, pénzügyi és orvosi előrejelzéseknél pontatlan és nehezen auditálható. A nagy kvantitatív modellek (LQM) számokra épülő, hibrid neurális architektúrák, amelyek szimulációval és előrejelzéssel dolgoznak.",
+          "A Gartner szerint szabályozott iparágakban (pénzügy, egészségügy) tehetik lehetővé az autonóm előrejelzést. Ma még korai szakasz, kevés kereskedelmi termékkel."
+        ],
+        "drivers": [
+          "A nyelvi modellek numerikus gyengesége",
+          "Szabályozói auditálhatósági elvárás"
+        ],
+        "players": [
+          "SandboxAQ (LQM)",
+          "Pénzügyi és biotech kutatócsoportok"
+        ],
+        "signals": [
+          "Első LQM-alapú termékek pénzügyben és gyógyszerkutatásban"
+        ],
+        "risks": [
+          "A fogalom még képlékeny, sok a marketing"
+        ],
+        "actions": [
+          "Figyelendő; számalapú appokban (költségvetés, kalkulátor) a hagyományos, ellenőrizhető számítás maradjon a mag"
+        ]
+      }
     },
     {
       "id": "wetware",
@@ -476,7 +766,32 @@
           "impact": 1,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A „wetware” élő vagy szintetikus biológiai rendszerek (például laboratóriumban növesztett idegsejthálózatok) használata számításra. A biokémiai hálózatok rendkívül energiahatékonyak, ezért az AI energiaigénye miatt komolyan kutatják őket.",
+          "A Gartner felvette a 2027-es listára, de ez jellemzően 2030 utáni technológia: ma kutatólaborok és néhány startup kínál felhőn keresztül hozzáférést kísérleti rendszerekhez."
+        ],
+        "drivers": [
+          "Az AI-számítás energiaigénye",
+          "Biotechnológiai fejlődés"
+        ],
+        "players": [
+          "Cortical Labs",
+          "FinalSpark"
+        ],
+        "signals": [
+          "Felhőn elérhető biocomputing-szolgáltatások",
+          "Etikai szabályozás megjelenése"
+        ],
+        "risks": [
+          "Etikai kérdések",
+          "Tudományos bizonytalanság"
+        ],
+        "actions": [
+          "Ismeretterjesztő csatornán erős, meglepő téma: „agysejtek, amelyek számítógépként működnek”"
+        ]
+      }
     },
     {
       "id": "okosszemuveg",
@@ -530,7 +845,38 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Az okosszemüveg a Google Glass kudarca után évekig halottnak tűnt. A fordulatot a Ray-Ban Meta hozta: hétköznapi napszemüveg-kinézet, kamera, hangszóró és hangalapú AI-asszisztens, kijelző nélkül. 2026-ban a kijelző nélküli modellek adták az AI-szemüvegek túlnyomó többségét, miközben a VR-headsetek eladása összeomlott.",
+          "A Google a Samsunggal Android XR-alapú szemüvegekkel lépett be, az Apple 2027 körül várható. Az elemzők szerint 2028-tól a kijelzős (HUD) változatok veszik át a vezetést, amikor a fordítás, navigáció és vizuális segítség valóban a szem előtt jelenik meg. A legnagyobb társadalmi gond az engedély nélküli felvétel."
+        ],
+        "drivers": [
+          "Multimodális AI (lát, hall, beszél)",
+          "Divatmárkákkal közös dizájn",
+          "Kéz nélküli, mindig elérhető asszisztens igénye"
+        ],
+        "players": [
+          "Meta + EssilorLuxottica (Ray-Ban, Oakley)",
+          "Google + Samsung (Android XR)",
+          "Apple (várható)",
+          "Xiaomi és kínai gyártók"
+        ],
+        "signals": [
+          "Az Apple belépésének időpontja",
+          "Megnyílnak-e a szemüvegek harmadik féltől származó appok előtt",
+          "Adatvédelmi szabályozás a nyilvános felvételre"
+        ],
+        "risks": [
+          "Magánszféra és felvételi aggályok",
+          "Akkumulátor és súly korlátai",
+          "Ha nincs saját appbolt, nincs fejlesztői piac"
+        ],
+        "actions": [
+          "Gondold végig, melyik appötleted működne pusztán hanggal (szótanulás séta közben, agytorna fejben)",
+          "Figyeld a Meta és Google fejlesztői programjait a szemüvegekre"
+        ]
+      }
     },
     {
       "id": "humanoidok",
@@ -580,7 +926,40 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A humanoid robotok 2025–2026-ban léptek ki a laborból: kínai gyártók tízezres nagyságrendben szállítanak, és az első valódi ipari szerződések is megszülettek (Toyota, BMW, Schaeffler, Hyundai). A technológiai alap közös: vizuális-nyelvi-cselekvési modellek, szimulációban tanított mozgás, emberi bemutatásból tanulás.",
+          "Az elemzők óvatosak: a bejelentett rendelések és a ténylegesen, mérhetően dolgozó robotok között nagy a rés. Az első munkák a „piszkos, veszélyes, unalmas” feladatok: dobozmozgatás, rakodás, raktári szállítás. A bérlési modell (robot mint szolgáltatás) csökkenti a belépési kockázatot."
+        ],
+        "drivers": [
+          "Robotikai AI-modellek fejlődése",
+          "Munkaerőhiány az iparban",
+          "Kínai gyártási méretgazdaságosság",
+          "Kockázati tőke"
+        ],
+        "players": [
+          "Unitree, AGIBOT, Galbot (Kína)",
+          "Agility Robotics (Digit)",
+          "Boston Dynamics (Atlas)",
+          "Figure AI",
+          "Tesla Optimus"
+        ],
+        "signals": [
+          "Üzemórák, rendelkezésre állás és emberi beavatkozási arány közzététele",
+          "Árak 20 000 dollár alá esése",
+          "Az első háztartási humanoidok"
+        ],
+        "risks": [
+          "A bemutatók és a valós teljesítmény közti rés",
+          "Munkahelyi biztonsági szabályozás",
+          "Túlfűtött befektetői várakozás"
+        ],
+        "actions": [
+          "Ismeretterjesztő csatornán erős téma: robot-maraton, gyári robotok, összehasonlítások",
+          "Szimulációs, Unity-alapú tréningkörnyezetek iránti kereslet figyelése"
+        ]
+      }
     },
     {
       "id": "kvantum",
@@ -626,7 +1005,37 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A kvantumszámítógépek fő akadálya, hogy a qubitek rendkívül hibásak. 2026-ban a verseny már nem a fizikai qubitek számáról, hanem a hibajavított, megbízható logikai qubitekről szól: a Quantinuum 94, az IBM és a Chicagói Egyetem 70 logikai qubites kísérletet mutatott be, a QuEra szimulációi szerint a hibajavítás költsége drasztikusan csökkenthető.",
+          "Gyakorlati következmény: a Forrester szerint 2030-ig a mai titkosítás feltörhetővé válhat („Q-nap”), ezért a kvantumbiztos titkosításra való átállás már most sürgős. Az első hasznos alkalmazások a kémiában és az anyagtudományban várhatók."
+        ],
+        "drivers": [
+          "Hibajavítási áttörések",
+          "Állami és nagyvállalati befektetések",
+          "A titkosítás veszélyeztetettsége"
+        ],
+        "players": [
+          "IBM",
+          "Google Quantum AI",
+          "Quantinuum",
+          "QuEra",
+          "Microsoft"
+        ],
+        "signals": [
+          "100+ logikai qubites rendszerek",
+          "Igazolt kvantumelőny valós problémán",
+          "Kvantumbiztos titkosítás bevezetése a böngészőkben és bankokban"
+        ],
+        "risks": [
+          "Túlzott várakozások, újabb csalódási hullám",
+          "A titkosítás késői cseréje"
+        ],
+        "actions": [
+          "Saját rendszereidben kövesd a kvantumbiztos TLS-támogatást (a nagy böngészők és felhőszolgáltatók már bevezették)"
+        ]
+      }
     },
     {
       "id": "eszkozon-ai",
@@ -663,7 +1072,37 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A telefonok és laptopok új chipjei kisebb AI-modelleket helyben futtatnak: gyorsabb válasz, offline működés, és az adat nem hagyja el a készüléket. Az Apple, a Google és a Samsung is erre építi az AI-funkcióit, a fejlesztők pedig API-n keresztül férhetnek hozzá a beépített modellekhez.",
+          "A fogyasztók közben óvatosabbak lettek: a funkciók száma helyett a valódi hasznot, adatvédelmet és tartósságot nézik. Ez az eszközön futó AI-nak kedvez, mert ingyenes a fejlesztőnek (nincs felhőköltség) és adatvédelmi érv."
+        ],
+        "drivers": [
+          "NPU-k a telefonokban",
+          "Kisebb, hatékony modellek",
+          "Adatvédelmi elvárás",
+          "Felhőköltségek"
+        ],
+        "players": [
+          "Apple (Foundation Models framework)",
+          "Google (Gemini Nano)",
+          "Qualcomm",
+          "Samsung"
+        ],
+        "signals": [
+          "Az eszközön futó modellek API-jainak bővülése iOS-en és Androidon",
+          "Offline AI mint appbolti kategória"
+        ],
+        "risks": [
+          "Régebbi készülékeken nem érhető el",
+          "A modellek korlátozott képességei"
+        ],
+        "actions": [
+          "Expo/React Native appban a beépített eszközön futó modellek (pl. szövegösszefoglalás, osztályozás) ingyenes AI-funkciót adnak",
+          "Az „offline, adatgyűjtés nélkül” legyen kiemelt az appleírásban"
+        ]
+      }
     },
     {
       "id": "kozossegi-kereso",
@@ -678,6 +1117,14 @@
         {
           "value": "~40%",
           "label": "fiatal felhasználó preferálja a TikTokot vagy Instagramot a Google kereséssel szemben (Narrative)"
+        },
+        {
+          "value": "46,9%",
+          "label": "a 16–24 éves internetezők ennyi része elsősorban Instagramon és Facebookon kutat márkák és vásárlás után (Digital 2027)"
+        },
+        {
+          "value": "−10%+",
+          "label": "csökkent a 10 000 legnagyobb webhely havi forgalma a ChatGPT indulása óta (Digital 2027)"
         }
       ],
       "why": "A platformok algoritmusa a videó szövegét is olvassa; a HubSpot szerint a közösségi gráf helyett az érdeklődés-alapú felfedezés dönt az elérésről.",
@@ -694,6 +1141,10 @@
         {
           "title": "Plansy: social media in 2027",
           "url": "https://blog.plansy.io/how-social-media-is-changing-in-2027/"
+        },
+        {
+          "title": "Meltwater: Digital 2027 report",
+          "url": "https://www.meltwater.com/en/press-releases/digital-2027-report"
         }
       ],
       "firstSeen": "2026-10",
@@ -705,7 +1156,39 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A fiatalok egy jelentős része már nem a Google-lel kezd: éttermet TikTokon, termékvéleményt YouTube-on, tanácsot Redditen keres. A Meltwater Digital 2027 jelentése szerint a 16–24 évesek közel fele elsősorban az Instagramot és Facebookot használja márkák és vásárlások felkutatására, miközben a nyílt web forgalma csökken.",
+          "A platformok erre keresőként kezdtek viselkedni: a TikTok indexeli a videók szövegét, feliratát, képernyőszövegét, az Instagram nyilvános posztjai a Google-ben is megjelennek. A követőszám helyett az érdeklődés-alapú felfedezés dönt az elérésről, ezért a kulcsszó és a kérdés megfogalmazása ugyanúgy számít, mint a weben."
+        ],
+        "drivers": [
+          "Vizuális, hiteles válasz igénye",
+          "A Google-találatok romló megítélése",
+          "Az algoritmusok érdeklődésalapú ajánlása"
+        ],
+        "players": [
+          "TikTok (keresés, Creative Center)",
+          "YouTube",
+          "Instagram",
+          "Reddit",
+          "Pinterest"
+        ],
+        "signals": [
+          "Az AI-asszisztensek hogyan veszik át a keresési szerepet a közösségi platformok mellett",
+          "Keresési hirdetések a TikTokon",
+          "Mennyire csökken tovább a nyílt web forgalma"
+        ],
+        "risks": [
+          "A platformok algoritmusa gyorsan változik",
+          "A közösségi tartalom pontossága gyakran gyenge"
+        ],
+        "actions": [
+          "A videók címe, első mondata és képernyőszövege fogalmazzon meg egy konkrét kérdést, amire keresnek (pl. „Miért kék a homár vére?”)",
+          "Használd a TikTok Creative Center keresési trendjeit ötletforrásnak",
+          "Az app neve és rövid leírása legyen kereshető kifejezés, ne csak márkanév"
+        ]
+      }
     },
     {
       "id": "social-commerce",
@@ -718,6 +1201,14 @@
       "summary": "Natív fizetés a TikTok Shopban, Instagramon és YouTube-on; a creatorok QVC-stílusú élő adásokban értékesítenek, jutalékból.",
       "figures": [
         {
+          "value": "$50,3 Mrd",
+          "label": "TikTok Shop globális forgalma 2026 első félévében, +92% egy év alatt (Momentum Works)"
+        },
+        {
+          "value": "$11,8 Mrd",
+          "label": "a TikTok Shop amerikai forgalma 2026-ban eddig, duplája az egy évvel korábbinak"
+        },
+        {
           "value": "$81 Mrd",
           "label": "közösségi platformokon keresztüli e-kereskedelem 2024-ben, gyorsuló növekedéssel"
         }
@@ -725,6 +1216,10 @@
       "why": "A platformok megoldották a súrlódást, a vásárlás már nem visz ki az appból. A creator-készítésű hirdetések jobban teljesítenek a stúdiós anyagoknál.",
       "opportunity": "Affiliate-bevétel tartalomcsatornák mellé; digitális termékek közvetlen értékesítése.",
       "sources": [
+        {
+          "title": "Tubefilter: TikTok Shop on track to hit $100B GMV in 2026",
+          "url": "https://www.tubefilter.com/2026/08/06/tiktok-shop-gross-merchandise-value-gmv-50-billion/"
+        },
         {
           "title": "Narrative: social commerce trends",
           "url": "https://narrativegroup.co/blog/social-commerce-trends/"
@@ -743,7 +1238,37 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A közösségi vásárlás Ázsiában évek óta fősodor, nyugaton a TikTok Shop hozta el: a termék a videóban vagy élő adásban megvásárolható, kilépés nélkül. 2026 első félévében a TikTok Shop globális forgalma 50 milliárd dollár fölé nőtt, közel kétszeresére egy év alatt, és az USA lett a legnagyobb piaca.",
+          "A vásárlás nagyobb része a Shop fülön és a rövid videókon keresztül történik, az élő adás kisebb, de erősen konvertáló csatorna. Az Instagram és a YouTube is bővíti a termékcímkézést és az affiliate-programokat; a creatorok jutalékból keresnek."
+        ],
+        "drivers": [
+          "Natív fizetés a platformokon",
+          "Affiliate-jutalék a creatoroknak",
+          "Impulzusvásárlás és szórakozás összeolvadása"
+        ],
+        "players": [
+          "TikTok Shop",
+          "Instagram Shopping",
+          "YouTube Shopping",
+          "Whatnot (élő vásárlás)"
+        ],
+        "signals": [
+          "TikTok Shop európai terjeszkedése",
+          "Fogyasztóvédelmi szabályok az élő vásárlásra",
+          "A Shorts és Reels termékcímkézésének bővülése"
+        ],
+        "risks": [
+          "Alacsony árrés, árverseny",
+          "Termékminőségi és hamisítási problémák"
+        ],
+        "actions": [
+          "Ha digitális terméket (e-könyv, nyomtatható kártyák) készítesz a csatornákhoz, a közvetlen link és az affiliate a legegyszerűbb bevétel",
+          "Kapcsolódó fizikai termékek (természetfigyelő eszközök, könyvek) affiliate-linkje az ismeretterjesztő videók mellé"
+        ]
+      }
     },
     {
       "id": "reszvetel",
@@ -776,7 +1301,35 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A legsikeresebb kampányok 2026-ban a közönséget alkotótárssá teszik: a kommentszekció maga a tartalom, a nézők történeteket, fotókat osztanak meg, a következő rész témájáról szavaznak. A creator inkább moderátor és házigazda, mint előadó.",
+          "Ehhez kapcsolódik a „drop” kultúra: korlátozott ideig elérhető tartalom, termék vagy esemény, amire a közösség együtt vár. A TikTok saját jelentése is a közös érdeklődésű csoportokat és a kommentekben zajló részvételt emeli ki."
+        ],
+        "drivers": [
+          "Algoritmusok jutalmazzák a kommentet és a megosztást",
+          "Feedfáradtság: aktív szerep igénye",
+          "Közösségi identitás"
+        ],
+        "players": [
+          "TikTok (kommentválasz-videók)",
+          "YouTube (közösségi posztok, szavazás)",
+          "Discord"
+        ],
+        "signals": [
+          "Kommentvezérelt formátumok terjedése",
+          "Interaktív videófunkciók (szavazás, választható történet)"
+        ],
+        "risks": [
+          "A közösség moderálása időigényes",
+          "Gyerekközönségnél a komment ki van kapcsolva"
+        ],
+        "actions": [
+          "Zárd a videókat egy kérdéssel, és a következő videóban válaszolj a legjobb kommentre",
+          "Hagyd a nézőket választani a következő témát (pl. két állat közül)"
+        ]
+      }
     },
     {
       "id": "karakterek",
@@ -809,7 +1362,35 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A fotós, élethű tartalom tengerében az illusztrált karakter kiemelkedik és könnyen felismerhető. Egy jól megírt karakter gesztust, érzelmet, kis történeteket ad, új fotózás vagy forgatás nélkül, és platformok között is ugyanaz marad.",
+          "A márkák (például a Duolingo bagolyfigurája) megmutatták, hogy egy személyiséggel rendelkező karakter önálló közösségi jelenséggé válhat. Az AI-tartalom áradatában a következetes, saját karakter az eredetiség egyik legerősebb jele."
+        ],
+        "drivers": [
+          "Az AI-tartalom egyformasága",
+          "Platformok közti újrahasznosítás",
+          "Olcsóbb animációs eszközök"
+        ],
+        "players": [
+          "Duolingo (bagoly)",
+          "Animált ismeretterjesztő csatornák",
+          "Webtoon és képregényalkotók"
+        ],
+        "signals": [
+          "Karakterek licencelése termékekre",
+          "AI-segített animációs munkafolyamatok"
+        ],
+        "risks": [
+          "Egy karakter felépítése idő és következetesség",
+          "A karakter elhasználódhat"
+        ],
+        "actions": [
+          "Mindhárom csatornához egy-egy visszatérő narrátor- vagy kabalakarakter, saját hanggal és szokásokkal",
+          "A karakter az appjaidban is megjelenhet: közös márkavilág"
+        ]
+      }
     },
     {
       "id": "hosszu-forma",
@@ -841,6 +1422,972 @@
           "ring": 2,
           "impact": 1,
           "note": "Első felvétel a radarra."
+        }
+      ],
+      "deep": {
+        "context": [
+          "A rövidvideós görgetés kifárasztja a közönséget, és egy részük mélyebb tartalom felé fordul. A TikTok 10 perces, az Instagram 20 perces videókat is enged, a YouTube-on pedig a hosszabb videókat egyre inkább tévén nézik.",
+          "A sikeres alkotók visszatérő sorozatokat építenek felismerhető szerkezettel. A YouTube monetizációs szabályainak szigorodása (2027) is a hosszú formátum felé terel, mert ott gyűlik a nézési idő."
+        ],
+        "drivers": [
+          "Görgetési fáradtság",
+          "Tévés YouTube-nézés",
+          "A nézési idő alapú monetizáció"
+        ],
+        "players": [
+          "YouTube",
+          "TikTok (hosszabb videók)",
+          "Instagram (20 perces Reels)"
+        ],
+        "signals": [
+          "A 3 percnél hosszabb Reels ajánlási korlátjának feloldása",
+          "A Shorts és a hosszú videók monetizációs aránya"
+        ],
+        "risks": [
+          "Hosszabb gyártási idő"
+        ],
+        "actions": [
+          "5–10 rövid videót fűzz össze tematikus, 8–12 perces válogatássá"
+        ]
+      }
+    },
+    {
+      "id": "ai-tartalomaradat",
+      "title": "AI-tartalomáradat és az eredetiség jutalmazása",
+      "area": "soc",
+      "ring": 3,
+      "impact": 3,
+      "indie": true,
+      "horizon": "most – 2027",
+      "summary": "Elárasztják a feedeket a tömegesen gyártott AI-videók és képek. A platformok címkéznek, szűrnek, és az eredeti, emberi tartalmat jutalmazzák a másolt vagy sablonos anyaggal szemben.",
+      "figures": [
+        {
+          "value": "33%",
+          "label": "a választási és egyéb rendszerkockázati helyzetekben azonosított deepfake-eknek ennyi kapott platformcímkét (Instagram, TikTok, X, YouTube audit, 2026 szept.)"
+        },
+        {
+          "value": "61%",
+          "label": "a szabványos AI-eredetjelzéssel feltöltött tartalmak címkézési aránya ugyanebben az auditban"
+        }
+      ],
+      "why": "A generatív videó olcsó és gyors lett, a hirdetési bevétel pedig a megtekintéshez kötött, ezért ipari méretű „slop” gyártás indult. A platformok erre 2025–2026-ban szinte mind reagáltak: a YouTube korlátozza az ismétlődő és tömegesen gyártott tartalom monetizációját, az Instagram 2026 áprilisától a fotókra és körhinta-posztokra is kiterjesztette az eredetiségi büntetést, a Pinterest szűrőt adott az AI-tartalom csökkentésére, a Snapchat nem ajánlja tovább a teljesen AI-generált videókat.",
+      "opportunity": "A felismerhető saját stílus, hang és karakter most többet ér, mint valaha: AI-val gyorsíts, de a végeredmény ne legyen sablon.",
+      "sources": [
+        {
+          "title": "Social Media Today: Can the apps stop AI slop?",
+          "url": "https://www.socialmediatoday.com/news/can-the-apps-stop-ai-slop/827170/"
+        },
+        {
+          "title": "arXiv: Drowning in AI Slop (AI-címkézési audit, 2026)",
+          "url": "https://arxiv.org/abs/2609.38571"
+        },
+        {
+          "title": "SocialPilot: Instagram Reels algoritmus-változások 2026",
+          "url": "https://www.socialpilot.co/?p=563048"
+        },
+        {
+          "title": "Storyblocks: faceless YouTube és a YouTube monetizációs szabályai",
+          "url": "https://www.storyblocks.com/resources/blog/faceless-youtube-channel"
+        }
+      ],
+      "deep": {
+        "context": [
+          "A 2025-ös évben a generatív videóeszközök (Veo, Sora, Kling és társaik) elérték azt a minőséget, amelynél egy rövid videó előállítása perceket és filléreket igényel. Ez a hirdetési bevételhez kötött platformokon azonnal kihasználható lett: megjelentek a naponta tucatnyi videót feltöltő, teljesen automatizált csatornák, a kamu filmelőzetesek, a gépi hangalámondású „tény”-videók.",
+          "A platformok számára ez kettős veszély: a nézők elfordulnak az egyforma tartalomtól, a hirdetők pedig nem akarnak gyenge minőségű környezetben megjelenni. Ezért 2025 közepétől szinte minden nagy platform lépett: a YouTube 2025 júliusában pontosította, hogy a tömeggyártott, sablonos és ismétlődő tartalom nem monetizálható, az Instagram a „Your Algorithm” vezérlőkkel és az eredetiségi büntetéssel a saját alkotást emeli ki, a Pinterest és a Snapchat a felhasználói oldalon szűr.",
+          "A címkézés ugyanakkor még lyukas: egy 2026 szeptemberi független audit szerint a kockázatos helyzetekben terjedő deepfake-eknek csak harmada kapott címkét, és a platformok gyakran eltávolítják az eredetjelzést a feltöltéskor. Ezért a szabályozók (az EU a deepfake-iránymutatásokkal) tovább fognak szigorítani."
+        ],
+        "drivers": [
+          "Az AI-videó előállítási költsége közel nullára esett",
+          "A megtekintésalapú bevétel ösztönzi a tömeggyártást",
+          "Hirdetői nyomás a márkabiztonság miatt",
+          "EU-s szabályozás a deepfake-ek és AI-tartalom jelölésére"
+        ],
+        "players": [
+          "YouTube (ismétlődő tartalom elleni monetizációs szabály)",
+          "Instagram (eredetiségi büntetés, Your Algorithm)",
+          "Pinterest (AI-tartalom szűrő)",
+          "Snapchat Spotlight",
+          "C2PA tartalomhitelesítési szabvány"
+        ],
+        "signals": [
+          "Bővül-e a YouTube demonetizációja animált, AI-hangalámondásos csatornákra",
+          "Megjelennek-e felhasználói „kevesebb AI” kapcsolók a TikTokon és YouTube-on",
+          "Az EU AI Act átláthatósági kötelezettségeinek végrehajtása 2026 augusztusától",
+          "Független auditok a címkézés pontosságáról"
+        ],
+        "risks": [
+          "A téves AI-címke eredeti alkotókat is sújthat",
+          "A szabályok értelmezése platformonként eltér és gyorsan változik",
+          "Az AI-eszközzel készült, de igényes munka is gyanúba kerülhet"
+        ],
+        "actions": [
+          "Minden csatornának legyen felismerhető, visszatérő eleme: karakter, hang, vizuális stílus",
+          "AI-t a gyártás gyorsítására használd (forgatókönyv-vázlat, vágás, fordítás), ne a teljes videó gépi előállítására",
+          "Kerüld a sablonszerű sorozatgyártást: változzon a szerkezet, a nyitás, a téma feldolgozása",
+          "Jelöld önként, ha AI-eszközt használtál: a platformok ezt kérik, és bizalmat épít"
+        ]
+      },
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-28",
+          "ring": 3,
+          "impact": 3,
+          "note": "Felvéve a social media mélyfelderítés során."
+        }
+      ]
+    },
+    {
+      "id": "youtube-monetizacio-2027",
+      "title": "Szigorodó creator-monetizáció (YouTube 2027)",
+      "area": "soc",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2027. február 1-jétől",
+      "summary": "A YouTube 2027. február 1-jétől megduplázza a partnerprogram belépési küszöbét az új jelentkezőknek, és a Shorts-bevételt folyamatos nézettséghez köti.",
+      "figures": [
+        {
+          "value": "8 000 óra",
+          "label": "nyilvános nézési idő 12 hónap alatt (eddig 4 000), vagy 20 millió Shorts-megtekintés 90 nap alatt (eddig 10 millió) – plusz 1 000 feliratkozó"
+        },
+        {
+          "value": "10 M / 90 nap",
+          "label": "folyamatosan szükséges Shorts-megtekintés a Shorts-hirdetési bevételhez"
+        },
+        {
+          "value": "200 Mrd",
+          "label": "napi Shorts-megtekintés a YouTube szerint"
+        }
+      ],
+      "why": "A YouTube a méretével indokolja a döntést, és azt mondja, a felszabaduló forrást a kisebb csatornák mérföldkő-jutalmaira (vásárlási bónusz, márkaajánlat-jutalom, trendalapú kiemelés) fordítja. Az alsó, rajongói támogatási szint (500 feliratkozó) változatlan. A meglévő partnereknek 2027. január 31-ig el kell fogadniuk az új feltételeket.",
+      "opportunity": "Az új csatornáknak a hirdetési bevétel helyett eleinte a rajongói támogatásra, affiliate-re és saját termékre érdemes építeni.",
+      "sources": [
+        {
+          "title": "Forbes: YouTube Doubles The Monetization Bar For New Creators",
+          "url": "https://www.forbes.com/sites/gabrielalinzainescu/2026/08/11/youtube-doubles-the-monetization-bar-for-new-creators/"
+        },
+        {
+          "title": "Storyblocks: a korábbi küszöbök és az ismétlődő tartalom szabálya",
+          "url": "https://www.storyblocks.com/resources/blog/faceless-youtube-channel"
+        },
+        {
+          "title": "ThoughtLeaders: creator economy, 2026 október",
+          "url": "https://www.thoughtleaders.io/blog/creator-economy-trends-2026"
+        }
+      ],
+      "deep": {
+        "context": [
+          "A YouTube partnerprogramja (YPP) évekig 1 000 feliratkozót és 4 000 óra nézési időt vagy 10 millió Shorts-megtekintést kért. 2026 augusztusában bejelentették, hogy 2027. február 1-jétől az új jelentkezőknek ennek dupláját kell teljesíteniük, a feliratkozói minimum marad.",
+          "A legnagyobb változás a Shorts: a Shorts-hirdetési bevételhez nem elég egyszer elérni a küszöböt, a csatornának folyamatosan, 90 napos gördülő ablakban kell hozni a 10 millió megtekintést. Aki alá esik, a hosszú videóin tovább keres, a Shortsból csak a küszöb újbóli elérésekor.",
+          "A meglévő partnereknek aktivitási minimumot is teljesíteniük kell (például 90 naponta két hosszú videó vagy öt Short). A döntés illeszkedik a tömeggyártott tartalom elleni lépések sorába: nehezebb lesz gyorsan felépített, automatizált csatornákkal pénzt keresni."
+        ],
+        "drivers": [
+          "A Shorts-kínálat robbanása és a hirdetési bevétel szétaprózódása",
+          "Küzdelem a tömegesen gyártott AI-csatornák ellen",
+          "A YouTube a tévéképernyőn és a hosszú formátumban látja a nagyobb értéket"
+        ],
+        "players": [
+          "YouTube Partner Program",
+          "YouTube Shopping és affiliate",
+          "Premium Lite (bővülő országok)",
+          "Patreon, Ko-fi és más közvetlen támogatási platformok"
+        ],
+        "signals": [
+          "Követi-e a TikTok és a Meta hasonló szigorítással a creator-alapjaikat",
+          "Hogyan működnek a beígért mérföldkő-jutalmak a kis csatornáknak",
+          "Változik-e az RPM (ezer megtekintésre jutó bevétel) a Shortsban 2027-ben"
+        ],
+        "risks": [
+          "A Shorts-központú új csatornák bevétele hónapokig kitolódhat",
+          "A szabályok további szigorítása a meglévő partnereket is érintheti"
+        ],
+        "actions": [
+          "Ha egy csatorna még nincs a partnerprogramban, tervezd úgy, hogy 2027. február 1. előtt elérje a régi küszöböt, ha reális",
+          "Építs hosszabb, összefűzött videókat is: a nézési idő a hosszú formátumból gyűlik gyorsabban",
+          "Az első bevételt keresd a rajongói támogatásban, affiliate-ben, digitális termékben",
+          "Meglévő partnerként fogadd el időben (2027. január 31-ig) az új feltételeket a YouTube Studióban"
+        ]
+      },
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-28",
+          "ring": 3,
+          "impact": 2,
+          "note": "Felvéve a social media mélyfelderítés során."
+        }
+      ]
+    },
+    {
+      "id": "youtube-tevekepernyo",
+      "title": "A YouTube a nappaliban",
+      "area": "soc",
+      "ring": 4,
+      "impact": 3,
+      "indie": true,
+      "horizon": "most",
+      "summary": "Az USA-ban a YouTube a legnézettebb „csatorna” a tévéképernyőn, megelőzve a Disney-t és a Netflixet. A creator-tartalmat egyre inkább a kanapéról, nagy képernyőn nézik.",
+      "figures": [
+        {
+          "value": "13,4%",
+          "label": "a YouTube részesedése az amerikai tévénézésből 2026 áprilisában (Nielsen The Gauge), sorozatban hatodik hónapja első"
+        },
+        {
+          "value": "44%+",
+          "label": "az amerikai YouTube-nézési idő ennyi része zajlik okostévén (eMarketer)"
+        }
+      ],
+      "why": "Az okostévék alapból tartalmazzák a YouTube-ot, a fiatalabb háztartások lemondják a kábeltévét, és a creatorok egyre igényesebb, tévéminőségű sorozatokat, podcastokat, dokumentumfilmeket készítenek. A YouTube kifejezetten tévére szánt eszközöket ad az alkotóknak.",
+      "opportunity": "A hosszabb, nyugodtabb tempójú, családdal együtt nézhető ismeretterjesztő tartalom a tévéképernyőn jól teljesít.",
+      "sources": [
+        {
+          "title": "AdWave: YouTube TV viewing share Q2 2026",
+          "url": "https://adwave.com/resources/youtube-tv-viewing-share-q2-2026"
+        },
+        {
+          "title": "Techloy: YouTube tops US TV viewership",
+          "url": "https://www.techloy.com/chart-youtube-tops-u-s-tv-viewership-again-for-the-third-straight-month/"
+        },
+        {
+          "title": "eNCA: YouTube TV-focused tools for creators",
+          "url": "https://www.enca.com/lifestyle/youtube-launches-new-tv-focused-tools-creators"
+        }
+      ],
+      "deep": {
+        "context": [
+          "A Nielsen havi „The Gauge” jelentése 2025 eleje óta rendszeresen a YouTube-ot mutatja a legnagyobb médiaszolgáltatónak az amerikai tévénézésben, 2026 tavaszán 13% feletti részesedéssel. Ez azért figyelemre méltó, mert nem egy stúdió, hanem több millió független alkotó tartalmáról van szó.",
+          "A tévéképernyős nézés megváltoztatja, mi működik: a nézők hosszabb ideig maradnak, közösen néznek, és kevésbé tűrik a kapkodó, mobilra vágott szerkesztést. A podcastok, dokumentumfilm-szerű videók, gyerek- és családi tartalmak és a sorozatszerű csatornák nyernek.",
+          "A hirdetők ezt követik: a YouTube tévés hirdetési helyei drágábbak, ami a creatoroknak magasabb bevételt hozhat a hosszú formátumon."
+        ],
+        "drivers": [
+          "Okostévék elterjedése, a kábeltévé lemondása",
+          "Tévéminőségű creator-produkciók",
+          "A YouTube tévére optimalizált funkciói és hirdetései"
+        ],
+        "players": [
+          "YouTube (TV-app, podcastok)",
+          "Nielsen The Gauge",
+          "Netflix és a klasszikus streamerek mint versenytársak"
+        ],
+        "signals": [
+          "A Nielsen őszi, újrakalibrált Gauge-adatai",
+          "A YouTube tévés hirdetési bevételének alakulása",
+          "Megjelenik-e hasonló adat Európára"
+        ],
+        "risks": [
+          "A tévén a nézők a megszokott tévés minőséget várják el",
+          "A Shorts tévén korlátozottan működik"
+        ],
+        "actions": [
+          "Ismeretterjesztő csatornánál készíts 8–15 perces összefoglaló epizódokat a Shortsok mellé",
+          "Ellenőrizd, hogy a videóid nagy képernyőn is olvashatók: szöveg, feliratméret, kontraszt",
+          "Gyerektartalomnál a tévés, családi nézés a természetes közeg: tervezz rá"
+        ]
+      },
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-28",
+          "ring": 4,
+          "impact": 3,
+          "note": "Felvéve a social media mélyfelderítés során."
+        }
+      ]
+    },
+    {
+      "id": "video-podcast",
+      "title": "Videós podcastok",
+      "area": "soc",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2026–2027",
+      "summary": "A podcast videóformátumban fősodorba ért: a YouTube a legnagyobb podcastplatform, és a Netflix, Spotify, Apple is a videós podcastokért versenyez.",
+      "figures": [
+        {
+          "value": "20%",
+          "label": "az internetezők ennyi része nézett videós podcastot vagy -részletet az elmúlt hónapban (Ampere Analysis)"
+        },
+        {
+          "value": "11%",
+          "label": "YouTube-on nézett videós podcastot; a TikTokon 6% látott podcastrészletet"
+        }
+      ],
+      "why": "A videós podcast egyszerre hosszú tévétartalom, rövid klipek forrása és hangos műsor. A Netflix 2026-ban a Spotify-jal kötött megállapodás alapján videós podcastokat kezdett sugározni, az Apple és a Spotify is a videóra tér át.",
+      "opportunity": "Egy havi beszélgetős vagy magyarázó epizód sok rövid klipet termel: egy gyártásból több formátum.",
+      "sources": [
+        {
+          "title": "Señal News: YouTube leads as video podcasts go mainstream (Ampere)",
+          "url": "https://senalnews.com/en/data/youtube-leads-as-video-podcasts-go-mainstream"
+        },
+        {
+          "title": "Axios: Netflix partners with Spotify for video podcasts",
+          "url": "https://www.axios.com/2025/10/14/netflix-spotify-video-podcasts-the-ringer"
+        },
+        {
+          "title": "MediaPost: Video podcast users rise, YouTube leads",
+          "url": "https://www.mediapost.com/publications/article/414493/"
+        }
+      ],
+      "deep": {
+        "context": [
+          "A podcast hosszú ideig hangalapú műfaj volt, de a YouTube felemelkedésével a videós változat lett a fő formátum. A nézők gyakran háttérben hallgatják, de a felfedezés a videós klipeken keresztül történik.",
+          "2026-ban a streamingcégek is beszálltak: a Netflix a Spotify-jal együttműködve videós podcastokat kínál, az Apple és a Spotify fejleszti a videós podcastfunkciókat. Az Ampere felmérése szerint a fiatal felnőttek és a mobil-első piacok (Brazília, India, Indonézia) a legaktívabbak.",
+          "Az alkotók számára a videós podcast a legjobb „tartalommotor”: egy felvételből hosszú epizód, rövid klipek, idézetkártyák és hírlevél készülhet."
+        ],
+        "drivers": [
+          "A YouTube podcastfelülete és tévés nézése",
+          "Streamingplatformok tartalomigénye olcsó, folyamatos műsorra",
+          "Egy gyártásból sokféle formátum"
+        ],
+        "players": [
+          "YouTube",
+          "Spotify",
+          "Netflix",
+          "Apple Podcasts",
+          "TikTok (klipek)"
+        ],
+        "signals": [
+          "A Netflix bővíti-e a podcastkínálatát 2027-ben",
+          "Megjelenik-e podcast-specifikus monetizáció a YouTube-on",
+          "Az AI-hangú, generált podcastok elfogadottsága"
+        ],
+        "risks": [
+          "Telített műfaj, nehéz kitűnni",
+          "Hosszú felvétel, magasabb időráfordítás"
+        ],
+        "actions": [
+          "Kipróbálható egy havi, 20–30 perces „hónap legfurcsább tényei” epizód, amelyből 6–10 rövid klip vágható",
+          "Ha nem akarsz kamerát, animált vagy illusztrált videós podcast is működik"
+        ]
+      },
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-28",
+          "ring": 3,
+          "impact": 2,
+          "note": "Felvéve a social media mélyfelderítés során."
+        }
+      ]
+    },
+    {
+      "id": "privat-megosztas",
+      "title": "Privát megosztás: DM-ek és csoportchatek",
+      "area": "soc",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "most",
+      "summary": "A közösségi élet a nyilvános posztokról a privát üzenetekbe és csoportchatekbe költözik. A tartalom sikerét egyre inkább az dönti el, hányan küldik tovább egy barátjuknak.",
+      "figures": [
+        {
+          "value": "1. jel",
+          "label": "az Instagram vezetője szerint a privát továbbküldés (sends) a legerősebb jel a nem követők elérésében"
+        }
+      ],
+      "why": "A nyilvános posztolás kockázatos és fárasztó lett, a feedek tele vannak idegen és gépi tartalommal. A személyes beszélgetés a csoportchatekbe vonult, a platformok pedig követik: a TikTok, Threads, YouTube és a Spotify is üzenetküldő funkciókat épít.",
+      "opportunity": "Olyan tartalom kell, amit az ember azért küld tovább, mert „ezt neked kell látnod”: meglepő tény, vicces felismerés, hasznos tipp.",
+      "sources": [
+        {
+          "title": "SocialPilot: Instagram rangsorolási jelek (Mosseri)",
+          "url": "https://www.socialpilot.co/?p=563048"
+        },
+        {
+          "title": "BSI: Social Media Trends 2027",
+          "url": "https://www.bsi.ag/market-reports/social-media-trends-2027/"
+        },
+        {
+          "title": "Altanet: DMs in 2026",
+          "url": "https://altanet.ro/en/?p=5334"
+        },
+        {
+          "title": "TechCrunch: Threads group chats",
+          "url": "https://techcrunch.com/2025/10/15/threads-is-getting-group-chats-as-messaging-rolls-out-to-the-eu/?sidebar=a"
+        }
+      ],
+      "deep": {
+        "context": [
+          "A közösségi média eredeti ígérete, hogy a barátaink életét látjuk, a nyilvános feedekben elhalványult: ott ma főleg ajánlott, idegen tartalom fut. A személyes beszélgetés a WhatsApp-, Messenger-, Instagram- és Discord-csoportokba költözött, ezt a „dark social” kifejezés is jelöli, mert a megosztások nagy része nem mérhető nyilvánosan.",
+          "A platformok ehhez igazodnak: az Instagram a továbbküldések számát kiemelt rangsorolási jelnek tekinti, a Threads csoportchateket kapott, a TikTok bővítette az üzenetküldést. A BSI 2027-es trendjelentése első helyen nevezi meg, hogy a csoportchatek és közösségek váltják a nyilvános feedet.",
+          "A márkák és alkotók számára ez azt jelenti, hogy a lájk és a követőszám kevésbé, a továbbküldés és a mentés jobban számít."
+        ],
+        "drivers": [
+          "Feedfáradtság és idegen tartalom a hírfolyamban",
+          "Biztonsági és adatvédelmi aggályok a nyilvános posztolásnál",
+          "Az üzenetküldő funkciók beépülése minden platformba"
+        ],
+        "players": [
+          "WhatsApp és WhatsApp-csatornák",
+          "Instagram DM",
+          "Discord",
+          "Telegram",
+          "Threads"
+        ],
+        "signals": [
+          "Az Instagram és TikTok továbbküldési statisztikái az alkotói felületeken",
+          "WhatsApp-csatornák monetizációja",
+          "Nő-e a közösségi funkciók (közös nézés, csoportos reakció) száma"
+        ],
+        "risks": [
+          "A megosztás nehezen mérhető, a siker kevésbé látható",
+          "A privát terekben nehéz márkaként jelen lenni"
+        ],
+        "actions": [
+          "Minden videóban legyen egy „ezt el kell küldenem valakinek” pillanat",
+          "Indíts WhatsApp- vagy Instagram-csatornát a legelkötelezettebb nézőknek",
+          "Mérd a megosztásokat és mentéseket a lájkok helyett"
+        ]
+      },
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-28",
+          "ring": 3,
+          "impact": 2,
+          "note": "Felvéve a social media mélyfelderítés során."
+        }
+      ]
+    },
+    {
+      "id": "korhatar",
+      "title": "Korhatár-szabályozás és életkor-ellenőrzés",
+      "area": "soc",
+      "ring": 3,
+      "impact": 3,
+      "indie": true,
+      "horizon": "2026–2028",
+      "summary": "Egyre több ország tiltja vagy köti szülői engedélyhez a közösségi médiát 15–16 év alatt, a platformok pedig arcalapú életkor-becslést vezetnek be.",
+      "figures": [
+        {
+          "value": "2025.12.10.",
+          "label": "Ausztráliában életbe lépett a 16 év alattiak tiltása a nagy platformokon, legfeljebb 49,5 millió ausztrál dolláros bírsággal"
+        },
+        {
+          "value": "123 M",
+          "label": "a Roblox napi aktív felhasználója 2026 Q2-ben, a 2025 Q3-as 152 millióról csökkenve, a kötelező életkor-ellenőrzés bevezetése után"
+        }
+      ],
+      "why": "A gyerekek mentális egészségével kapcsolatos aggodalmak politikai konszenzust teremtettek. Ausztrália után Malajzia, Törökország bevezette, Franciaország, Spanyolország, Dánia, Lengyelország, Görögország előkészíti a tiltást, az EU pedig a függőséget okozó dizájn ellen készít jogszabályt (Digital Fairness Act).",
+      "opportunity": "A gyerekeknek szóló tartalomnál a biztonságos, szülők által jóváhagyott közeg (YouTube Kids, oktatási appok) felértékelődik.",
+      "sources": [
+        {
+          "title": "Al-Monitor/Reuters factbox: countries curb children's social media access",
+          "url": "https://www.al-monitor.com/originals/2026/06/factbox-australia-europe-countries-move-curb-childrens-social-media-access"
+        },
+        {
+          "title": "Roblox: age checks for chat worldwide",
+          "url": "https://www.nasdaq.com/press-release/roblox-requires-users-worldwide-age-check-access-chat-2026-01-07"
+        },
+        {
+          "title": "Shacknews: Roblox Q2 2026 DAUs",
+          "url": "https://www.shacknews.com/article/150208/roblox-daus-grew-10-percent-yoy"
+        }
+      ],
+      "deep": {
+        "context": [
+          "Ausztrália 2025 decemberében elsőként tiltotta meg a nagy közösségi platformok használatát 16 év alatt, és a platformokat terheli a felelősség. Azóta a hullám Európába is átért: Franciaországban az alsóház megszavazta a 15 év alatti tiltást, Spanyolország 16 év alatti tilalmat és kötelező életkor-ellenőrzést tervez, Dánia, Lengyelország, Szlovénia, Görögország és Svédország is hasonló szabályokon dolgozik. Az Európai Parlament 16 év alatti, szülői engedély nélküli tiltást sürget.",
+          "A platformok előre menekülnek: a Roblox 2026 januárjától világszerte arcalapú életkor-becsléshez kötötte a chatet. Ennek látható ára lett: a napi aktív felhasználók száma 2025 harmadik negyedéve óta minden negyedévben csökkent, a lekötött órák száma 40 milliárdról 29 milliárdra esett.",
+          "A trend nemcsak a közösségi médiát érinti: az appboltok (Google Play életkorjelzések), a játékok és a gyerekeknek szóló tartalmak is szigorúbb ellenőrzés alá kerülnek."
+        ],
+        "drivers": [
+          "Kutatások és közvélemény a gyerekek mentális egészségéről",
+          "Ausztrália mint működő minta",
+          "Az EU Digital Fairness Act előkészítése",
+          "Életkor-becslő technológiák (arcfelismerés, AI) olcsóbbá válása"
+        ],
+        "players": [
+          "Ausztrália eSafety Commissioner",
+          "Európai Bizottság és Parlament",
+          "Roblox (Persona életkor-becslés)",
+          "Meta, TikTok, Snap (tinédzser fiókok)",
+          "Google Play (életkorjelzés API)"
+        ],
+        "signals": [
+          "A francia és spanyol törvény végső elfogadása",
+          "Az EU Digital Fairness Act tervezete",
+          "Az ausztrál tiltás első hatásvizsgálatai",
+          "Magyarországon indul-e hasonló kezdeményezés"
+        ],
+        "risks": [
+          "Az életkor-ellenőrzés adatvédelmi kockázatot hordoz",
+          "A tiltások megkerülhetők, a gyerekek kevésbé szabályozott terekbe vándorolhatnak",
+          "A gyerekeknek szóló alkotók elérése csökkenhet"
+        ],
+        "actions": [
+          "Gyerekeknek szóló csatornánál a „gyerekeknek szóló” (Made for Kids) jelölés és a szabályok pontos betartása kötelező, a kommentek és személyre szabott hirdetések hiányával számolni kell",
+          "Gyerekappnál tervezz szülői kapuval, adatgyűjtés nélkül, és kövesd a Google Play életkorjelzéseit",
+          "Számolj azzal, hogy a 13–16 éves közönség egyes országokban eltűnhet a közösségi platformokról"
+        ]
+      },
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-28",
+          "ring": 3,
+          "impact": 3,
+          "note": "Felvéve a social media mélyfelderítés során."
+        }
+      ]
+    },
+    {
+      "id": "ai-videofolyam",
+      "title": "Teljesen AI-generált videófolyamok",
+      "area": "soc",
+      "ring": 2,
+      "impact": 2,
+      "indie": true,
+      "horizon": "2026–2028",
+      "summary": "Megjelentek a csak AI-videókból álló közösségi appok (OpenAI Sora, Meta Vibes), ahol a felhasználók generálnak, remixelnek és saját magukat is beleteszik a jelenetekbe.",
+      "figures": [
+        {
+          "value": "10×+",
+          "label": "nőtt a médiakészítés a Meta AI appban a Vibes elindítása után (Meta)"
+        },
+        {
+          "value": "20 Mrd+",
+          "label": "kép készült a Meta AI-eszközeivel a Meta közlése szerint"
+        }
+      ],
+      "why": "A videógenerálás minősége és sebessége elérte azt a szintet, hogy szórakoztató, remixelhető tartalom legyen belőle. A Sora app 2025 szeptemberében indult, a Meta 2026 elején külön appként tesztelte a Vibes-t.",
+      "opportunity": "A remixelhető karakterek és formátumok új terjesztési csatornát adhatnak, de a felhasználói elfogadás még bizonytalan.",
+      "sources": [
+        {
+          "title": "PYMNTS: Meta challenges Sora with standalone Vibes app",
+          "url": "https://www.pymnts.com/meta/2026/meta-challenges-sora-with-standalone-vibes-app/"
+        },
+        {
+          "title": "TechCrunch: Meta tests a standalone app for Vibes",
+          "url": "https://www.techcrunch.com/2026/02/05/meta-tests-a-standalone-app-for-its-ai-generated-vibes-videos"
+        },
+        {
+          "title": "TechCrunch: Meta AI app downloads spiked after Vibes",
+          "url": "https://techcrunch.com/2025/10/20/meta-ais-app-downloads-and-daily-users-spiked-after-launch-of-vibes-ai-video-feed"
+        }
+      ],
+      "deep": {
+        "context": [
+          "2025 őszén két nagy szereplő is elindította a csak AI-videókból álló hírfolyamot: az OpenAI a Sora appot, a Meta a Vibes-t a Meta AI alkalmazáson belül. Mindkettőben a felhasználók nemcsak néznek, hanem generálnak, más videóit remixelik, és saját arcukat, karakterüket is beilleszthetik.",
+          "A korai adatok vegyesek: a Meta szerint a Vibes után ugrásszerűen nőtt a tartalomkészítés az appjában, ugyanakkor a „slop” elleni hangulat és a platformok szigorítása mutatja, hogy a nézők egy része elutasítja a gépi tartalmat. A nyitott kérdés, hogy az AI-videó külön szórakozási kategória lesz-e (mint a mémek), vagy beolvad a meglévő platformokba.",
+          "A szerzői jog itt különösen érzékeny: a karakterek és hasonmások remixelése jogi vitákat szül."
+        ],
+        "drivers": [
+          "Olcsó, gyors videógenerálás",
+          "A platformok saját AI-modelljeinek népszerűsítése",
+          "A remix- és mémkultúra"
+        ],
+        "players": [
+          "OpenAI Sora app",
+          "Meta Vibes",
+          "Google Veo (YouTube Shorts integráció)",
+          "TikTok AI-effektek"
+        ],
+        "signals": [
+          "Közölnek-e a cégek aktív felhasználói számokat",
+          "Bevezetik-e a monetizációt az alkotóknak",
+          "Szerzői jogi perek a karakter-remixek miatt"
+        ],
+        "risks": [
+          "Gyorsan lecsengő újdonság lehet",
+          "Szerzői és személyiségi jogi kockázat",
+          "Erős felhasználói ellenérzés a gépi tartalommal szemben"
+        ],
+        "actions": [
+          "Figyeld, de ne építs rá fő csatornát, amíg nincs monetizáció és stabil közönség",
+          "A saját karaktereid remixelhetőségét kezeld tudatosan: mit engedsz, mit nem"
+        ]
+      },
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-28",
+          "ring": 2,
+          "impact": 2,
+          "note": "Felvéve a social media mélyfelderítés során."
+        }
+      ]
+    },
+    {
+      "id": "platform-fragmentacio",
+      "title": "Szétaprózódó szöveges platformok és a TikTok amerikai újraindulása",
+      "area": "soc",
+      "ring": 3,
+      "impact": 1,
+      "indie": false,
+      "horizon": "most",
+      "summary": "A szöveges közösségi tér három részre szakadt (X, Threads, Bluesky), miközben a TikTok amerikai változata új tulajdonosi szerkezetben, újratanított algoritmussal működik.",
+      "figures": [
+        {
+          "value": "+21,3%",
+          "label": "a Threads havi aktív felhasználóinak éves növekedése 2026 júniusában (Similarweb, mobil); az X −3%"
+        },
+        {
+          "value": "10,4 M",
+          "label": "a Bluesky havi aktív mobilfelhasználója 2026 júniusában, a 2024-es csúcs fele"
+        },
+        {
+          "value": "19,9%",
+          "label": "a ByteDance részesedése a TikTok amerikai közös vállalatában (2026 januártól)"
+        }
+      ],
+      "why": "Az X 2022 utáni átalakulása után a felhasználók szétszéledtek; a Threads a Meta erejével nő, a Bluesky a 2024-es kiugrás után visszaesett. A TikTok amerikai közös vállalata (Oracle, Silver Lake, MGX és mások) 2026 januárjában indult, az algoritmust amerikai adatokon tanítják újra.",
+      "opportunity": "Nem kell minden platformon jelen lenni: a szöveges platformok közül a Threads a legígéretesebb újraosztásra.",
+      "sources": [
+        {
+          "title": "GIGAZINE: Bluesky, Threads, X active users (Similarweb)",
+          "url": "https://gigazine.net/gsc_news/en/20260812-blueskys-active-user/"
+        },
+        {
+          "title": "Al Jazeera: Who controls TikTok's US platform",
+          "url": "https://www.aljazeera.com/news/2026/1/23/who-controls-tiktoks-us-platform-under-new-deal"
+        },
+        {
+          "title": "Social Media Today: Threads adds users as X declines",
+          "url": "https://www.socialmediatoday.com/news/threads-continues-to-add-users-as-x-sees-ongoing-declines/809940/"
+        }
+      ],
+      "deep": {
+        "context": [
+          "A „mindenki egy helyen” típusú szöveges közösségi tér megszűnt. Az X napi aktív felhasználói 2026 közepén csökkentek, a Threads két számjegyű ütemben nő, a Bluesky pedig regisztrált felhasználóban nő, de aktív használatban a 2024-es csúcs felére esett.",
+          "A TikTok amerikai jövője 2026 januárjában rendeződött: egy amerikai többségi tulajdonú közös vállalat felel az adatokért, a tartalommoderálásért és az algoritmus amerikai újratanításáért. Az amerikai alkotók globálisan is felfedezhetők maradnak, de az amerikai és a többi piac algoritmusa idővel eltérhet.",
+          "Európai szemmel a TikTok globális változata nem változott, de az amerikai trendek és formátumok terjedése lassulhat vagy eltérhet."
+        ],
+        "drivers": [
+          "Az X irányváltása és a felhasználói megosztottság",
+          "A Meta platformokon átívelő felhasználói bázisa",
+          "Geopolitikai szabályozás (TikTok-törvény)"
+        ],
+        "players": [
+          "X",
+          "Threads",
+          "Bluesky (AT Protocol)",
+          "TikTok USDS Joint Venture"
+        ],
+        "signals": [
+          "Eltér-e látványosan az amerikai és a globális TikTok algoritmusa",
+          "Eléri-e a Threads az X napi aktív felhasználószámát",
+          "Az AT Protocolra épülő új appok"
+        ],
+        "risks": [
+          "Több platform kezelése elaprózza az időt",
+          "A TikTok-szabályozás más országokban is előkerülhet"
+        ],
+        "actions": [
+          "Válassz egy elsődleges rövidvideós és egy hosszú formátumú platformot, a többin csak újraoszd",
+          "Ha szöveges jelenlét kell, a Threads-et érdemes kipróbálni az Instagram-fiókhoz kötve"
+        ]
+      },
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-28",
+          "ring": 3,
+          "impact": 1,
+          "note": "Felvéve a social media mélyfelderítés során."
+        }
+      ]
+    },
+    {
+      "id": "brainrot",
+      "title": "Abszurd AI-mémkultúra (brainrot)",
+      "area": "soc",
+      "ring": 3,
+      "impact": 1,
+      "indie": true,
+      "horizon": "most",
+      "summary": "Szürreális, értelmetlennek tűnő, AI-val generált karakterek és mémek (például az „olasz brainrot” lényei) uralják az Alfa- és Z-generáció humorát.",
+      "figures": [],
+      "why": "Az AI-képgenerálás olcsón hoz létre furcsa hibridlényeket, a túlzó hangalámondás és az ismétlődő karakterek közösségi „belső poénná” válnak. A márkák gyakran rosszul próbálják utánozni, mert a polírozott változat nem hiteles.",
+      "opportunity": "Az eszközök átvehetők: meghökkentő nyitás, visszatérő karakterek, futó poénok, nyers stílus.",
+      "sources": [
+        {
+          "title": "OpusClip: The Brainrot Era field guide 2026",
+          "url": "https://www.opus.pro/blog/brainrot-field-guide-2026"
+        },
+        {
+          "title": "Campaign: Why brain rot makes sense to Gen Alpha",
+          "url": "https://campaignlive.com/article/why-brain-rot-makes-sense-gen-alpha/1945896"
+        },
+        {
+          "title": "TechTarget: Brainrot marketing examples",
+          "url": "https://www.techtarget.com/WhatIs/feature/Brainrot-marketing-examples"
+        }
+      ],
+      "deep": {
+        "context": [
+          "A „brainrot” gyűjtőfogalom a 2024–2026-os, szürreális alapötletre épülő virális tartalmakra. Legismertebb ága az „olasz brainrot”: AI-val generált állat–tárgy hibridek álolasz nevekkel és drámai hangalámondással. Rokona a Skibidi-sorozat és az „Ohio” mémuniverzum.",
+          "A jelenség lényege nem a minőség, hanem a közösségi tudás: aki ismeri a karaktereket, az része a csoportnak. Ezért a gyerekek és tinédzserek körében gyűjtőkártyák, játékok és rajzok is készülnek belőlük.",
+          "A szülők és pedagógusok egy része aggódik, a kutatók szerint viszont a mémkultúra régi mintázatát követi: közös nyelv és identitás."
+        ],
+        "drivers": [
+          "Olcsó AI-képgenerálás",
+          "A TikTok és a YouTube Shorts remixkultúrája",
+          "Az Alfa-generáció saját humorkódja"
+        ],
+        "players": [
+          "TikTok",
+          "YouTube Shorts",
+          "Roblox (brainrot-témájú játékok)"
+        ],
+        "signals": [
+          "Megjelennek-e licencelt termékek a mémkarakterekből",
+          "Mi jön a brainrot után: a mémkultúra ciklusai rövidek"
+        ],
+        "risks": [
+          "Nagyon rövid életciklus",
+          "A márkás utánzás könnyen kínos",
+          "Gyerekeknek szóló tartalomnál szülői ellenérzés"
+        ],
+        "actions": [
+          "Ne másold a stílust, de vedd át a technikákat: első 1 másodperc meglepetés, visszatérő karakterek, futó poénok",
+          "Gyerekcsatornánál a saját, kedves abszurd karakter (pl. egy furcsa állat-figura) jobb út, mint a mémkarakterek"
+        ]
+      },
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-28",
+          "ring": 3,
+          "impact": 1,
+          "note": "Felvéve a social media mélyfelderítés során."
+        }
+      ]
+    },
+    {
+      "id": "creator-mediaceg",
+      "title": "Creatorok mint médiacégek, teljesítményalapú szponzoráció",
+      "area": "soc",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "most",
+      "summary": "A creatorok saját termékekkel, licenccel, eseményekkel épülnek céggé, a márkák pedig hosszabb partnerséget és teljesítményhez kötött díjat kérnek az egyszeri hirdetés helyett.",
+      "figures": [
+        {
+          "value": "6,2%",
+          "label": "az elemzett hosszú YouTube-videók ennyi része tartalmazott szponzorációt 2026 szept.–okt.-ben (egy évvel korábban 4,8%)"
+        },
+        {
+          "value": "+15%",
+          "label": "nőtt az influencer-hirdetési költés az elmúlt évben (Digital 2027)"
+        },
+        {
+          "value": "+18%",
+          "label": "nőtt a közösségimédia-hirdetési költés"
+        }
+      ],
+      "why": "A hirdetési bevétel ingadozik, ezért a sikeres alkotók diverzifikálnak. A márkák mérhető eredményt akarnak: alap díj + teljesítménybónusz, több formátumban (hosszú videó, Shorts, közösségi klipek). A szponzorált videók hónapokig, évekig hoznak megtekintést.",
+      "opportunity": "Már közepes méretű csatornák is kaphatnak szponzorációt, ha egy szűk témában hiteles a közönségük.",
+      "sources": [
+        {
+          "title": "ThoughtLeaders: Creator Economy Trends 2026, October update",
+          "url": "https://www.thoughtleaders.io/blog/creator-economy-trends-2026"
+        },
+        {
+          "title": "Meltwater: Digital 2027 report",
+          "url": "https://www.meltwater.com/en/press-releases/digital-2027-report"
+        },
+        {
+          "title": "Everything PR: where creators build communities in 2026",
+          "url": "https://everything-pr.com/where-creators-build-communities-in-2026-the-platform-breakdown"
+        }
+      ],
+      "deep": {
+        "context": [
+          "A creator-gazdaság érett szakaszba lépett: a legnagyobb alkotók saját kávémárkát, podcasthálózatot, eseményeket, licenceket építenek, és a szponzoráció egyre inkább hosszú távú partnerség. A ThoughtLeaders 2,9 millió YouTube-videót elemzett 2026 szeptember–októberben: a szponzorált videók aránya egy év alatt 4,8%-ról 6,2%-ra nőtt.",
+          "A legaktívabb szponzorok között előrejelzési piacok, játékcégek, sportfogadás, zene- és creator-eszközök vannak. Szinte minden ismétlődő márka korábban is szponzorált, vagyis a piac a visszatérő partnereken nyugszik.",
+          "A közvetlen bevétel is erősödik: a Patreon, Substack, Skool és társaik előfizetéses közösségeket tesznek lehetővé, eltérő jutalékkal és fókuszszal."
+        ],
+        "drivers": [
+          "Ingadozó platformbevétel",
+          "A márkák mérhetőségi igénye",
+          "AI-eszközök, amelyekkel kis csapat is sok formátumot gyárt"
+        ],
+        "players": [
+          "ThoughtLeaders, Passionfroot (szponzorációs piacterek)",
+          "Patreon, Substack, Skool, beehiiv",
+          "YouTube BrandConnect",
+          "TikTok Creator Marketplace"
+        ],
+        "signals": [
+          "A Shorts-szponzoráció mérésének megjelenése",
+          "Teljesítményalapú (affiliate) modellek terjedése",
+          "Szigorodó FTC és EU-s szabályok a jelöletlen hirdetésekre"
+        ],
+        "risks": [
+          "Jelöletlen szponzoráció bírságot és bizalomvesztést hoz",
+          "A márkafüggés a tartalom hitelességét ronthatja"
+        ],
+        "actions": [
+          "Készíts egyoldalas médiaajánlatot a csatornákhoz (közönség, téma, elérés)",
+          "Válassz illeszkedő termékkategóriákat (könyvek, oktatási appok, természetfigyelő eszközök, pénzügyi edukáció)",
+          "A saját appjaidat keresztpromózd a csatornáidon: ez a legolcsóbb szponzoráció"
+        ]
+      },
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-28",
+          "ring": 3,
+          "impact": 2,
+          "note": "Felvéve a social media mélyfelderítés során."
+        }
+      ]
+    },
+    {
+      "id": "reddit-emberi-valasz",
+      "title": "Reddit és a fórumok mint emberi tudásbázis",
+      "area": "soc",
+      "ring": 3,
+      "impact": 2,
+      "indie": true,
+      "horizon": "most",
+      "summary": "Az AI-válaszok korában az emberek tudatosan keresik a valódi emberi tapasztalatot. A Reddit forgalma, bevétele és az AI-cégeknek eladott adatai is nőnek.",
+      "figures": [
+        {
+          "value": "130,3 M",
+          "label": "napi aktív Reddit-felhasználó 2026 Q2-ben"
+        },
+        {
+          "value": "+61%",
+          "label": "a Reddit bevételének éves növekedése 2026 Q2-ben (805 millió dollár)"
+        }
+      ],
+      "why": "A keresők és az AI-asszisztensek is gyakran a Redditet idézik, mert ott valódi felhasználói vélemény van. Ugyanakkor a Reddit forgalma erősen függ a keresési és chatbot-hivatkozásoktól, ezt a vezérigazgató is „hullámzónak” nevezte.",
+      "opportunity": "Niche subredditekben lehet valódi felhasználói problémákat, appötleteket és visszajelzést gyűjteni.",
+      "sources": [
+        {
+          "title": "Social Media Today: Reddit grows to 130M+ daily actives",
+          "url": "https://www.socialmediatoday.com/news/reddits-user-base-grows-to-more-than-130-million-daily-actives/826783/"
+        },
+        {
+          "title": "Magica: Reddit Q2 growth and Google exposure",
+          "url": "https://magica.com/news/reddit-google-search-referrals-q2-2026"
+        },
+        {
+          "title": "Meltwater: Digital 2027",
+          "url": "https://www.meltwater.com/en/press-releases/digital-2027-report"
+        }
+      ],
+      "deep": {
+        "context": [
+          "Ahogy a web tele lett gépi szöveggel, a felhasználók egy része a kereséshez hozzáírja: „reddit”. Ezt a Google és az AI-asszisztensek is felismerték: a Reddit-tartalom kiemelten jelenik meg a találatok között, és licencszerződésekkel AI-modellek tanításához is felhasználják.",
+          "A Reddit 2026 második negyedévében 130 millió feletti napi aktív felhasználót és 61%-os bevételnövekedést jelentett. A gyenge pont: a felhasználók ritkán térnek vissza közvetlenül, a forgalom jelentős része keresőkből és chatbotokból érkezik.",
+          "A Meltwater Digital 2027 jelentése szerint a nyílt web forgalma csökken, miközben a közösségi és AI-felületek nőnek; az emberi vélemény ebben a közegben értékes nyersanyag."
+        ],
+        "drivers": [
+          "Bizalmatlanság a gépi szöveggel szemben",
+          "Keresőmotorok és AI-asszisztensek hivatkozásai",
+          "Adatlicenc-szerződések AI-cégekkel"
+        ],
+        "players": [
+          "Reddit",
+          "Google (AI Overviews)",
+          "Discord és niche fórumok",
+          "Quora"
+        ],
+        "signals": [
+          "A Reddit keresési forgalmának változása a Google-frissítések után",
+          "Új AI-adatlicenc-szerződések",
+          "Nemzetközi növekedés gépi fordítással"
+        ],
+        "risks": [
+          "A Reddit-közösségek elutasítják a promóciót",
+          "Erős függés a Google-tól"
+        ],
+        "actions": [
+          "Appötlet előtt keress rá a probléma Reddit-szálaira: mit panaszolnak az emberek",
+          "Ne reklámozz, hanem válaszolj hasznosan; a profilban lehet link",
+          "A saját témáidhoz (természet, pénz, agytorna) figyeld a kapcsolódó subredditek kérdéseit videóötletnek"
+        ]
+      },
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-28",
+          "ring": 3,
+          "impact": 2,
+          "note": "Felvéve a social media mélyfelderítés során."
+        }
+      ]
+    },
+    {
+      "id": "linkedin-video",
+      "title": "B2B creatorok és LinkedIn-videó",
+      "area": "soc",
+      "ring": 2,
+      "impact": 1,
+      "indie": false,
+      "horizon": "2026–2027",
+      "summary": "A LinkedIn videós platformmá alakul: creator-műsorokat, szponzorált sorozatokat és tévés hirdetést kínál a B2B márkáknak.",
+      "figures": [
+        {
+          "value": "81%",
+          "label": "a B2B marketingvezetők szerint a videó lerövidíti az értékesítési ciklust (LinkedIn/YouGov, 1 299 válaszadó)"
+        },
+        {
+          "value": "56%",
+          "label": "a creatorokat használó B2B vásárlók a döntés utolsó szakaszában támaszkodnak rájuk"
+        }
+      ],
+      "why": "A B2B vásárlók egyre fiatalabbak és videón tájékozódnak. A LinkedIn 2026-ban bővítette a BrandLink programot, a Top Voices 360 szponzorációt és a tévés hirdetéseket.",
+      "opportunity": "Cégeknek dolgozó szabadúszóként a szakmai munka rövid videós bemutatása ügyfélszerző csatorna lehet.",
+      "sources": [
+        {
+          "title": "LinkedIn: helping B2B marketers with creators and video (2026.03.)",
+          "url": "https://news.linkedin.com/2026/how-linkedin-is-helping-b2b-marketers-reach-audiences-at-scale-w"
+        },
+        {
+          "title": "Net Influencer: LinkedIn expands creator video ad tools",
+          "url": "https://www.netinfluencer.com/linkedin-expands-creator-video-ad-tools-as-b2b-marketers-demand-greater-scale/"
+        }
+      ],
+      "deep": {
+        "context": [
+          "A LinkedIn évekig szöveges szakmai hálózat volt, 2025–2026-ban azonban a videót tette a középpontba: függőleges videófolyam, creator-műsorok, kiadókkal közös szponzorált tartalom és tévés hirdetés.",
+          "A cég saját felmérése szerint a B2B marketingvezetők nagy többsége úgy látja, hogy a videó gyorsítja az értékesítést, és a vásárlók a döntés végén a szakmai alkotókra támaszkodnak."
+        ],
+        "drivers": [
+          "Fiatalodó B2B vásárlók",
+          "A videós formátum általános térnyerése",
+          "A LinkedIn hirdetési bevételi céljai"
+        ],
+        "players": [
+          "LinkedIn (BrandLink, Top Voices 360)",
+          "Microsoft Monetize",
+          "Szakmai creatorok"
+        ],
+        "signals": [
+          "A LinkedIn creator-kifizetéseinek bővülése",
+          "Nő-e a videós posztok organikus elérése"
+        ],
+        "risks": [
+          "A szakmai közönség telítődik a videós önreklámmal"
+        ],
+        "actions": [
+          "Egy-egy elkészült projektről 60 másodperces „hogyan oldottam meg” videó a LinkedInen ügyfélszerzésre"
+        ]
+      },
+      "firstSeen": "2026-10",
+      "momentum": "new",
+      "history": [
+        {
+          "date": "2026-10-28",
+          "ring": 2,
+          "impact": 1,
+          "note": "Felvéve a social media mélyfelderítés során."
         }
       ]
     },
@@ -896,7 +2443,40 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A mikrodráma Kínában született: 1–3 perces, álló formátumú epizódok, erős konfliktussal és minden rész végén függővéggel, jellemzően webregények alapján. A néző az első részeket ingyen nézi, a folytatásért fizet vagy hirdetést néz. A formátum 2024–2026-ban nyugatra is átért: az USA-ban a ReelShort és a DramaBox több napi időt visz el mobilon, mint a Netflix.",
+          "2026 első negyedévében a kategória több mint 850 millió letöltést ért el, Latin-Amerikában robbanásszerűen nőtt, a TikTok saját mikrodráma-appot indított. Kínában az AI-generált szereplők és az AI-képregény-drámák már a kínálat jelentős részét adják. A gyenge pont: a platformok a bevétel nagy részét marketingre költik, így konszolidáció várható."
+        ],
+        "drivers": [
+          "Mobil-első, rövid figyelmi ablakok",
+          "Fizetős epizódmodell (mikrotranzakció)",
+          "Olcsó gyártás, AI-segített produkció",
+          "Webregény-katalógusok mint alapanyag"
+        ],
+        "players": [
+          "ReelShort (Crazy Maple)",
+          "DramaBox",
+          "TikTok PineDrama",
+          "My Drama (Holywater)",
+          "Peacock és más streamerek licencei"
+        ],
+        "signals": [
+          "Felvásárlások, konszolidáció a kategóriában",
+          "AI-generált mikrodrámák elfogadottsága nyugaton",
+          "Új műfajok (horror, thriller) megjelenése"
+        ],
+        "risks": [
+          "Magas felhasználószerzési költség",
+          "Sablonos, alacsony minőségű tartalom",
+          "Fizetési minták miatt szabályozói figyelem"
+        ],
+        "actions": [
+          "Kísérletként egy rövid, AI-animált, függővéges ismeretterjesztő sorozat (pl. egy állat élettörténete 5 részben)",
+          "Horror- vagy rejtélyes „igaz történet” formátum a Weird-csatornákhoz"
+        ]
+      }
     },
     {
       "id": "elofizetes",
@@ -950,7 +2530,37 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Az app-gazdaság mennyiségi növekedése lelassult: a letöltések alig nőnek, de a fizetős konverzió és az előfizetési bevétel gyorsul. 2026 első negyedévében az előfizetési bevétel több mint duplájára nőtt egy év alatt, főleg az AI-appok miatt; a ChatGPT 2026 májusában lett a leggyorsabban milliárd havi felhasználót elérő app.",
+          "Közben a kínálat robban: az AI-val épített appok miatt havonta tízezres nagyságrendben jelennek meg új előfizetéses appok, de a legtöbbjük nem tartja meg a felhasználókat. A nyertesek a szűk, valódi problémát megoldó appok, a hibrid monetizáció (ingyenes alap, előfizetés, egyszeri vásárlás) és a webes fizetés a bolti jutalék csökkentésére."
+        ],
+        "drivers": [
+          "AI-appok új, magasabb árszintje",
+          "Webes fizetés engedélyezése (USA)",
+          "Előfizetés-fáradtság a fogyasztóknál"
+        ],
+        "players": [
+          "Sensor Tower, RevenueCat (adatok)",
+          "OpenAI, Google, Anthropic (AI-appok)",
+          "Apple App Store, Google Play"
+        ],
+        "signals": [
+          "Előfizetési lemondási arányok változása",
+          "Webes fizetés terjedése Európában (DMA)",
+          "AI-appok koncentrációja: három app viszi a figyelem nagyját"
+        ],
+        "risks": [
+          "Telített kategóriák",
+          "Az AI-asszisztensek beépítik az egyszerű utility-funkciókat"
+        ],
+        "actions": [
+          "Alapverzió legyen igazán hasznos ingyen, a prémium adjon tartós extra értéket",
+          "Kínálj éves és egyszeri (lifetime) opciót is az előfizetés-fáradtság miatt",
+          "Számolj a RevenueCat vagy hasonló eszközzel: mérd a próbaidő-konverziót"
+        ]
+      }
     },
     {
       "id": "android-2027",
@@ -984,7 +2594,37 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Az Android-ökoszisztéma 2026–2027-ben látványosan átalakul. Az USA-ban a bírósági döntések nyomán rivális boltok jelenhetnek meg a Google Playen belül, és az appok saját webes fizetést is kínálhatnak. Közben a Google kötelező fejlesztői ellenőrzést vezet be: 2027-től minden tanúsított Android-telefonon csak ellenőrzött fejlesztők appjai telepíthetők, az oldalról telepített appoké is.",
+          "Mellette terjed az életkor-ellenőrzés (életkorjelzés API, szülői jóváhagyás), és a Google folyamatosan emeli a kötelező célverziót. Az indie fejlesztőknek ez adminisztrációs teher, de a csalók kiszűrésével tisztább piacot is jelenthet."
+        ],
+        "drivers": [
+          "Trösztellenes bírósági döntések (Epic v. Google)",
+          "Kártékony appok elleni fellépés",
+          "Gyerekvédelmi szabályozás"
+        ],
+        "players": [
+          "Google Play",
+          "Epic Games Store",
+          "Uniós DMA-szabályozás"
+        ],
+        "signals": [
+          "A fejlesztői ellenőrzés részletei és díja",
+          "Európában is engedélyezik-e a hasonló webes fizetést",
+          "Életkorjelzés API kötelezővé válása"
+        ],
+        "risks": [
+          "Elmaradt ellenőrzés esetén az app nem telepíthető",
+          "Több bolt, több adminisztráció"
+        ],
+        "actions": [
+          "Végezd el időben a fejlesztői fiók ellenőrzését",
+          "Tartsd naprakészen a célverziót (targetSdk) minden appodban",
+          "Gyerekeknek szóló appnál építsd be az életkorjelzések kezelését"
+        ]
+      }
     },
     {
       "id": "idle",
@@ -1030,7 +2670,35 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A mobiljáték-piac stabilizálódott és lassan nő, a feltörekvő piacok hajtják. A kínálat telített: évente több mint egymillió új app jelenik meg, és csak kis részük kap érdemi figyelmet.",
+          "Az idle (tétlen, automatikusan haladó) játékok népszerűek, mert rövid munkamenetekhez illeszkednek, és erős meta-progressziót kínálnak; ismert sorozatok is kiadják idle-változatukat. Az alacsony fejlesztési költség miatt indie fejlesztőnek is elérhető műfaj."
+        ],
+        "drivers": [
+          "Rövid, alkalmi játékidő",
+          "Hirdetés + vásárlás hibrid monetizáció",
+          "Ismert IP-k idle-adaptációi"
+        ],
+        "players": [
+          "AppMagic, Sensor Tower (adatok)",
+          "Habby, Supercell (hibrid-kasual)",
+          "Ismert IP-tulajdonosok"
+        ],
+        "signals": [
+          "Felhasználószerzési költségek alakulása",
+          "Hibrid-kasual alműfajok felfutása"
+        ],
+        "risks": [
+          "Nagyon magas felhasználószerzési költség",
+          "Klónok gyors megjelenése"
+        ],
+        "actions": [
+          "A Unity-játékaidhoz gondold végig az idle meta-réteget (offline haladás, fejlesztési fa)",
+          "Mérj korán: 1. napi és 7. napi megtartás alapján dönts a folytatásról"
+        ]
+      }
     },
     {
       "id": "platformok-osszemosodnak",
@@ -1068,7 +2736,34 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A konzol, PC és mobil határa elmosódik: a kézi PC-k (Steam Deck és társai), a felhőjáték és a mobil hardver ereje miatt ugyanaz a játék több eszközön fut. A nagy, ingyenes, platformfüggetlen címek (Genshin Impact és társai) beállították a mércét.",
+          "A PwC 2027-re több mint 300 milliárd dolláros globális játékbevételt vár. Az AI mélyebben épül be a fejlesztésbe (asszetek, tesztelés), és a játék-creatorok gazdasága tovább nő."
+        ],
+        "drivers": [
+          "Kézi PC-k és erős mobil-SoC-k",
+          "Felhőjáték",
+          "Platformok közti mentés és vásárlás"
+        ],
+        "players": [
+          "Valve (Steam Deck)",
+          "Nintendo",
+          "Microsoft (Xbox Cloud)",
+          "miHoYo"
+        ],
+        "signals": [
+          "Új kézikonzolok 2027-ben",
+          "Webes boltok és platformok közti vásárlás"
+        ],
+        "risks": [
+          "Több platform, több tesztelési teher"
+        ],
+        "actions": [
+          "Unity-játékoknál tervezz eleve mobil + PC (Steam) célra: a Steam alacsonyabb belépési költségű közönség lehet"
+        ]
+      }
     },
     {
       "id": "analog",
@@ -1118,7 +2813,34 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A Z generáció egy része tudatosan csökkenti a képernyőidőt: film fényképezőgépek, walkmanek, buta telefonok, „nagymama-hobbik” (kötés, horgolás, kenyérsütés), telefonmentes események. Az Offline Club 19 városban szervez telefon nélküli találkozókat.",
+          "Ez nem a digitális világ elutasítása, hanem határhúzás: a fiatalok a közösségi média mentális terhére reagálnak. A Fortune legalább 5 milliárd dolláros piacnak becsüli az analóg gazdaságot."
+        ],
+        "drivers": [
+          "Közösségimédia-fáradtság",
+          "Mentális egészség tudatossága",
+          "Nosztalgia egy soha meg nem élt korszak iránt"
+        ],
+        "players": [
+          "Offline Club",
+          "Dumbphone-gyártók (Light Phone, Punkt)",
+          "Fujifilm Instax"
+        ],
+        "signals": [
+          "Iskolai telefontilalmak terjedése",
+          "Képernyőidő-csökkentő appok népszerűsége"
+        ],
+        "risks": [
+          "Lehet, hogy rövid divat"
+        ],
+        "actions": [
+          "Az appjaid kínáljanak rövid, lezárt munkamenetet (napi 5 perc agytorna, majd vége), ne végtelen görgetést",
+          "Nyomtatható kiegészítők (kártyák, matricák) a gyerekcsatornához"
+        ]
+      }
     },
     {
       "id": "emberi-premium",
@@ -1155,7 +2877,33 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Amikor az AI-tartalom korlátlan és ingyenes, a ritka érték az ellenőrizhetően emberi: a látható készítő, a valós tapasztalat, a forrás. A fogyasztók és a munkahelyi vezetők körében is terjed az AI-fáradtság, egyes előrejelzések szerint a túl tökéletes munka gyanút kelt.",
+          "A Mintel szerint a hagyományos tekintélyforrások szétaprózódnak, és azok a márkák nyernek, amelyek igazolni tudják hitelességüket. A platformok eredetiségi szabályai ezt a trendet erősítik."
+        ],
+        "drivers": [
+          "AI-tartalomáradat",
+          "Bizalomvesztés a médiában",
+          "Platformok eredetiségi jutalmazása"
+        ],
+        "players": [
+          "C2PA (tartalomhitelesítés)",
+          "Kézműves és közvetlen márkák"
+        ],
+        "signals": [
+          "„Ember készítette” jelölések megjelenése",
+          "AI-mentes tartalmat ígérő platformok"
+        ],
+        "risks": [
+          "Az „emberi” címke is marketingfogássá válhat"
+        ],
+        "actions": [
+          "Mutasd meg a készítés folyamatát (kulisszák mögött, forrásellenőrzés)",
+          "A videók leírásában add meg a forrásokat: bizalmi jel"
+        ]
+      }
     },
     {
       "id": "rendszerek",
@@ -1184,7 +2932,31 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A Mintel 2027-es előrejelzésének központi gondolata: a fogyasztó nem terméket, hanem eredményt vásárol. Aki termékhez szakértelmet, technológiát és szolgáltatást kapcsol (például egy étrend-kiegészítőhöz követő appot és tanácsadást), tartósabb kapcsolatot épít.",
+          "A legnagyobb versenytárs így gyakran nem egy hasonló termék, hanem egy jobb rendszer, amely az egész problémát megoldja."
+        ],
+        "drivers": [
+          "Eredményközpontú vásárlás",
+          "Összekapcsolt eszközök és appok",
+          "AI-alapú személyre szabás"
+        ],
+        "players": [
+          "Mintel",
+          "Egészség- és szépségipari márkák appjai"
+        ],
+        "signals": [
+          "Termék + app csomagok terjedése"
+        ],
+        "risks": [
+          "Bonyolultabb termékfejlesztés"
+        ],
+        "actions": [
+          "Az appjaidat kapcsold valós szokáshoz: agytorna + napi rutin, szótanulás + utazás"
+        ]
+      }
     },
     {
       "id": "pozitiv-loket",
@@ -1226,7 +2998,32 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A folyamatos negatív hírek, háború és infláció mellett a fogyasztók kis hangulatjavító élményeket és biztonságos menedéket keresnek: kisebb társaságot, gyerekkori kényelmi jeleket, nyugtató rutinokat. Az Innova szerint a fogyasztók 71%-a fáradt a negatív hírektől.",
+          "A csavar: a legkeresettebb ígéretek (hangulat, nyugalom, energia) az élelmiszereken a legtöbb piacon szabályozás miatt nem írhatók ki, így a márkák az élményre és a hangulatra építenek."
+        ],
+        "drivers": [
+          "Hírfáradtság",
+          "Gazdasági bizonytalanság",
+          "Mentális egészség tudatossága"
+        ],
+        "players": [
+          "Innova Market Insights",
+          "WGSN"
+        ],
+        "signals": [
+          "Kényelmi és nosztalgiatermékek eladásai"
+        ],
+        "risks": [
+          "Felszínes „jó hangulat” marketing"
+        ],
+        "actions": [
+          "A csodálkozást keltő, pozitív hangvételű ismeretterjesztés jól illeszkedik: zárd a videókat kellemes, meglepő tényekkel",
+          "Appokban nyugtató hangok, lassú animációk, kedves visszajelzések"
+        ]
+      }
     },
     {
       "id": "jatek-jollet",
@@ -1268,7 +3065,35 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A játék már nem csak a gyerekeké: a felnőttek a stressz oldására, kapcsolódásra és nosztalgiából játszanak és gyűjtenek. A WGSN a felelősség alóli szabadulás vágyát („Witherwill”) 2027 egyik kulcsérzelmének nevezte; az Expedia szerint sokan „felnőttségmentes” utat terveznek.",
+          "A Whatnot játék- és gyűjtői piacán a gyerekkori kedvencek és a „vadászat izgalma” hajtja a forgalmat."
+        ],
+        "drivers": [
+          "Kiégés és stressz",
+          "Nosztalgia",
+          "Kidult (felnőtt gyerek) fogyasztói csoport"
+        ],
+        "players": [
+          "LEGO (felnőtt szettek)",
+          "Nintendo",
+          "Whatnot",
+          "Pop Mart"
+        ],
+        "signals": [
+          "Felnőtteknek szóló játékboltok és élmények",
+          "Gyűjthető digitális elemek appokban"
+        ],
+        "risks": [
+          "Divatfüggő gyűjtői hullámok"
+        ],
+        "actions": [
+          "Agytorna appban a gyűjthető jelvények, kártyák, sorozatok erős motivátor felnőtteknél is",
+          "Felnőtt közönségnek is játékos, nem gyerekes vizuális stílus"
+        ]
+      }
     },
     {
       "id": "meleg-dizajn",
@@ -1297,7 +3122,30 @@
           "impact": 1,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A márkatervezésben ellenreakció indult a hideg, túlpolírozott, minimalista vizuális világgal szemben: melegebb színek, emberi textúra, kézműves jelleg, nyugodtabb elrendezés. Ez az AI-generált képek egyformaságára is válasz.",
+          "A márkarendszerek modulárisak lettek, hogy polcon, webshopban, rövid videóban és appikonban is működjenek."
+        ],
+        "drivers": [
+          "AI-vizuálok egyformasága",
+          "Közösség és öröm mint vásárlási ok"
+        ],
+        "players": [
+          "Big Eye Agency (elemzés)",
+          "Dizájnstúdiók"
+        ],
+        "signals": [
+          "Appikon- és UI-trendek az appboltokban"
+        ],
+        "risks": [
+          "Gyorsan változó esztétika"
+        ],
+        "actions": [
+          "Appikonoknál és bélyegképeknél teszteld a melegebb palettát A/B teszttel"
+        ]
+      }
     },
     {
       "id": "glp1",
@@ -1339,7 +3187,36 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A GLP-1 gyógyszerek (szemaglutid, tirzepatid) eredetileg cukorbetegségre készültek, de a fogyasztásban elért hatásuk miatt tömegtermékké váltak; az USA-ban a felnőttek nagyjából ötöde használt már ilyet. A kutatás kiterjed a szív-, vese-, máj-, ízületi és függőségi hatásokra, egyesek az első „hosszú élet” gyógyszernek tartják, bár egészséges embereknél nincs elég hosszú távú adat.",
+          "A tablettás és ritkább adagolású formák olcsóbbá és elérhetőbbé teszik. A hullámhatás széles: kevesebb, de tápanyagdúsabb étel, izommegtartó edzés, ruházati és élelmiszeripari változások."
+        ],
+        "drivers": [
+          "Klinikai eredmények",
+          "Tablettás formák, csökkenő árak",
+          "Lejáró szabadalmak és generikumok egyes piacokon"
+        ],
+        "players": [
+          "Novo Nordisk",
+          "Eli Lilly",
+          "Generikus gyártók"
+        ],
+        "signals": [
+          "Generikus szemaglutid megjelenése",
+          "Árak és támogatás változása Európában",
+          "Hosszú távú biztonsági adatok"
+        ],
+        "risks": [
+          "Mellékhatások, izomvesztés",
+          "Orvosi felügyelet nélküli használat"
+        ],
+        "actions": [
+          "Egészségügyi tanácsot ne adj, de a táplálkozás és edzéskövetés appötlet lehet orvosi felügyelet melletti használatra – szabályozási kockázattal",
+          "Ismeretterjesztő témaként a hatásmechanizmus érdekes, de pontos forrással kell kezelni"
+        ]
+      }
     },
     {
       "id": "hosszu-elet",
@@ -1372,7 +3249,33 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A longevity (hosszú élet) a virális tippek korszakából a mérhető, orvosi megközelítés felé mozdul: biomarkerek, epigenetikai órák, alvásmérés. Több mint 200 orvos válaszai alapján a cél nem a szuperemberi teljesítmény, hanem az egészségben töltött évek.",
+          "Az alvás lett a terület egyik központi eleme; a fogyasztói eszközök (gyűrűk, órák) ehhez adatot adnak."
+        ],
+        "drivers": [
+          "Viselhető eszközök",
+          "Személyre szabott orvoslás",
+          "Gazdag, idősödő fogyasztók"
+        ],
+        "players": [
+          "Oura, Whoop",
+          "Function Health",
+          "Lanserhof"
+        ],
+        "signals": [
+          "Biomarker-tesztek árának csökkenése",
+          "Szabályozás a longevity-állításokra"
+        ],
+        "risks": [
+          "Tudományosan nem igazolt állítások"
+        ],
+        "actions": [
+          "Agytorna appnál a kognitív frissesség és a napi rutin kapcsolata jó üzenet, egészségügyi ígéret nélkül"
+        ]
+      }
     },
     {
       "id": "etel-borapolas",
@@ -1405,7 +3308,30 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Kollagénes zselérudak, „bőrfény” gumicukrok, olívaolaj-shotok: a snack, az étrend-kiegészítő és a kozmetikum határa elmosódik. A Whole Foods 2027-es nyolc trendje között szerepel.",
+          "A K-beauty továbbra is meghatározza a bőrápolási rutinokat, a TikTok pedig gyorsan terjeszti az új „belülről szépítő” termékeket."
+        ],
+        "drivers": [
+          "Közösségimédia-szépségtrendek",
+          "Wellness és szépség összeolvadása"
+        ],
+        "players": [
+          "Whole Foods",
+          "K-beauty márkák"
+        ],
+        "signals": [
+          "Szabályozói fellépés a megalapozatlan állítások ellen"
+        ],
+        "risks": [
+          "Tudományos alátámasztás gyakran gyenge"
+        ],
+        "actions": [
+          "Tartalomtéma: tényellenőrző videó arról, mi igaz a „belülről szépítő” termékekből"
+        ]
+      }
     },
     {
       "id": "upf",
@@ -1438,7 +3364,33 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Az ultrafeldolgozott élelmiszerek (UPF) egészségügyi hatásairól szóló kutatások és viták miatt egyre több fogyasztó próbálja kerülni őket. Megjelentek a UPF-mentességet ellenőrző appok és tanúsítások.",
+          "Az Expo West „modern betegségek” trendje szerint új termékek reagálnak a mikroműanyagokra és az alfa-gal szindrómára (vörös húsra kialakuló allergia kullancscsípés után)."
+        ],
+        "drivers": [
+          "Kutatások és média",
+          "Átláthatósági igény",
+          "Új egészségügyi aggodalmak"
+        ],
+        "players": [
+          "Yuka és más címkeolvasó appok",
+          "Whole Foods",
+          "Natural Products Expo"
+        ],
+        "signals": [
+          "Szabályozói UPF-definíciók",
+          "Címkézési előírások"
+        ],
+        "risks": [
+          "A UPF fogalma tudományosan vitatott"
+        ],
+        "actions": [
+          "Címkeolvasó vagy összetevő-magyarázó app lehetséges utility-ötlet, nyelvfüggetlen ikonokkal, de erős a verseny"
+        ]
+      }
     },
     {
       "id": "funkcionalis-italok",
@@ -1471,7 +3423,30 @@
           "impact": 1,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A koffeines sportitalok és az alkoholmentes alternatívák után a „harmadik hullám” tisztább összetételű, életszakaszhoz és konkrét igényhez kötött italokat hoz: szénsavas fehérjeitalok, alváshoz, fókuszhoz, menopauzához szánt italok.",
+          "Az Expo West 2027-es előrejelzésében szerepel; a fogyasztók egyszerre keresik a hagyományt és a precíz hatást."
+        ],
+        "drivers": [
+          "Egészségtudatosság",
+          "Alkoholfogyasztás csökkenése a fiataloknál"
+        ],
+        "players": [
+          "Natural Products Expo",
+          "Italgyártók"
+        ],
+        "signals": [
+          "Nagy italgyártók felvásárlásai a kategóriában"
+        ],
+        "risks": [
+          "Egészségügyi állítások szabályozása"
+        ],
+        "actions": [
+          "Kevés közvetlen lehetőség, inkább háttértrend"
+        ]
+      }
     },
     {
       "id": "terroir",
@@ -1513,7 +3488,33 @@
           "impact": 1,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A „terroir”, vagyis a talaj, éghajlat és táj által adott egyedi íz a boron túl is értéket kap: regionális méz, egybirtokos csokoládé, eredetvédett termékek. A Whole Foods 2027-ben a származás iránti igényt nevezi meg egyik fő trendként.",
+          "Az Expo West „örökség-tejtermék” trendjében név szerint szerepel a magyar túró, a vietnami joghurt és a labneh mellett; az ősi gabonák (emmer, amaránt) is visszatérnek."
+        ],
+        "drivers": [
+          "Hitelesség és történet iránti igény",
+          "Eredetvédelmi rendszerek",
+          "Közösségimédia-ételkultúra"
+        ],
+        "players": [
+          "Whole Foods",
+          "Natural Products Expo",
+          "Datassential"
+        ],
+        "signals": [
+          "Közép-európai termékek megjelenése amerikai polcokon"
+        ],
+        "risks": [
+          "Kis volumenű, drága termékek"
+        ],
+        "actions": [
+          "Weird Nature/Weird Money témának jó: miért drága egy adott helyről származó méz vagy sajt",
+          "Magyar élelmiszerek története angol nyelven nemzetközi érdekesség lehet"
+        ]
+      }
     },
     {
       "id": "mikro-utazas",
@@ -1555,7 +3556,33 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Az utazók rövidebb, rugalmasabb, fejlődést vagy pihenést hozó utakat keresnek: egyéjszakás kiruccanások, hobbiköré szervezett utak, természetközeli wellness. A Hilton 14 ezer utazót kérdezett meg, az Expedia saját foglalási adataira épít.",
+          "A forgatási helyszínekre utazás („set-jetting”) erős: az utazók nagyjából ötöde foglalt már utat sorozatban vagy filmben látott helyszínre."
+        ],
+        "drivers": [
+          "Szűkebb költségvetés",
+          "Rugalmas munka",
+          "Közösségimédia-inspiráció"
+        ],
+        "players": [
+          "Hilton",
+          "Expedia, Vrbo",
+          "Airbnb"
+        ],
+        "signals": [
+          "Rövid távú foglalások aránya",
+          "Hobbiköré szervezett túrák"
+        ],
+        "risks": [
+          "Gazdasági lassulás csökkenti a szabadidős költést"
+        ],
+        "actions": [
+          "Szótanító appban az utazási szókincs-csomagok aktuálisak lehetnek"
+        ]
+      }
     },
     {
       "id": "stablecoin",
@@ -1609,7 +3636,38 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A stablecoin dollárhoz (vagy más devizához) kötött, blokkláncon mozgó digitális pénz. Évekig főleg kriptokereskedésre használták, de 2026-ra a határon átnyúló vállalati fizetés, treasury és elszámolás eszközévé kezd válni. Az USA GENIUS Act-je szabályozott keretet adott, a nagy fizetési szereplők (Stripe, Visa, Mastercard, PayPal) beszálltak.",
+          "A volumen még kicsi: a globális fizetések elenyésző része, de a felmérések szerint 2030-ra a határon átnyúló fizetések 5–10%-a futhat stablecoinon. A Capgemini szerint a bankok jelentős fizetési bevétele kerülhet veszélybe, ezért 2027-ben a bankok saját megoldásai jönnek. Az AI-ügynökök a 24/7-es, programozható fizetés miatt természetes felhasználói lehetnek."
+        ],
+        "drivers": [
+          "Szabályozási keret (GENIUS Act, uniós MiCA)",
+          "Olcsóbb, gyorsabb nemzetközi átutalás",
+          "Ügynöki fizetések"
+        ],
+        "players": [
+          "Circle (USDC)",
+          "Tether",
+          "Stripe (Bridge)",
+          "Visa, Mastercard",
+          "Bankok tokenizált betétei"
+        ],
+        "signals": [
+          "Bankok stablecoin-indításai 2027-ben",
+          "Uniós szabályok az amerikai stablecoinokra",
+          "Ügynöki fizetési szabványok"
+        ],
+        "risks": [
+          "Szabályozási bizonytalanság nemzetközi szinten",
+          "Fedezeti és csődkockázat"
+        ],
+        "actions": [
+          "Külföldi ügyfeleknek számlázva figyeld az olcsóbb kifizetési utakat (Wise, Stripe és a stablecoin-alapú szolgáltatások)",
+          "Pénzügyi döntéshez kérj szakértői tanácsot: ez a terület szabályozásban gyorsan változik"
+        ]
+      }
     },
     {
       "id": "szukulo-penztarca",
@@ -1651,7 +3709,33 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Az energiasokk és a magasabb infláció miatt sok háztartásnak kevesebb jut szabad költésre; a Gartner felmérése szerint az amerikai fogyasztók többségének kevesebb pénze van az ünnepi szezonra. A vásárlók a tartósságot, javíthatóságot és valós hasznot mérlegelik a funkciók száma helyett.",
+          "Ez az „elég” korszakával kapcsolódik össze: kevesebb, de értelmesebb vásárlás, előfizetések lemondása, akciók és másodkézi piac."
+        ],
+        "drivers": [
+          "Infláció és energiaárak",
+          "Bizonytalan munkaerőpiac",
+          "Tudatos fogyasztás"
+        ],
+        "players": [
+          "Gartner",
+          "Diszkont- és másodkézi platformok"
+        ],
+        "signals": [
+          "Fogyasztói bizalmi indexek",
+          "Előfizetés-lemondási hullámok"
+        ],
+        "risks": [
+          "A prémium szolgáltatások kereslete csökken"
+        ],
+        "actions": [
+          "Az appokban legyen kedvező éves vagy egyszeri ár, és erős ingyenes alap",
+          "Pénzügyi témájú videóknál a takarékos, gyakorlati tartalom jól teljesít"
+        ]
+      }
     },
     {
       "id": "adatkozpont-aram",
@@ -1701,7 +3785,37 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Az AI-modellek tanítása és futtatása óriási áramot igényel. Az S&P magas forgatókönyve szerint a globális adatközponti áramigény 2030-ra India mai teljes fogyasztásával lehet egyenlő. A hálózati csatlakozás sok helyen évekig tart, ezért az adatközpontok akkumulátorokkal, saját erőművekkel, gázturbinákkal és mikrohálózatokkal kerülik meg a szűk keresztmetszetet.",
+          "Az akkumulátorok a tréningterhelés ezredmásodperces ingadozását is simítják; az USA-ban az AI-szerverek tartalékakkumulátorainak importja egy év alatt duplájára nőtt. Az ingatlanpiacon az áram elérhetősége lett a helyválasztás egyik fő szempontja."
+        ],
+        "drivers": [
+          "AI-beruházások",
+          "Hálózati szűk keresztmetszetek",
+          "Ingadozó AI-terhelés"
+        ],
+        "players": [
+          "Microsoft, Google, Amazon, Meta (hiperskálázók)",
+          "NVIDIA",
+          "FlexGen, Tesla Energy (akkumulátor)",
+          "Kis moduláris atomreaktor-fejlesztők"
+        ],
+        "signals": [
+          "Áramárak emelkedése az adatközpontok közelében",
+          "Kis moduláris reaktorok első szerződései",
+          "Adatközponti moratóriumok egyes régiókban"
+        ],
+        "risks": [
+          "Lakossági áramárak emelkedése",
+          "Klímacélok sérülése a gázalapú megoldások miatt"
+        ],
+        "actions": [
+          "Ismeretterjesztő téma: mennyi áramot fogyaszt egy AI-kérdés, miért kellenek akkumulátorok",
+          "Saját fejlesztésben a kisebb, hatékony modellek használata költség- és energiatakarékos"
+        ]
+      }
     },
     {
       "id": "nap-tarolas",
@@ -1747,7 +3861,35 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A napenergia a túlkínálat és az árcsökkenés miatt a BloombergNEF szerint 2032-re a világ legnagyobb áramforrása lehet. Ahol a nap terjed, ott az akkumulátoros tárolás követi: az energiatárolási kapacitás a következő évtizedben többszörösére nő.",
+          "A lítiumion mellett a nátriumion, flow- és vas-levegő akkumulátorok is skálázódnak, amelyek olcsóbb, könnyebben elérhető anyagokra épülnek. A tiszta energia egyre inkább energiabiztonsági kérdés is: a fosszilis importtól való leválás eszköze."
+        ],
+        "drivers": [
+          "Csökkenő panel- és akkumulátorárak",
+          "Energiabiztonság",
+          "Villamosítás (EV, hőszivattyú)"
+        ],
+        "players": [
+          "CATL, BYD",
+          "LONGi, JinkoSolar",
+          "BloombergNEF (elemzés)"
+        ],
+        "signals": [
+          "Kína 2027. január 1-jei akkumulátor-áfavisszatérítés-megszüntetésének hatása az árakra",
+          "Nátriumion-akkumulátorok tömeggyártása",
+          "Negatív áramárak gyakorisága Európában"
+        ],
+        "risks": [
+          "Vámok és kereskedelmi korlátozások",
+          "Hálózati integrációs problémák"
+        ],
+        "actions": [
+          "Otthoni energiafigyelő vagy napelem-optimalizáló app lehetséges utility-irány (pl. mikor érdemes mosni a negatív áramáraknál)"
+        ]
+      }
     },
     {
       "id": "hoseg",
@@ -1789,7 +3931,34 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A rendkívüli hőség Európában a leghalálosabb időjárási veszély, több halálesetet okoz, mint az árvizek, viharok és erdőtüzek együtt. A 2026-os nyár Európában ismét rendkívüli hőhullámokat és aszályt hozott; 2026 végére El Niño valószínű, ami 2027-et újabb rekordmeleg évvé teheti.",
+          "Az alkalmazkodás a középpontba került: Szingapúr 2026-ot az alkalmazkodás évének nyilvánította, a francia kormány finanszírozott beruházási programot ígért, a városok zöldtetőkkel, fákkal, hűtőközpontokkal készülnek."
+        ],
+        "drivers": [
+          "Melegedés és El Niño",
+          "Városi hősziget",
+          "Gazdasági veszteségek"
+        ],
+        "players": [
+          "Európai Bizottság",
+          "Városi önkormányzatok",
+          "Biztosítók"
+        ],
+        "signals": [
+          "Hőségriasztási rendszerek bővülése",
+          "Munkavédelmi hőségszabályok"
+        ],
+        "risks": [
+          "Egészségügyi és termelékenységi veszteségek"
+        ],
+        "actions": [
+          "Weird Nature témának: hogyan bírják az állatok a hőséget",
+          "Hőségriasztó vagy „hűvös helyek” app lehetséges, nyílt adatforrásokkal"
+        ]
+      }
     },
     {
       "id": "belepo-szint",
@@ -1835,7 +4004,35 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Az AI a junior munkák rutinfeladatait veszi át: kutatás, dokumentumkészítés, adatrögzítés, egyszerű elemzés. A PwC szerint az AI-nak leginkább kitett belépő pozíciók hétszer valószínűbben kérnek korábban senior készségeket; a megmaradó junior állások „seniorizálódnak”.",
+          "A HR-vezetők riadót fújnak: ha nincs belépő szint, honnan jön a jövő tapasztalt szakembere? A Stanford kutatói gyengülő foglalkoztatást mértek a fiatalok körében az AI-nak kitett szakmákban, bár az ok-okozat nem egyértelmű."
+        ],
+        "drivers": [
+          "Kódoló és irodai AI-ügynökök",
+          "Költségcsökkentési nyomás",
+          "Gazdasági bizonytalanság"
+        ],
+        "players": [
+          "PwC (AI Jobs Barometer)",
+          "Stanford Digital Economy Lab",
+          "AIHR, Gartner (HR-elemzések)"
+        ],
+        "signals": [
+          "Pályakezdő munkanélküliség az érintett szakmákban",
+          "Cégek új gyakornoki és mentorprogramjai"
+        ],
+        "risks": [
+          "Elvesztegetett generációs tudásátadás",
+          "Társadalmi feszültség"
+        ],
+        "actions": [
+          "Szimulációs gyakorló- vagy mentorplatform appötlet lehet pályakezdőknek",
+          "Szabadúszóként a junior munkát AI-val kiváltva kis csapattal is versenyképes vagy"
+        ]
+      }
     },
     {
       "id": "ellenorzes",
@@ -1877,7 +4074,33 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "2027-ben az AI használata alapkészség lesz, a megkülönböztető előny az, aki észreveszi az AI hibáit és jó ítélőképességgel dönt. A Gartner HR-kutatása szerint az igazgatótanácsok nagy többsége AI-ból várt hatékonyságot és megtakarítást, de csak a szervezetek 3%-a teljesíti túl a célját.",
+          "Új kockázat az „AI-atrófia”: a készségek elsorvadása, ha mindent az AI végez. A szakmunkák (villanyszerelő, vízvezeték-szerelő) is az AI-boom nyertesei az adatközpont-építések miatt."
+        ],
+        "drivers": [
+          "AI-hibák és hallucinációk",
+          "Szabályozói felelősség",
+          "Vezetői elvárások"
+        ],
+        "players": [
+          "Gartner HR",
+          "Forbes (Bernard Marr)"
+        ],
+        "signals": [
+          "AI-ellenőrzés mint munkakör",
+          "Tényellenőrző eszközök piaca"
+        ],
+        "risks": [
+          "Túlzott bizalom az AI-ban"
+        ],
+        "actions": [
+          "Kvíz- vagy tényellenőrző játék („igaz vagy AI-hamisítvány?”) a Weird-csatornák formátumába illik",
+          "Saját munkában minden AI-kimenethez legyen ellenőrző lépés"
+        ]
+      }
     },
     {
       "id": "ai-tanitas",
@@ -1915,7 +4138,36 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Az AI-tanárok és adaptív gyakorlóeszközök terjednek, de a bizonyíték vékony: a legtöbbet használt oktatási eszközök kevesebb mint felének van publikált hatásvizsgálata. A csupasz „chatbot mint tanár” ígéret halványul, a blokklánc-oklevél és a teljes osztálytermi VR is visszaszorult.",
+          "A mérhető tanulási eredmény lett a mérce: a nyertesek szűk, jól mérhető célra (szókincs, matematika) épülnek, tanári felügyelettel."
+        ],
+        "drivers": [
+          "Diákok AI-használata",
+          "Tanárhiány",
+          "Mobil, egyéni tanulás"
+        ],
+        "players": [
+          "Duolingo",
+          "Khan Academy (Khanmigo)",
+          "Speak",
+          "Drops"
+        ],
+        "signals": [
+          "Hatásvizsgálatok és szabályozás az iskolai AI-ra",
+          "AI-tanárok beépülése a tananyagkezelő rendszerekbe"
+        ],
+        "risks": [
+          "Pontatlan AI-válaszok",
+          "Adatvédelem gyerekeknél"
+        ],
+        "actions": [
+          "Szótanító appban mérd és mutasd a fejlődést (megtanult szavak, ismétlési pontosság)",
+          "Rövid, játékos gyakorlás erősebb, mint egy általános AI-csevegő"
+        ]
+      }
     },
     {
       "id": "ev-piac",
@@ -1965,7 +4217,36 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "A globális villanyautó-piac 2026-ban kettészakadt: Kínában a hazai eladás csökken a támogatások szűkülése miatt, Európában viszont erősen nő. A kínai gyártók exportra fordulnak, és az Európában eladott villanyautók egyre nagyobb része Kínában készül.",
+          "A vámok elkerülésére a kínai gyártók Európában építenek gyárat, köztük Magyarországon (BYD Szeged). Az USA-ban a támogatások megszűnése visszavetette a piacot."
+        ],
+        "drivers": [
+          "Támogatáspolitikák",
+          "Kínai túlkapacitás és export",
+          "Akkumulátorárak csökkenése"
+        ],
+        "players": [
+          "BYD",
+          "Tesla",
+          "Volkswagen",
+          "Geely, MG (SAIC)"
+        ],
+        "signals": [
+          "Az uniós vámok és minimumár-megállapodások",
+          "Kínai gyárak indulása Európában",
+          "Használt EV-árak"
+        ],
+        "risks": [
+          "Árháború",
+          "Kereskedelmi konfliktusok"
+        ],
+        "actions": [
+          "Töltési költségkalkulátor vagy útvonaltervező utility-ötlet (erős verseny mellett)"
+        ]
+      }
     },
     {
       "id": "robotaxi",
@@ -2011,7 +4292,36 @@
           "impact": 2,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "Az önvezető taxik az USA és Kína után Európába is megérkeztek: Zágrábban indult az első nyilvános szolgáltatás, a Pony.ai és az Uber több ezer robotaxit tervez Európában, a Baidu Londonban tesztel, a WeRide Dániában indul. Az iparág a helyi pilotokból a nagy léptékű üzem felé lép.",
+          "Kínai technológia és amerikai platform (Uber) együttműködése jellemző; a kínai, olcsóbb célautók töredékébe kerülnek a nyugati megoldásoknak."
+        ],
+        "drivers": [
+          "AI-alapú önvezetés fejlődése",
+          "Olcsó célautók",
+          "Platformpartnerségek"
+        ],
+        "players": [
+          "Waymo",
+          "Baidu Apollo Go",
+          "Pony.ai",
+          "WeRide",
+          "Wayve"
+        ],
+        "signals": [
+          "Uniós szabályozás az önvezető üzemre",
+          "Balesetek és közbizalom"
+        ],
+        "risks": [
+          "Biztonsági incidensek",
+          "Adatbiztonsági aggályok a kínai technológiával"
+        ],
+        "actions": [
+          "Ismeretterjesztő téma; Magyarországhoz közeli fejlemény (Zágráb)"
+        ]
+      }
     },
     {
       "id": "energiasokk",
@@ -2061,7 +4371,36 @@
           "impact": 3,
           "note": "Első felvétel a radarra."
         }
-      ]
+      ],
+      "deep": {
+        "context": [
+          "2026 februárjában kitört a nyugat-ázsiai háború, amely megzavarta az olaj- és LNG-szállítást a Hormuzi-szoroson keresztül, ahol a világ olajellátásának nagyjából ötöde halad át. Az IMF áprilisban levágta a 2026-os globális növekedési előrejelzést, és többforgatókönyves előrejelzésre tért át.",
+          "Az IMF októberi jelentése szerint a gazdaság ellenállónak bizonyult, de a növekedés „újraosztódik”: a sokknak kitett, olajimportőr országok szenvednek, míg az AI-beruházásokban érdekelt gazdaságok nőnek. 2027-re 3,4%-os globális növekedést vár, de a konfliktus elhúzódása komoly lefelé mutató kockázat."
+        ],
+        "drivers": [
+          "Nyugat-ázsiai konfliktus",
+          "Energiaárak",
+          "AI-beruházások mint ellensúly"
+        ],
+        "players": [
+          "IMF",
+          "OPEC+",
+          "Központi bankok"
+        ],
+        "signals": [
+          "Olajár és a Hormuzi-szoros forgalma",
+          "Infláció és kamatdöntések Európában",
+          "Az IMF 2027 januári frissítése"
+        ],
+        "risks": [
+          "Elhúzódó konfliktus, stagfláció",
+          "Devizaingadozás"
+        ],
+        "actions": [
+          "Nemzetközi bevételnél figyeld a forint–euró–dollár árfolyamot, és árazz ennek megfelelően",
+          "Weird Money témának: hogyan befolyásolja egy szoros a világ benzinárait"
+        ]
+      }
     }
   ],
   "changelog": [
@@ -2119,6 +4458,27 @@
         "ev-piac",
         "robotaxi",
         "energiasokk"
+      ],
+      "moved": [],
+      "removed": []
+    },
+    {
+      "date": "2026-10-28",
+      "edition": "2026-10",
+      "summary": "Bővítés: 12 új social media trend (AI-tartalomáradat, YouTube 2027-es monetizációs küszöb, tévés YouTube-nézés, videós podcastok, privát megosztás, korhatár-szabályozás és mások), Social média nézet, valamint részletes elemzés minden trendhez: háttér, hajtóerők, szereplők, figyelendő jelek, kockázatok, teendők.",
+      "added": [
+        "ai-tartalomaradat",
+        "youtube-monetizacio-2027",
+        "youtube-tevekepernyo",
+        "video-podcast",
+        "privat-megosztas",
+        "korhatar",
+        "ai-videofolyam",
+        "platform-fragmentacio",
+        "brainrot",
+        "creator-mediaceg",
+        "reddit-emberi-valasz",
+        "linkedin-video"
       ],
       "moved": [],
       "removed": []
